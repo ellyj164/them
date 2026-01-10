@@ -21,7 +21,7 @@ get_header();
             <p><?php esc_html_e( 'The Instructor agrees to:', 'french-practice-hub' ); ?></p>
             <ul>
                 <li><?php esc_html_e( 'Create high-quality, original educational content related to French language learning', 'french-practice-hub' ); ?></li>
-                <li><?php esc_html_e( 'Ensure all content complies with the Platform\'s quality standards and guidelines', 'french-practice-hub' ); ?></li>
+                <li><?php esc_html_e( "Ensure all content complies with the Platform's quality standards and guidelines", 'french-practice-hub' ); ?></li>
                 <li><?php esc_html_e( 'Respect intellectual property rights of third parties', 'french-practice-hub' ); ?></li>
                 <li><?php esc_html_e( 'Provide accurate and up-to-date course information', 'french-practice-hub' ); ?></li>
                 <li><?php esc_html_e( 'Respond to student inquiries in a timely manner', 'french-practice-hub' ); ?></li>

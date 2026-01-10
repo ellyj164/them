@@ -270,7 +270,9 @@ body {
     display: none !important;
 }
 
-body {
+/* Prevent Google Translate from adding top margin to body */
+body.translated-ltr,
+body.translated-rtl {
     top: 0 !important;
 }
 
