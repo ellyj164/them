@@ -38,61 +38,61 @@
                 <ul>
                     <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php pll_e( 'nav_home' ); ?></a></li>
                     <li class="has-dropdown">
-                        <a href="#">
+                        <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'French courses' ) ) ); ?>">
                             <span><?php pll_e( 'nav_courses' ); ?></span>
                             <span class="dropdown-arrow"></span>
                         </a>
                         <div class="dropdown">
-                            <a href="#"><?php pll_e( 'courses_kids_a11' ); ?></a>
-                            <a href="#"><?php pll_e( 'courses_kids_a1' ); ?></a>
-                            <a href="#"><?php pll_e( 'courses_kids_a21' ); ?></a>
-                            <a href="#"><?php pll_e( 'courses_kids_a2' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1.1 (Pre-Beginner)' ) ) ); ?>"><?php pll_e( 'courses_kids_a11' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1 (Beginner)' ) ) ); ?>"><?php pll_e( 'courses_kids_a1' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A2.1 (Elementary)' ) ) ); ?>"><?php pll_e( 'courses_kids_a21' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A2 (Pre-Intermediate)' ) ) ); ?>"><?php pll_e( 'courses_kids_a2' ); ?></a>
                         </div>
                     </li>
                     <li class="has-dropdown">
-                        <a href="#">
+                        <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Exams Prep' ) ) ); ?>">
                             <span><?php pll_e( 'nav_exams' ); ?></span>
                             <span class="dropdown-arrow"></span>
                         </a>
                         <div class="dropdown">
-                            <a href="#"><?php pll_e( 'exams_delf_pa11' ); ?></a>
-                            <a href="#"><?php pll_e( 'exams_delf_pa1' ); ?></a>
-                            <a href="#"><?php pll_e( 'exams_delf_pa2' ); ?></a>
-                            <a href="#"><?php pll_e( 'exams_delf_b1' ); ?></a>
-                            <a href="#"><?php pll_e( 'exams_delf_b2' ); ?></a>
-                            <a href="#"><?php pll_e( 'exams_dalf_c1' ); ?></a>
-                            <a href="#"><?php pll_e( 'exams_dalf_c2' ); ?></a>
-                            <a href="#"><?php pll_e( 'exams_tcf' ); ?></a>
-                            <a href="#"><?php pll_e( 'exams_tef' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DELF Prim A1.1' ) ) ); ?>"><?php pll_e( 'exams_delf_pa11' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DELF Prim A1' ) ) ); ?>"><?php pll_e( 'exams_delf_pa1' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DELF Prim A2' ) ) ); ?>"><?php pll_e( 'exams_delf_pa2' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DELF B1' ) ) ); ?>"><?php pll_e( 'exams_delf_b1' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DELF B2' ) ) ); ?>"><?php pll_e( 'exams_delf_b2' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DALF C1' ) ) ); ?>"><?php pll_e( 'exams_dalf_c1' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DALF C2' ) ) ); ?>"><?php pll_e( 'exams_dalf_c2' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'TCF Canada 🇨🇦' ) ) ); ?>"><?php pll_e( 'exams_tcf' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'TEF Canada 🇨🇦' ) ) ); ?>"><?php pll_e( 'exams_tef' ); ?></a>
                         </div>
                     </li>
                     <li class="has-dropdown">
-                        <a href="#">
+                        <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Fun Exercises' ) ) ); ?>">
                             <span><?php pll_e( 'nav_exercises' ); ?></span>
                             <span class="dropdown-arrow"></span>
                         </a>
                         <div class="dropdown">
-                            <a href="#"><?php pll_e( 'exercises_kids_a11' ); ?></a>
-                            <a href="#"><?php pll_e( 'exercises_kids_a11p' ); ?></a>
-                            <a href="#"><?php pll_e( 'exercises_kids_a1' ); ?></a>
-                            <a href="#"><?php pll_e( 'exercises_kids_a1p' ); ?></a>
-                            <a href="#"><?php pll_e( 'exercises_kids_a21' ); ?></a>
-                            <a href="#"><?php pll_e( 'exercises_kids_a2' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1.1' ) ) ); ?>"><?php pll_e( 'exercises_kids_a11' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1.1+' ) ) ); ?>"><?php pll_e( 'exercises_kids_a11p' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1' ) ) ); ?>"><?php pll_e( 'exercises_kids_a1' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1+' ) ) ); ?>"><?php pll_e( 'exercises_kids_a1p' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A2.1' ) ) ); ?>"><?php pll_e( 'exercises_kids_a21' ); ?></a>
+                            <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A2' ) ) ); ?>"><?php pll_e( 'exercises_kids_a2' ); ?></a>
                         </div>
                     </li>
-                    <li><a href="#"><?php pll_e( 'nav_blog' ); ?></a></li>
+                    <li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"><?php pll_e( 'nav_blog' ); ?></a></li>
                     <li class="has-dropdown">
-                        <a href="#">
+                        <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>">
                             <span><?php pll_e( 'nav_about' ); ?></span>
                             <span class="dropdown-arrow"></span>
                         </a>
                         <div class="dropdown">
-                            <a href="#"><?php pll_e( 'nav_about_us' ); ?></a>
-                            <a href="#"><?php pll_e( 'nav_mission' ); ?></a>
-                            <a href="#"><?php pll_e( 'nav_pedagogy' ); ?></a>
-                            <a href="#"><?php pll_e( 'nav_biographie' ); ?></a>
-                            <a href="#"><?php pll_e( 'nav_story' ); ?></a>
-                            <a href="#"><?php pll_e( 'nav_partners' ); ?></a>
+                            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>"><?php pll_e( 'nav_about_us' ); ?></a>
+                            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'mission' ) ) ); ?>"><?php pll_e( 'nav_mission' ); ?></a>
+                            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'pedagogy' ) ) ); ?>"><?php pll_e( 'nav_pedagogy' ); ?></a>
+                            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'biography' ) ) ); ?>"><?php pll_e( 'nav_biographie' ); ?></a>
+                            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'story' ) ) ); ?>"><?php pll_e( 'nav_story' ); ?></a>
+                            <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'partners' ) ) ); ?>"><?php pll_e( 'nav_partners' ); ?></a>
                         </div>
                     </li>
                 </ul>
@@ -191,10 +191,10 @@
                     <span class="mobile-dropdown-arrow"></span>
                 </div>
                 <div class="mobile-dropdown-content">
-                    <a href="#"><?php pll_e( 'courses_kids_a11' ); ?></a>
-                    <a href="#"><?php pll_e( 'courses_kids_a1' ); ?></a>
-                    <a href="#"><?php pll_e( 'courses_kids_a21' ); ?></a>
-                    <a href="#"><?php pll_e( 'courses_kids_a2' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1.1 (Pre-Beginner)' ) ) ); ?>"><?php pll_e( 'courses_kids_a11' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1 (Beginner)' ) ) ); ?>"><?php pll_e( 'courses_kids_a1' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A2.1 (Elementary)' ) ) ); ?>"><?php pll_e( 'courses_kids_a21' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A2 (Pre-Intermediate)' ) ) ); ?>"><?php pll_e( 'courses_kids_a2' ); ?></a>
                 </div>
             </li>
             <li>
@@ -203,15 +203,15 @@
                     <span class="mobile-dropdown-arrow"></span>
                 </div>
                 <div class="mobile-dropdown-content">
-                    <a href="#"><?php pll_e( 'exams_delf_pa11' ); ?></a>
-                    <a href="#"><?php pll_e( 'exams_delf_pa1' ); ?></a>
-                    <a href="#"><?php pll_e( 'exams_delf_pa2' ); ?></a>
-                    <a href="#"><?php pll_e( 'exams_delf_b1' ); ?></a>
-                    <a href="#"><?php pll_e( 'exams_delf_b2' ); ?></a>
-                    <a href="#"><?php pll_e( 'exams_dalf_c1' ); ?></a>
-                    <a href="#"><?php pll_e( 'exams_dalf_c2' ); ?></a>
-                    <a href="#"><?php pll_e( 'exams_tcf' ); ?></a>
-                    <a href="#"><?php pll_e( 'exams_tef' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DELF Prim A1.1' ) ) ); ?>"><?php pll_e( 'exams_delf_pa11' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DELF Prim A1' ) ) ); ?>"><?php pll_e( 'exams_delf_pa1' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DELF Prim A2' ) ) ); ?>"><?php pll_e( 'exams_delf_pa2' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DELF B1' ) ) ); ?>"><?php pll_e( 'exams_delf_b1' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DELF B2' ) ) ); ?>"><?php pll_e( 'exams_delf_b2' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DALF C1' ) ) ); ?>"><?php pll_e( 'exams_dalf_c1' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'DALF C2' ) ) ); ?>"><?php pll_e( 'exams_dalf_c2' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'TCF Canada 🇨🇦' ) ) ); ?>"><?php pll_e( 'exams_tcf' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'TEF Canada 🇨🇦' ) ) ); ?>"><?php pll_e( 'exams_tef' ); ?></a>
                 </div>
             </li>
             <li>
@@ -220,31 +220,37 @@
                     <span class="mobile-dropdown-arrow"></span>
                 </div>
                 <div class="mobile-dropdown-content">
-                    <a href="#"><?php pll_e( 'exercises_kids_a11' ); ?></a>
-                    <a href="#"><?php pll_e( 'exercises_kids_a11p' ); ?></a>
-                    <a href="#"><?php pll_e( 'exercises_kids_a1' ); ?></a>
-                    <a href="#"><?php pll_e( 'exercises_kids_a1p' ); ?></a>
-                    <a href="#"><?php pll_e( 'exercises_kids_a21' ); ?></a>
-                    <a href="#"><?php pll_e( 'exercises_kids_a2' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1.1' ) ) ); ?>"><?php pll_e( 'exercises_kids_a11' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1.1+' ) ) ); ?>"><?php pll_e( 'exercises_kids_a11p' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1' ) ) ); ?>"><?php pll_e( 'exercises_kids_a1' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1+' ) ) ); ?>"><?php pll_e( 'exercises_kids_a1p' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A2.1' ) ) ); ?>"><?php pll_e( 'exercises_kids_a21' ); ?></a>
+                    <a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A2' ) ) ); ?>"><?php pll_e( 'exercises_kids_a2' ); ?></a>
                 </div>
             </li>
-            <li><a href="#"><?php pll_e( 'nav_blog' ); ?></a></li>
+            <li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"><?php pll_e( 'nav_blog' ); ?></a></li>
             <li>
                 <div class="mobile-dropdown-toggle">
                     <?php pll_e( 'nav_about' ); ?>
                     <span class="mobile-dropdown-arrow"></span>
                 </div>
                 <div class="mobile-dropdown-content">
-                    <a href="#"><?php pll_e( 'nav_about_us' ); ?></a>
-                    <a href="#"><?php pll_e( 'nav_mission' ); ?></a>
-                    <a href="#"><?php pll_e( 'nav_pedagogy' ); ?></a>
-                    <a href="#"><?php pll_e( 'nav_biographie' ); ?></a>
-                    <a href="#"><?php pll_e( 'nav_story' ); ?></a>
-                    <a href="#"><?php pll_e( 'nav_partners' ); ?></a>
+                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'about' ) ) ); ?>"><?php pll_e( 'nav_about_us' ); ?></a>
+                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'mission' ) ) ); ?>"><?php pll_e( 'nav_mission' ); ?></a>
+                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'pedagogy' ) ) ); ?>"><?php pll_e( 'nav_pedagogy' ); ?></a>
+                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'biography' ) ) ); ?>"><?php pll_e( 'nav_biographie' ); ?></a>
+                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'story' ) ) ); ?>"><?php pll_e( 'nav_story' ); ?></a>
+                    <a href="<?php echo esc_url( get_permalink( get_page_by_path( 'partners' ) ) ); ?>"><?php pll_e( 'nav_partners' ); ?></a>
                 </div>
             </li>
-            <li><button class="mobile-sign-in-btn"><?php pll_e( 'nav_signin' ); ?></button></li>
-            <li><a href="#" class="mobile-register-btn"><?php pll_e( 'nav_register' ); ?></a></li>
+            <?php if ( is_user_logged_in() ) : ?>
+                <li><a href="<?php echo esc_url( wp_logout_url( home_url() ) ); ?>" class="mobile-sign-in-btn"><?php esc_html_e( 'Log out', 'french-practice-hub' ); ?></a></li>
+            <?php else : ?>
+                <li><a href="<?php echo esc_url( wp_login_url() ); ?>" class="mobile-sign-in-btn"><?php pll_e( 'nav_signin' ); ?></a></li>
+            <?php endif; ?>
+            <?php if ( get_option( 'users_can_register' ) ) : ?>
+                <li><a href="<?php echo esc_url( wp_registration_url() ); ?>" class="mobile-register-btn"><?php pll_e( 'nav_register' ); ?></a></li>
+            <?php endif; ?>
         </ul>
         <?php
     }
