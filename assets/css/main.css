@@ -102,7 +102,6 @@ body {
 }
 
 .dropdown {
-    display: none;
     position: absolute;
     top: 100%;
     left: 0;
@@ -116,14 +115,17 @@ body {
     z-index: 1001;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
 }
 
 .has-dropdown:hover .dropdown,
-.dropdown:hover {
-    display: block;
+.has-dropdown:focus-within .dropdown {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 .dropdown a {
@@ -240,6 +242,36 @@ body {
     background-color: #f0f0f0;
     padding: 2px 6px;
     border-radius: 4px;
+}
+
+/* Google Translate Widget */
+.google-translate-widget {
+    display: flex;
+    align-items: center;
+}
+
+.google-translate-widget .goog-te-gadget {
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+.google-translate-widget .goog-te-gadget-simple {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 5px !important;
+    font-size: 0.9em !important;
+}
+
+.google-translate-widget .goog-te-menu-value span {
+    color: var(--text-color) !important;
+}
+
+/* Hide Google Translate top banner */
+.goog-te-banner-frame {
+    display: none !important;
+}
+
+body {
+    top: 0 !important;
 }
 
 /* Hero Section */

@@ -103,6 +103,13 @@
         
         <div class="header-actions">
             <?php
+            // Google Translate widget (optional, if enabled in theme settings)
+            if ( get_theme_mod( 'french_practice_hub_enable_google_translate', false ) ) :
+                ?>
+                <div id="google_translate_element" class="google-translate-widget"></div>
+                <?php
+            endif;
+            
             // Polylang language switcher
             if ( function_exists( 'pll_the_languages' ) ) :
                 $lang_flags = array(
