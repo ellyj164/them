@@ -103,6 +103,28 @@ function french_practice_hub_scripts() {
         wp_get_theme()->get( 'Version' ),
         true
     );
+    
+    // Google Translate (optional, works alongside Polylang for on-the-fly translation)
+    // Only load if Google Translate is enabled in theme options
+    if ( get_theme_mod( 'french_practice_hub_enable_google_translate', false ) ) {
+        // Google Translate initialization script
+        wp_enqueue_script(
+            'google-translate-init',
+            get_template_directory_uri() . '/assets/js/google-translate-init.js',
+            array(),
+            wp_get_theme()->get( 'Version' ),
+            true
+        );
+        
+        // Google Translate Element library
+        wp_enqueue_script(
+            'google-translate-element',
+            'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit',
+            array( 'google-translate-init' ),
+            null,
+            true
+        );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'french_practice_hub_scripts' );
 
@@ -195,6 +217,32 @@ function french_practice_hub_register_polylang_strings() {
     }
 }
 add_action( 'init', 'french_practice_hub_register_polylang_strings' );
+
+/**
+ * Add theme customizer settings
+ */
+function french_practice_hub_customize_register( $wp_customize ) {
+    // Add Google Translate section
+    $wp_customize->add_section( 'french_practice_hub_google_translate', array(
+        'title'    => __( 'Google Translate', 'french-practice-hub' ),
+        'priority' => 130,
+    ) );
+    
+    // Add Google Translate enable/disable setting
+    $wp_customize->add_setting( 'french_practice_hub_enable_google_translate', array(
+        'default'           => false,
+        'sanitize_callback' => 'rest_sanitize_boolean',
+        'transport'         => 'refresh',
+    ) );
+    
+    $wp_customize->add_control( 'french_practice_hub_enable_google_translate', array(
+        'label'       => __( 'Enable Google Translate Widget', 'french-practice-hub' ),
+        'description' => __( 'Display a Google Translate widget in the header for on-the-fly translation. Works alongside Polylang.', 'french-practice-hub' ),
+        'section'     => 'french_practice_hub_google_translate',
+        'type'        => 'checkbox',
+    ) );
+}
+add_action( 'customize_register', 'french_practice_hub_customize_register' );
 
 /**
  * Custom walker for dropdown menus
@@ -422,13 +470,13 @@ function french_practice_hub_activation() {
         ),
         'instructor-agreement' => array(
             'title'    => 'Instructor Agreement',
-            'template' => '',
-            'content'  => '<h1>Instructor Agreement</h1><p>Details about the instructor agreement will be added here.</p>',
+            'template' => 'page-instructor-agreement.php',
+            'content'  => '',
         ),
         'contact' => array(
             'title'    => 'Contact / Legal Notice',
-            'template' => '',
-            'content'  => '<h1>Contact / Legal Notice</h1><p>Email: <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a></p>',
+            'template' => 'page-contact.php',
+            'content'  => '',
         ),
     );
 
