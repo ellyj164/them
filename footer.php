@@ -13,10 +13,10 @@
                     } else {
                         ?>
                         <ul>
-                            <li><a href="#"><?php pll_e( 'courses_kids_a11' ); ?></a></li>
-                            <li><a href="#"><?php pll_e( 'courses_kids_a1' ); ?></a></li>
-                            <li><a href="#"><?php pll_e( 'courses_kids_a21' ); ?></a></li>
-                            <li><a href="#"><?php pll_e( 'courses_kids_a2' ); ?></a></li>
+                            <li><a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1.1 (Pre-Beginner)' ) ) ); ?>"><?php pll_e( 'courses_kids_a11' ); ?></a></li>
+                            <li><a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A1 (Beginner)' ) ) ); ?>"><?php pll_e( 'courses_kids_a1' ); ?></a></li>
+                            <li><a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A2.1 (Elementary)' ) ) ); ?>"><?php pll_e( 'courses_kids_a21' ); ?></a></li>
+                            <li><a href="<?php echo esc_url( get_category_link( get_cat_ID( 'Kids, A2 (Pre-Intermediate)' ) ) ); ?>"><?php pll_e( 'courses_kids_a2' ); ?></a></li>
                         </ul>
                         <?php
                     }
@@ -35,11 +35,11 @@
                     } else {
                         ?>
                         <ul>
-                            <li><a href="#"><?php pll_e( 'footer_privacy' ); ?></a></li>
-                            <li><a href="#"><?php pll_e( 'footer_terms' ); ?></a></li>
-                            <li><a href="#"><?php pll_e( 'footer_refund' ); ?></a></li>
-                            <li><a href="#"><?php pll_e( 'footer_copyright_ip' ); ?></a></li>
-                            <li><a href="#"><?php pll_e( 'footer_acceptable' ); ?></a></li>
+                            <li><a href="<?php echo esc_url( get_permalink( get_page_by_path( 'privacy' ) ) ); ?>"><?php pll_e( 'footer_privacy' ); ?></a></li>
+                            <li><a href="<?php echo esc_url( get_permalink( get_page_by_path( 'terms' ) ) ); ?>"><?php pll_e( 'footer_terms' ); ?></a></li>
+                            <li><a href="<?php echo esc_url( get_permalink( get_page_by_path( 'refund' ) ) ); ?>"><?php pll_e( 'footer_refund' ); ?></a></li>
+                            <li><a href="<?php echo esc_url( get_permalink( get_page_by_path( 'copyright' ) ) ); ?>"><?php pll_e( 'footer_copyright_ip' ); ?></a></li>
+                            <li><a href="<?php echo esc_url( get_permalink( get_page_by_path( 'acceptable-use' ) ) ); ?>"><?php pll_e( 'footer_acceptable' ); ?></a></li>
                         </ul>
                         <?php
                     }

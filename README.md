@@ -17,15 +17,53 @@ A comprehensive WordPress theme for French language learning platform with Polyl
 1. Download the theme folder `french-practice-hub-theme`
 2. Upload to `/wp-content/themes/` directory on your WordPress installation
 3. Activate the theme from WordPress admin dashboard
-4. Install and activate recommended plugins:
+4. **Automatic Setup**: Upon activation, the theme will automatically:
+   - Create all required pages (Home, About, Legal pages, etc.)
+   - Set up post categories (French courses, Exams Prep, Fun Exercises)
+   - Create and assign navigation menus (Primary, Mobile, Footer menus)
+   - Set the Home page as your front page
+5. Install and activate recommended plugins:
    - Polylang (for multilingual support)
    - Tutor LMS (for courses)
    - WooCommerce (optional, for e-commerce)
+
+## Automated Theme Setup
+
+When you activate this theme for the first time, it automatically creates:
+
+### Pages Created
+- **Home** - Set as front page
+- **About Us** - With complete content
+- **Mission & Vision** - Full mission statement and values
+- **Pedagogical Information** - Including CEFR level tables
+- **Biographie** - Founder biography
+- **Story of the Project** - Platform history
+- **Partenaires** - Partnership information
+- **Privacy Policy** - 11 sections
+- **Terms of Use** - 15 sections
+- **Refund & Cancellation Policy** - 10 sections
+- **Copyright & Intellectual Property Policy** - 10 sections
+- **Acceptable Use Policy** - Complete policy
+- **Instructor Agreement** - Agreement template
+- **Contact / Legal Notice** - Contact information
+
+### Categories Created
+The theme creates hierarchical post categories for:
+- **French courses**: Kids A1.1, A1, A2.1, A2
+- **Exams Prep**: DELF Prim A1.1, A1, A2, DELF B1, B2, DALF C1, C2, TCF Canada, TEF Canada
+- **Fun Exercises**: Kids A1.1, A1.1+, A1, A1+, A2.1, A2
+
+### Menus Created
+- **Main Navigation** (Primary & Mobile): Complete header menu with dropdowns
+- **Footer Courses**: Course category links
+- **Footer Legal**: Legal page links
 
 ## Required Plugins
 
 ### Polylang
 The theme is designed to work with Polylang for multilingual content. Install Polylang and configure languages (English, French, Spanish, Arabic, Chinese) to enable the language switcher.
+
+**Note**: The theme includes fallback functions so it works perfectly without Polylang. When Polylang is not installed, the theme uses built-in English translations.
 
 **String Registration**: The theme automatically registers all UI strings with Polylang. After activating the theme, go to **Languages > String translations** to translate:
 - Navigation items
@@ -33,6 +71,14 @@ The theme is designed to work with Polylang for multilingual content. Install Po
 - Feature card titles
 - Footer text
 - Button labels
+
+### WordPress Native Features
+
+The theme integrates seamlessly with WordPress core features:
+- **Search**: Header search uses native WordPress search functionality
+- **User Authentication**: Sign-in/Log-out buttons link to WordPress login pages
+- **User Registration**: Register button appears when user registration is enabled
+- **Navigation Menus**: All menus use `wp_nav_menu()` with intelligent fallbacks
 
 ### Recommended Setup
 
@@ -54,10 +100,11 @@ The theme is designed to work with Polylang for multilingual content. Install Po
    - Set the page slug to match (e.g., "about" for About Us)
    - Select the corresponding template from the "Template" dropdown
    - The content is built into the template, no editing needed!
+   
+   **Note**: Pages are automatically created on theme activation, so you may not need to create them manually!
 
-2. **Configure Menus**: Go to **Appearance > Menus** and create:
-   - Primary Menu (desktop navigation)
-   - Mobile Menu (mobile navigation)
+2. **Menus**: Menus are automatically created and assigned on theme activation. You can customize them at **Appearance > Menus**:
+   - Main Navigation (assigned to Primary & Mobile locations)
    - Footer Courses (footer courses links)
    - Footer Legal (footer legal links)
 
@@ -93,6 +140,8 @@ french-practice-hub-theme/
 ├── searchform.php         # Search form
 ├── comments.php           # Comments template
 ├── screenshot.png         # Theme screenshot (placeholder)
+├── languages/
+│   └── french-practice-hub.pot  # Translation template
 ├── assets/
 │   ├── css/
 │   │   └── main.css       # All theme styles (from weWEB.html)
@@ -105,6 +154,33 @@ french-practice-hub-theme/
     ├── content-single.php # Single post content template
     └── content-none.php   # No results template
 ```
+
+## Key Features
+
+### Dropdown Menu Enhancement
+The header dropdown menus now include a smooth hover delay, preventing them from disappearing too quickly. This allows users to easily navigate to sub-menu items.
+
+### WordPress Search Integration
+The header search functionality is fully integrated with WordPress's native search. Search queries are processed through WordPress and display results using the theme's search template.
+
+### User Authentication
+- **Sign in/Log out**: Dynamically changes based on user login status
+- **Register**: Appears only when user registration is enabled in WordPress settings
+- All links use WordPress core functions for authentication
+
+### Automated Content Setup
+On theme activation, the system automatically:
+- Creates 14 pages with complete content
+- Establishes 22 post categories in proper hierarchy
+- Builds navigation menus with proper structure
+- Assigns menus to theme locations
+- Sets the home page as the front page
+
+### Translation Ready
+- Includes `languages/french-practice-hub.pot` file
+- All strings use WordPress localization functions
+- Compatible with Polylang for multilingual sites
+- Works without Polylang using built-in fallback translations
 
 ## Customization
 
@@ -151,6 +227,24 @@ For support, please contact: contact@fidelefle.com
 - Fonts: Source Sans Pro (Google Fonts)
 
 ## Changelog
+
+### 1.1.0 (2026-01-10)
+**Major Compatibility & Functionality Update**
+- **Dropdown Menu Fix**: Added smooth transitions to prevent dropdowns from disappearing too quickly
+- **WordPress Search Integration**: Header search now uses native WordPress search functionality
+- **User Authentication**: Sign-in/Log-out buttons dynamically change based on login status
+- **Register Button**: Appears only when user registration is enabled
+- **Automated Theme Setup**: Theme activation now automatically creates:
+  - 14 pages with complete content (Home, About, Legal pages, etc.)
+  - 22 post categories in proper hierarchy
+  - Navigation menus (Primary, Mobile, Footer menus)
+  - Proper menu assignments to theme locations
+- **Navigation Improvements**: All fallback menus now link to proper WordPress pages and categories
+- **Translation Support**: Added `languages/french-practice-hub.pot` file for translations
+- **Security**: Fixed XSS vulnerability in search form with proper escaping
+- **Menu Parent URLs**: Parent menu items now link to actual category/page archives
+- **Mobile Menu**: Automatically assigned the same menu as desktop for consistency
+- **Text Domain**: Added proper text domain loading for WordPress translations
 
 ### 1.0.0
 - Initial release
