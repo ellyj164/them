@@ -102,8 +102,7 @@ function french_practice_hub_scripts() {
         array(),
         wp_get_theme()->get( 'Version' ),
         true
-    )
-;
+    );
     
     // Google Translate (optional, works alongside Polylang for on-the-fly translation)
     // Only load if Google Translate is enabled in theme options

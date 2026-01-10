@@ -35,7 +35,7 @@ get_header();
             <p><?php esc_html_e( 'The Platform and Instructor will share revenue from course sales according to the agreed-upon revenue sharing model. Specific terms and percentages will be provided in a separate agreement.', 'french-practice-hub' ); ?></p>
             
             <h2><?php esc_html_e( '5. Quality Standards', 'french-practice-hub' ); ?></h2>
-            <p><?php esc_html_e( 'All course content must meet the Platform\'s quality standards including:', 'french-practice-hub' ); ?></p>
+            <p><?php esc_html_e( "All course content must meet the Platform's quality standards including:", 'french-practice-hub' ); ?></p>
             <ul>
                 <li><?php esc_html_e( 'Clear audio and video quality', 'french-practice-hub' ); ?></li>
                 <li><?php esc_html_e( 'Accurate and pedagogically sound content', 'french-practice-hub' ); ?></li>
@@ -47,7 +47,7 @@ get_header();
             <p><?php esc_html_e( 'The Platform reserves the right to review and approve all content before publication. Content that does not meet quality standards or violates platform policies may be rejected or removed.', 'french-practice-hub' ); ?></p>
             
             <h2><?php esc_html_e( '7. Term and Termination', 'french-practice-hub' ); ?></h2>
-            <p><?php esc_html_e( 'This Agreement remains in effect until terminated by either party with 30 days written notice. Upon termination, the Instructor\'s content may be removed from the Platform, subject to any ongoing student enrollments.', 'french-practice-hub' ); ?></p>
+            <p><?php esc_html_e( "This Agreement remains in effect until terminated by either party with 30 days written notice. Upon termination, the Instructor's content may be removed from the Platform, subject to any ongoing student enrollments.", 'french-practice-hub' ); ?></p>
             
             <h2><?php esc_html_e( '8. Confidentiality', 'french-practice-hub' ); ?></h2>
             <p><?php esc_html_e( 'Both parties agree to maintain the confidentiality of any proprietary information shared during the course of this Agreement.', 'french-practice-hub' ); ?></p>
