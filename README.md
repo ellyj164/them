@@ -94,6 +94,8 @@ The theme integrates seamlessly with WordPress core features:
    - Refund & Cancellation Policy (`page-refund.php`)
    - Copyright & IP Policy (`page-copyright.php`)
    - Acceptable Use Policy (`page-acceptable-use.php`)
+   - Instructor Agreement (`page-instructor-agreement.php`)
+   - Contact / Legal Notice (`page-contact.php`)
    
    **To use these templates**:
    - Create a new page in WordPress
@@ -107,6 +109,11 @@ The theme integrates seamlessly with WordPress core features:
    - Main Navigation (assigned to Primary & Mobile locations)
    - Footer Courses (footer courses links)
    - Footer Legal (footer legal links)
+   
+3. **Google Translate** (Optional): To enable Google Translate widget:
+   - Go to **Appearance > Customize**
+   - Enable the option `french_practice_hub_enable_google_translate`
+   - The widget will appear in the header next to the language switcher
 
 3. **Upload Logo**: Go to **Appearance > Customize > Site Identity** to upload your logo
 
@@ -131,6 +138,8 @@ french-practice-hub-theme/
 ├── page-refund.php        # Refund Policy (10 sections)
 ├── page-copyright.php     # Copyright Policy (10 sections)
 ├── page-acceptable-use.php # Acceptable Use Policy
+├── page-instructor-agreement.php # Instructor Agreement
+├── page-contact.php       # Contact / Legal Notice
 ├── single.php             # Single post template
 ├── archive.php            # Archive pages
 ├── index.php              # Fallback template
@@ -144,7 +153,7 @@ french-practice-hub-theme/
 │   └── french-practice-hub.pot  # Translation template
 ├── assets/
 │   ├── css/
-│   │   └── main.css       # All theme styles (from weWEB.html)
+│   │   └── main.css       # All theme styles
 │   ├── js/
 │   │   └── main.js        # Theme JavaScript
 │   └── images/            # Theme images
@@ -227,6 +236,28 @@ For support, please contact: contact@fidelefle.com
 - Fonts: Source Sans Pro (Google Fonts)
 
 ## Changelog
+
+### 1.2.0 (2026-01-10)
+**Enhancement Update - Complete FPWEBP.html Parity**
+- **Missing Page Templates**: Added dedicated templates for:
+  - Instructor Agreement (`page-instructor-agreement.php`)
+  - Contact / Legal Notice (`page-contact.php`)
+- **Google Translate Support**: Optional Google Translate widget for on-the-fly translation
+  - WordPress-compatible implementation (no inline `document.write`)
+  - Proper script enqueueing via `wp_enqueue_script`
+  - Can be enabled via theme customizer option `french_practice_hub_enable_google_translate`
+  - Works alongside Polylang for complementary translation options
+  - Styled to match theme design
+- **Enhanced Dropdown Menus**: 
+  - Removed conflicting `display: none` that prevented smooth transitions
+  - Added smooth opacity, visibility, and transform transitions
+  - Added `focus-within` support for keyboard accessibility
+  - Improved UX with proper hover states
+- **CSS Improvements**:
+  - Better dropdown animations with translateY effect
+  - Google Translate widget styling
+  - Hidden Google Translate top banner for cleaner UI
+- **Complete Section Coverage**: All 15 required sections now present with dedicated templates
 
 ### 1.1.0 (2026-01-10)
 **Major Compatibility & Functionality Update**

@@ -450,13 +450,13 @@ function french_practice_hub_activation() {
         ),
         'instructor-agreement' => array(
             'title'    => 'Instructor Agreement',
-            'template' => '',
-            'content'  => '<h1>Instructor Agreement</h1><p>Details about the instructor agreement will be added here.</p>',
+            'template' => 'page-instructor-agreement.php',
+            'content'  => '',
         ),
         'contact' => array(
             'title'    => 'Contact / Legal Notice',
-            'template' => '',
-            'content'  => '<h1>Contact / Legal Notice</h1><p>Email: <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a></p>',
+            'template' => 'page-contact.php',
+            'content'  => '',
         ),
     );
 

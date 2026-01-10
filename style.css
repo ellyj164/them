@@ -3,15 +3,15 @@ Theme Name: French Practice Hub
 Theme URI: https://frenchpracticehub.com
 Author: Fidele FLE
 Author URI: https://frenchpracticehub.com
-Description: A comprehensive WordPress theme for French language learning platform with Polylang, Tutor LMS, and WooCommerce support. Features automated setup, WordPress search integration, and dynamic user authentication.
-Version: 1.1.0
+Description: A comprehensive WordPress theme for French language learning platform with Polylang, Tutor LMS, and WooCommerce support. Features automated setup, WordPress search integration, Google Translate support, and dynamic user authentication with all required page templates.
+Version: 1.2.0
 Requires at least: 5.8
 Tested up to: 6.4
 Requires PHP: 7.4
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: french-practice-hub
-Tags: education, language, multilingual, tutor-lms, woocommerce
+Tags: education, language, multilingual, tutor-lms, woocommerce, google-translate
 */
 
 /* 
