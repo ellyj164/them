@@ -114,10 +114,16 @@ body {
     border: 1px solid var(--border-color);
     margin-top: 15px;
     z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.has-dropdown:hover .dropdown {
+.has-dropdown:hover .dropdown,
+.dropdown:hover {
     display: block;
+    opacity: 1;
+    visibility: visible;
 }
 
 .dropdown a {
@@ -185,6 +191,7 @@ body {
     border: none;
     cursor: pointer;
     color: var(--text-color);
+    text-decoration: none;
 }
 
 .sign-in-btn:hover {

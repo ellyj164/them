@@ -20,6 +20,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
+        // Submit search form when clicking search button if input has value
+        searchBtn.addEventListener('click', (e) => {
+            if (searchContainer.classList.contains('active')) {
+                const searchInput = document.getElementById('search-input');
+                const searchForm = searchContainer.querySelector('form');
+                if (searchInput && searchInput.value.trim() !== '' && searchForm) {
+                    searchForm.submit();
+                }
+            }
+        });
+        
         // Close search when clicking outside
         document.addEventListener('click', (e) => {
             if (searchContainer.classList.contains('active') && !searchContainer.contains(e.target)) {

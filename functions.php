@@ -14,6 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Theme setup
  */
 function french_practice_hub_setup() {
+    // Load text domain for translations
+    load_theme_textdomain( 'french-practice-hub', get_template_directory() . '/languages' );
+    
     // Add default posts and comments RSS feed links to head
     add_theme_support( 'automatic-feed-links' );
 
@@ -348,5 +351,361 @@ if ( ! function_exists( 'pll_the_languages' ) ) {
             return array();
         }
         return '';
+    }
+}
+
+/**
+ * Theme activation - Create pages, categories, and menus
+ */
+function french_practice_hub_activation() {
+    // Create pages with content
+    $pages = array(
+        'home' => array(
+            'title'    => 'Home',
+            'template' => '',
+            'content'  => '',
+        ),
+        'about' => array(
+            'title'    => 'About Us',
+            'template' => 'page-about.php',
+            'content'  => '',
+        ),
+        'mission' => array(
+            'title'    => 'Mission & Vision',
+            'template' => 'page-mission.php',
+            'content'  => '',
+        ),
+        'pedagogy' => array(
+            'title'    => 'Pedagogical Information',
+            'template' => 'page-pedagogy.php',
+            'content'  => '',
+        ),
+        'biography' => array(
+            'title'    => 'Biographie',
+            'template' => 'page-biography.php',
+            'content'  => '',
+        ),
+        'story' => array(
+            'title'    => 'Story of the Project',
+            'template' => 'page-story.php',
+            'content'  => '',
+        ),
+        'partners' => array(
+            'title'    => 'Partenaires',
+            'template' => 'page-partners.php',
+            'content'  => '',
+        ),
+        'privacy' => array(
+            'title'    => 'Privacy Policy',
+            'template' => 'page-privacy.php',
+            'content'  => '',
+        ),
+        'terms' => array(
+            'title'    => 'Terms of Use',
+            'template' => 'page-terms.php',
+            'content'  => '',
+        ),
+        'refund' => array(
+            'title'    => 'Refund & Cancellation Policy',
+            'template' => 'page-refund.php',
+            'content'  => '',
+        ),
+        'copyright' => array(
+            'title'    => 'Copyright & Intellectual Property Policy',
+            'template' => 'page-copyright.php',
+            'content'  => '',
+        ),
+        'acceptable-use' => array(
+            'title'    => 'Acceptable Use Policy',
+            'template' => 'page-acceptable-use.php',
+            'content'  => '',
+        ),
+        'instructor-agreement' => array(
+            'title'    => 'Instructor Agreement',
+            'template' => '',
+            'content'  => '<h1>Instructor Agreement</h1><p>Details about the instructor agreement will be added here.</p>',
+        ),
+        'contact' => array(
+            'title'    => 'Contact / Legal Notice',
+            'template' => '',
+            'content'  => '<h1>Contact / Legal Notice</h1><p>Email: <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a></p>',
+        ),
+    );
+
+    $created_pages = array();
+    foreach ( $pages as $slug => $page_data ) {
+        // Check if page already exists
+        $page_check = get_page_by_path( $slug );
+        if ( ! $page_check ) {
+            $page_id = wp_insert_post( array(
+                'post_title'     => $page_data['title'],
+                'post_name'      => $slug,
+                'post_content'   => $page_data['content'],
+                'post_status'    => 'publish',
+                'post_type'      => 'page',
+                'comment_status' => 'closed',
+                'ping_status'    => 'closed',
+            ) );
+
+            if ( $page_id && ! is_wp_error( $page_id ) ) {
+                $created_pages[ $slug ] = $page_id;
+                
+                // Set page template if specified
+                if ( ! empty( $page_data['template'] ) ) {
+                    update_post_meta( $page_id, '_wp_page_template', $page_data['template'] );
+                }
+                
+                // Set home page as front page
+                if ( $slug === 'home' ) {
+                    update_option( 'page_on_front', $page_id );
+                    update_option( 'show_on_front', 'page' );
+                }
+            }
+        } else {
+            $created_pages[ $slug ] = $page_check->ID;
+        }
+    }
+
+    // Create categories
+    $categories = array(
+        'french-courses'      => 'French courses',
+        'kids-a11'            => 'Kids, A1.1 (Pre-Beginner)',
+        'kids-a1'             => 'Kids, A1 (Beginner)',
+        'kids-a21'            => 'Kids, A2.1 (Elementary)',
+        'kids-a2'             => 'Kids, A2 (Pre-Intermediate)',
+        'exams-prep'          => 'Exams Prep',
+        'delf-prim-a11'       => 'DELF Prim A1.1',
+        'delf-prim-a1'        => 'DELF Prim A1',
+        'delf-prim-a2'        => 'DELF Prim A2',
+        'delf-b1'             => 'DELF B1',
+        'delf-b2'             => 'DELF B2',
+        'dalf-c1'             => 'DALF C1',
+        'dalf-c2'             => 'DALF C2',
+        'tcf-canada'          => 'TCF Canada 🇨🇦',
+        'tef-canada'          => 'TEF Canada 🇨🇦',
+        'fun-exercises'       => 'Fun Exercises',
+        'exercises-kids-a11'  => 'Kids, A1.1',
+        'exercises-kids-a11p' => 'Kids, A1.1+',
+        'exercises-kids-a1'   => 'Kids, A1',
+        'exercises-kids-a1p'  => 'Kids, A1+',
+        'exercises-kids-a21'  => 'Kids, A2.1',
+        'exercises-kids-a2'   => 'Kids, A2',
+    );
+
+    $created_categories = array();
+    foreach ( $categories as $slug => $name ) {
+        $term = term_exists( $slug, 'category' );
+        if ( ! $term ) {
+            $term = wp_insert_term( $name, 'category', array( 'slug' => $slug ) );
+        }
+        if ( ! is_wp_error( $term ) ) {
+            $created_categories[ $slug ] = is_array( $term ) ? $term['term_id'] : $term;
+        }
+    }
+
+    // Create primary navigation menu
+    $menu_name = 'Main Navigation';
+    $menu_exists = wp_get_nav_menu_object( $menu_name );
+    
+    if ( ! $menu_exists ) {
+        $menu_id = wp_create_nav_menu( $menu_name );
+        
+        if ( ! is_wp_error( $menu_id ) ) {
+            // Add Home
+            if ( isset( $created_pages['home'] ) ) {
+                wp_update_nav_menu_item( $menu_id, 0, array(
+                    'menu-item-title'     => 'Home',
+                    'menu-item-object-id' => $created_pages['home'],
+                    'menu-item-object'    => 'page',
+                    'menu-item-type'      => 'post_type',
+                    'menu-item-status'    => 'publish',
+                    'menu-item-position'  => 1,
+                ) );
+            }
+
+            // Add French courses dropdown
+            $courses_parent = wp_update_nav_menu_item( $menu_id, 0, array(
+                'menu-item-title'  => 'French courses',
+                'menu-item-url'    => '#',
+                'menu-item-status' => 'publish',
+                'menu-item-position' => 2,
+            ) );
+            
+            $course_items = array( 'kids-a11', 'kids-a1', 'kids-a21', 'kids-a2' );
+            $position = 1;
+            foreach ( $course_items as $slug ) {
+                if ( isset( $created_categories[ $slug ] ) ) {
+                    wp_update_nav_menu_item( $menu_id, 0, array(
+                        'menu-item-title'     => $categories[ $slug ],
+                        'menu-item-object-id' => $created_categories[ $slug ],
+                        'menu-item-object'    => 'category',
+                        'menu-item-type'      => 'taxonomy',
+                        'menu-item-status'    => 'publish',
+                        'menu-item-parent-id' => $courses_parent,
+                        'menu-item-position'  => $position++,
+                    ) );
+                }
+            }
+
+            // Add Exams Prep dropdown
+            $exams_parent = wp_update_nav_menu_item( $menu_id, 0, array(
+                'menu-item-title'  => 'Exams Prep',
+                'menu-item-url'    => '#',
+                'menu-item-status' => 'publish',
+                'menu-item-position' => 3,
+            ) );
+            
+            $exam_items = array( 'delf-prim-a11', 'delf-prim-a1', 'delf-prim-a2', 'delf-b1', 'delf-b2', 'dalf-c1', 'dalf-c2', 'tcf-canada', 'tef-canada' );
+            $position = 1;
+            foreach ( $exam_items as $slug ) {
+                if ( isset( $created_categories[ $slug ] ) ) {
+                    wp_update_nav_menu_item( $menu_id, 0, array(
+                        'menu-item-title'     => $categories[ $slug ],
+                        'menu-item-object-id' => $created_categories[ $slug ],
+                        'menu-item-object'    => 'category',
+                        'menu-item-type'      => 'taxonomy',
+                        'menu-item-status'    => 'publish',
+                        'menu-item-parent-id' => $exams_parent,
+                        'menu-item-position'  => $position++,
+                    ) );
+                }
+            }
+
+            // Add Fun Exercises dropdown
+            $exercises_parent = wp_update_nav_menu_item( $menu_id, 0, array(
+                'menu-item-title'  => 'Fun Exercises',
+                'menu-item-url'    => '#',
+                'menu-item-status' => 'publish',
+                'menu-item-position' => 4,
+            ) );
+            
+            $exercise_items = array( 'exercises-kids-a11', 'exercises-kids-a11p', 'exercises-kids-a1', 'exercises-kids-a1p', 'exercises-kids-a21', 'exercises-kids-a2' );
+            $position = 1;
+            foreach ( $exercise_items as $slug ) {
+                if ( isset( $created_categories[ $slug ] ) ) {
+                    wp_update_nav_menu_item( $menu_id, 0, array(
+                        'menu-item-title'     => $categories[ $slug ],
+                        'menu-item-object-id' => $created_categories[ $slug ],
+                        'menu-item-object'    => 'category',
+                        'menu-item-type'      => 'taxonomy',
+                        'menu-item-status'    => 'publish',
+                        'menu-item-parent-id' => $exercises_parent,
+                        'menu-item-position'  => $position++,
+                    ) );
+                }
+            }
+
+            // Add Blog
+            wp_update_nav_menu_item( $menu_id, 0, array(
+                'menu-item-title'  => 'Blog',
+                'menu-item-url'    => home_url( '/blog/' ),
+                'menu-item-status' => 'publish',
+                'menu-item-position' => 5,
+            ) );
+
+            // Add About dropdown
+            $about_parent = wp_update_nav_menu_item( $menu_id, 0, array(
+                'menu-item-title'  => 'About',
+                'menu-item-url'    => '#',
+                'menu-item-status' => 'publish',
+                'menu-item-position' => 6,
+            ) );
+            
+            $about_pages = array( 'about', 'mission', 'pedagogy', 'biography', 'story', 'partners' );
+            $position = 1;
+            foreach ( $about_pages as $slug ) {
+                if ( isset( $created_pages[ $slug ] ) ) {
+                    wp_update_nav_menu_item( $menu_id, 0, array(
+                        'menu-item-title'     => $pages[ $slug ]['title'],
+                        'menu-item-object-id' => $created_pages[ $slug ],
+                        'menu-item-object'    => 'page',
+                        'menu-item-type'      => 'post_type',
+                        'menu-item-status'    => 'publish',
+                        'menu-item-parent-id' => $about_parent,
+                        'menu-item-position'  => $position++,
+                    ) );
+                }
+            }
+
+            // Assign menu to primary location
+            $locations = get_theme_mod( 'nav_menu_locations' );
+            $locations['primary'] = $menu_id;
+            set_theme_mod( 'nav_menu_locations', $locations );
+        }
+    }
+
+    // Create footer menus
+    french_practice_hub_create_footer_menus( $created_pages, $created_categories, $categories );
+}
+add_action( 'after_switch_theme', 'french_practice_hub_activation' );
+
+/**
+ * Create footer menus
+ */
+function french_practice_hub_create_footer_menus( $created_pages, $created_categories, $categories ) {
+    // Footer Courses Menu
+    $footer_courses_name = 'Footer Courses';
+    $footer_courses_exists = wp_get_nav_menu_object( $footer_courses_name );
+    
+    if ( ! $footer_courses_exists ) {
+        $footer_courses_id = wp_create_nav_menu( $footer_courses_name );
+        
+        if ( ! is_wp_error( $footer_courses_id ) ) {
+            $course_items = array( 'kids-a11', 'kids-a1', 'kids-a21', 'kids-a2' );
+            $position = 1;
+            foreach ( $course_items as $slug ) {
+                if ( isset( $created_categories[ $slug ] ) ) {
+                    wp_update_nav_menu_item( $footer_courses_id, 0, array(
+                        'menu-item-title'     => $categories[ $slug ],
+                        'menu-item-object-id' => $created_categories[ $slug ],
+                        'menu-item-object'    => 'category',
+                        'menu-item-type'      => 'taxonomy',
+                        'menu-item-status'    => 'publish',
+                        'menu-item-position'  => $position++,
+                    ) );
+                }
+            }
+
+            $locations = get_theme_mod( 'nav_menu_locations' );
+            $locations['footer-courses'] = $footer_courses_id;
+            set_theme_mod( 'nav_menu_locations', $locations );
+        }
+    }
+
+    // Footer Legal Menu
+    $footer_legal_name = 'Footer Legal';
+    $footer_legal_exists = wp_get_nav_menu_object( $footer_legal_name );
+    
+    if ( ! $footer_legal_exists ) {
+        $footer_legal_id = wp_create_nav_menu( $footer_legal_name );
+        
+        if ( ! is_wp_error( $footer_legal_id ) ) {
+            $legal_pages = array( 'privacy', 'terms', 'refund', 'copyright', 'acceptable-use' );
+            $position = 1;
+            foreach ( $legal_pages as $slug ) {
+                if ( isset( $created_pages[ $slug ] ) ) {
+                    $pages = array(
+                        'privacy'         => 'Privacy Policy',
+                        'terms'           => 'Terms of Use',
+                        'refund'          => 'Refund & Cancellation Policy',
+                        'copyright'       => 'Copyright & Intellectual Property Policy',
+                        'acceptable-use'  => 'Acceptable Use Policy',
+                    );
+                    
+                    wp_update_nav_menu_item( $footer_legal_id, 0, array(
+                        'menu-item-title'     => $pages[ $slug ],
+                        'menu-item-object-id' => $created_pages[ $slug ],
+                        'menu-item-object'    => 'page',
+                        'menu-item-type'      => 'post_type',
+                        'menu-item-status'    => 'publish',
+                        'menu-item-position'  => $position++,
+                    ) );
+                }
+            }
+
+            $locations = get_theme_mod( 'nav_menu_locations' );
+            $locations['footer-legal'] = $footer_legal_id;
+            set_theme_mod( 'nav_menu_locations', $locations );
+        }
     }
 }
