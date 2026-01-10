@@ -142,7 +142,7 @@
             
             <div class="search-container" id="search-container">
                 <form role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-                    <input type="search" id="search-input" name="s" placeholder="<?php esc_attr_e( 'Search...', 'french-practice-hub' ); ?>" value="<?php echo get_search_query(); ?>">
+                    <input type="search" id="search-input" name="s" placeholder="<?php esc_attr_e( 'Search...', 'french-practice-hub' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>">
                 </form>
                 <button id="search-btn" aria-label="<?php esc_attr_e( 'Open search', 'french-practice-hub' ); ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">

@@ -524,9 +524,11 @@ function french_practice_hub_activation() {
             }
 
             // Add French courses dropdown
+            $courses_cat_id = isset( $created_categories['french-courses'] ) ? $created_categories['french-courses'] : 0;
+            $courses_url = $courses_cat_id ? get_category_link( $courses_cat_id ) : '#';
             $courses_parent = wp_update_nav_menu_item( $menu_id, 0, array(
                 'menu-item-title'  => 'French courses',
-                'menu-item-url'    => '#',
+                'menu-item-url'    => $courses_url,
                 'menu-item-status' => 'publish',
                 'menu-item-position' => 2,
             ) );
@@ -548,9 +550,11 @@ function french_practice_hub_activation() {
             }
 
             // Add Exams Prep dropdown
+            $exams_cat_id = isset( $created_categories['exams-prep'] ) ? $created_categories['exams-prep'] : 0;
+            $exams_url = $exams_cat_id ? get_category_link( $exams_cat_id ) : '#';
             $exams_parent = wp_update_nav_menu_item( $menu_id, 0, array(
                 'menu-item-title'  => 'Exams Prep',
-                'menu-item-url'    => '#',
+                'menu-item-url'    => $exams_url,
                 'menu-item-status' => 'publish',
                 'menu-item-position' => 3,
             ) );
@@ -572,9 +576,11 @@ function french_practice_hub_activation() {
             }
 
             // Add Fun Exercises dropdown
+            $exercises_cat_id = isset( $created_categories['fun-exercises'] ) ? $created_categories['fun-exercises'] : 0;
+            $exercises_url = $exercises_cat_id ? get_category_link( $exercises_cat_id ) : '#';
             $exercises_parent = wp_update_nav_menu_item( $menu_id, 0, array(
                 'menu-item-title'  => 'Fun Exercises',
-                'menu-item-url'    => '#',
+                'menu-item-url'    => $exercises_url,
                 'menu-item-status' => 'publish',
                 'menu-item-position' => 4,
             ) );
@@ -604,9 +610,11 @@ function french_practice_hub_activation() {
             ) );
 
             // Add About dropdown
+            $about_page_id = isset( $created_pages['about'] ) ? $created_pages['about'] : 0;
+            $about_url = $about_page_id ? get_permalink( $about_page_id ) : '#';
             $about_parent = wp_update_nav_menu_item( $menu_id, 0, array(
                 'menu-item-title'  => 'About',
-                'menu-item-url'    => '#',
+                'menu-item-url'    => $about_url,
                 'menu-item-status' => 'publish',
                 'menu-item-position' => 6,
             ) );
@@ -630,6 +638,10 @@ function french_practice_hub_activation() {
             // Assign menu to primary location
             $locations = get_theme_mod( 'nav_menu_locations' );
             $locations['primary'] = $menu_id;
+            set_theme_mod( 'nav_menu_locations', $locations );
+            
+            // Duplicate menu for mobile location
+            $locations['mobile'] = $menu_id;
             set_theme_mod( 'nav_menu_locations', $locations );
         }
     }
