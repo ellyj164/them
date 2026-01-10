@@ -1,0 +1,3 @@
+This is a placeholder for screenshot.png
+The actual screenshot.png should be an 880x660 pixel image showing the theme's homepage.
+You can create one manually after installing the theme.
