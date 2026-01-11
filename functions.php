@@ -415,6 +415,12 @@ class French_Practice_Hub_Walker_Nav_Menu extends Walker_Nav_Menu {
             $output .= '<a href="' . esc_url( $item->url ) . '">' . esc_html( $item->title ) . '</a>';
         }
     }
+
+    function end_el( &$output, $item, $depth = 0, $args = null ) {
+        if ( $depth === 0 ) {
+            $output .= '</li>';
+        }
+    }
 }
 
 /**
