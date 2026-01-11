@@ -391,15 +391,15 @@ function fph_wpml_mobile_language_switcher() {
  * Custom walker for dropdown menus
  */
 class French_Practice_Hub_Walker_Nav_Menu extends Walker_Nav_Menu {
-    function start_lvl( &$output, $depth = 0, $args = null ) {
+    public function start_lvl( &$output, $depth = 0, $args = null ) {
         $output .= '<div class="dropdown">';
     }
 
-    function end_lvl( &$output, $depth = 0, $args = null ) {
+    public function end_lvl( &$output, $depth = 0, $args = null ) {
         $output .= '</div>';
     }
 
-    function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
+    public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         $classes = empty( $item->classes ) ? array() : (array) $item->classes;
         
         if ( in_array( 'menu-item-has-children', $classes ) && $depth === 0 ) {
@@ -413,6 +413,12 @@ class French_Practice_Hub_Walker_Nav_Menu extends Walker_Nav_Menu {
                 $output .= '<li>';
             }
             $output .= '<a href="' . esc_url( $item->url ) . '">' . esc_html( $item->title ) . '</a>';
+        }
+    }
+
+    public function end_el( &$output, $item, $depth = 0, $args = null ) {
+        if ( $depth === 0 ) {
+            $output .= '</li>';
         }
     }
 }
