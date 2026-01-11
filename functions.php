@@ -130,85 +130,18 @@ add_action( 'wp_enqueue_scripts', 'french_practice_hub_scripts' );
 
 /**
  * Register Polylang strings for translation
+ * Uses the centralized default strings array
  */
 function french_practice_hub_register_polylang_strings() {
     if ( function_exists( 'pll_register_string' ) ) {
-        // Navigation
-        pll_register_string( 'nav_home', 'Home', 'french-practice-hub' );
-        pll_register_string( 'nav_courses', 'French courses', 'french-practice-hub' );
-        pll_register_string( 'nav_exams', 'Exams Prep', 'french-practice-hub' );
-        pll_register_string( 'nav_exercises', 'Fun Exercises', 'french-practice-hub' );
-        pll_register_string( 'nav_blog', 'Blog', 'french-practice-hub' );
-        pll_register_string( 'nav_about', 'About', 'french-practice-hub' );
-        pll_register_string( 'nav_about_us', 'About Us', 'french-practice-hub' );
-        pll_register_string( 'nav_signin', 'Sign in', 'french-practice-hub' );
-        pll_register_string( 'nav_register', 'Register', 'french-practice-hub' );
+        $default_strings = fph_get_default_strings();
         
-        // Course dropdown items
-        pll_register_string( 'courses_kids_a11', 'Kids, A1.1 (Pre-Beginner)', 'french-practice-hub' );
-        pll_register_string( 'courses_kids_a1', 'Kids, A1 (Beginner)', 'french-practice-hub' );
-        pll_register_string( 'courses_kids_a21', 'Kids, A2.1 (Elementary)', 'french-practice-hub' );
-        pll_register_string( 'courses_kids_a2', 'Kids, A2 (Pre-Intermediate)', 'french-practice-hub' );
+        // Register each string with Polylang
+        foreach ( $default_strings as $key => $value ) {
+            pll_register_string( $key, $value, 'french-practice-hub' );
+        }
         
-        // Exam dropdown items
-        pll_register_string( 'exams_delf_pa11', 'DELF Prim A1.1', 'french-practice-hub' );
-        pll_register_string( 'exams_delf_pa1', 'DELF Prim A1', 'french-practice-hub' );
-        pll_register_string( 'exams_delf_pa2', 'DELF Prim A2', 'french-practice-hub' );
-        pll_register_string( 'exams_delf_b1', 'DELF B1', 'french-practice-hub' );
-        pll_register_string( 'exams_delf_b2', 'DELF B2', 'french-practice-hub' );
-        pll_register_string( 'exams_dalf_c1', 'DALF C1', 'french-practice-hub' );
-        pll_register_string( 'exams_dalf_c2', 'DALF C2', 'french-practice-hub' );
-        pll_register_string( 'exams_tcf', 'TCF Canada 🇨🇦', 'french-practice-hub' );
-        pll_register_string( 'exams_tef', 'TEF Canada 🇨🇦', 'french-practice-hub' );
-        
-        // Exercise dropdown items
-        pll_register_string( 'exercises_kids_a11', 'Kids, A1.1', 'french-practice-hub' );
-        pll_register_string( 'exercises_kids_a11p', 'Kids, A1.1+', 'french-practice-hub' );
-        pll_register_string( 'exercises_kids_a1', 'Kids, A1', 'french-practice-hub' );
-        pll_register_string( 'exercises_kids_a1p', 'Kids, A1+', 'french-practice-hub' );
-        pll_register_string( 'exercises_kids_a21', 'Kids, A2.1', 'french-practice-hub' );
-        pll_register_string( 'exercises_kids_a2', 'Kids, A2', 'french-practice-hub' );
-        
-        // About dropdown items
-        pll_register_string( 'nav_mission', 'Mission & Vision', 'french-practice-hub' );
-        pll_register_string( 'nav_pedagogy', 'Pedagogical Information', 'french-practice-hub' );
-        pll_register_string( 'nav_biographie', 'Biographie', 'french-practice-hub' );
-        pll_register_string( 'nav_story', 'Story of the Project', 'french-practice-hub' );
-        pll_register_string( 'nav_partners', 'Partenaires', 'french-practice-hub' );
-        
-        // Hero section
-        pll_register_string( 'hero_title', 'Practice French to Communicate with Confidence & Succeed', 'french-practice-hub' );
-        pll_register_string( 'hero_subtitle1', 'Learn French through structured practice, games, fun songs, storytelling, dialogues and real-life communication', 'french-practice-hub' );
-        pll_register_string( 'hero_subtitle2', 'Succeed in DELF 🇫🇷 DALF, TCF 🇨🇦 TEF Canada', 'french-practice-hub' );
-        pll_register_string( 'btn_get_started', 'Get Started', 'french-practice-hub' );
-        pll_register_string( 'btn_book_session', 'Book a Session', 'french-practice-hub' );
-        
-        // Feature cards
-        pll_register_string( 'feature1_title', 'Comprehensive Courses', 'french-practice-hub' );
-        pll_register_string( 'feature1_desc', 'Structured French courses from A1.1 to C2', 'french-practice-hub' );
-        pll_register_string( 'feature2_title', 'Video Dialogues', 'french-practice-hub' );
-        pll_register_string( 'feature2_desc', 'Real-life conversations and dialogues', 'french-practice-hub' );
-        pll_register_string( 'feature3_title', 'Fun Games', 'french-practice-hub' );
-        pll_register_string( 'feature3_desc', 'Interactive games for effective practice', 'french-practice-hub' );
-        pll_register_string( 'feature4_title', 'Educational Songs', 'french-practice-hub' );
-        pll_register_string( 'feature4_desc', 'Engaging songs to learn French', 'french-practice-hub' );
-        pll_register_string( 'feature5_title', 'DELF/DALF Prep', 'french-practice-hub' );
-        pll_register_string( 'feature5_desc', 'Exam preparation for DELF, DALF, TCF, TEF', 'french-practice-hub' );
-        pll_register_string( 'feature6_title', 'Storytelling', 'french-practice-hub' );
-        pll_register_string( 'feature6_desc', 'French stories for all levels', 'french-practice-hub' );
-        
-        // Footer
-        pll_register_string( 'footer_courses_title', 'Courses', 'french-practice-hub' );
-        pll_register_string( 'footer_legal_title', 'Legal', 'french-practice-hub' );
-        pll_register_string( 'footer_contact_title', 'Contact', 'french-practice-hub' );
-        pll_register_string( 'footer_privacy', 'Privacy Policy', 'french-practice-hub' );
-        pll_register_string( 'footer_terms', 'Terms of Use', 'french-practice-hub' );
-        pll_register_string( 'footer_refund', 'Refund & Cancellation Policy', 'french-practice-hub' );
-        pll_register_string( 'footer_copyright_ip', 'Copyright & Intellectual Property Policy', 'french-practice-hub' );
-        pll_register_string( 'footer_acceptable', 'Acceptable Use Policy', 'french-practice-hub' );
-        pll_register_string( 'footer_copyright', '© 2026 Fidele FLE - French Practice Hub – All rights reserved', 'french-practice-hub' );
-        
-        // Language names
+        // Additional language names (not in main array)
         pll_register_string( 'lang_en', 'English', 'french-practice-hub' );
         pll_register_string( 'lang_fr', 'Français', 'french-practice-hub' );
         pll_register_string( 'lang_es', 'Español', 'french-practice-hub' );
@@ -275,33 +208,11 @@ class French_Practice_Hub_Walker_Nav_Menu extends Walker_Nav_Menu {
 }
 
 /**
- * Polylang fallback functions
- * These functions provide default behavior when Polylang is not installed
+ * Centralized default translations array
+ * Contains all translatable strings with their default English values
  */
-if ( ! function_exists( 'pll_e' ) ) {
-    /**
-     * Fallback for pll_e() - echoes the translated string
-     */
-    function pll_e( $string ) {
-        echo esc_html( french_practice_hub_get_translation( $string ) );
-    }
-}
-
-if ( ! function_exists( 'pll__' ) ) {
-    /**
-     * Fallback for pll__() - returns the translated string
-     */
-    function pll__( $string ) {
-        return french_practice_hub_get_translation( $string );
-    }
-}
-
-/**
- * Get translation for a string key
- * Used as fallback when Polylang is not installed
- */
-function french_practice_hub_get_translation( $key ) {
-    $translations = array(
+function fph_get_default_strings() {
+    return array(
         // Navigation
         'nav_home'        => 'Home',
         'nav_courses'     => 'French courses',
@@ -309,7 +220,7 @@ function french_practice_hub_get_translation( $key ) {
         'nav_exercises'   => 'Fun Exercises',
         'nav_blog'        => 'Blog',
         'nav_about'       => 'About',
-        'nav_about_us'    => 'About Us',
+        'nav_about_us'    => 'About',
         'nav_signin'      => 'Sign in',
         'nav_register'    => 'Register',
         
@@ -352,19 +263,19 @@ function french_practice_hub_get_translation( $key ) {
         'btn_get_started'=> 'Get Started',
         'btn_book_session'=> 'Book a Session',
         
-        // Feature cards
-        'feature1_title' => 'Comprehensive Courses',
-        'feature1_desc'  => 'Structured French courses from A1.1 to C2',
-        'feature2_title' => 'Video Dialogues',
-        'feature2_desc'  => 'Real-life conversations and dialogues',
-        'feature3_title' => 'Fun Games',
-        'feature3_desc'  => 'Interactive games for effective practice',
-        'feature4_title' => 'Educational Songs',
-        'feature4_desc'  => 'Engaging songs to learn French',
-        'feature5_title' => 'DELF/DALF Prep',
-        'feature5_desc'  => 'Exam preparation for DELF, DALF, TCF, TEF',
-        'feature6_title' => 'Storytelling',
-        'feature6_desc'  => 'French stories for all levels',
+        // Feature cards (updated to match FPWEBP.html)
+        'feature1_title' => 'Fun Exercises FLE',
+        'feature1_desc'  => 'A1.1 - B2',
+        'feature2_title' => 'Video Dialogues FLE',
+        'feature2_desc'  => 'A1.1 - B2',
+        'feature3_title' => 'French Exam Success',
+        'feature3_desc'  => 'DELF, TCF, TEF Canada (A1.1 - B2)',
+        'feature4_title' => 'Fun French Songs FLE',
+        'feature4_desc'  => 'Engaging songs to learn French.',
+        'feature5_title' => 'French Reading Club',
+        'feature5_desc'  => 'A1.1 - B2',
+        'feature6_title' => 'Online French Tutoring',
+        'feature6_desc'  => 'A1.1 - C2',
         
         // Footer
         'footer_courses_title' => 'Courses',
@@ -377,8 +288,79 @@ function french_practice_hub_get_translation( $key ) {
         'footer_acceptable'    => 'Acceptable Use Policy',
         'footer_copyright'     => '© 2026 Fidele FLE - French Practice Hub – All rights reserved',
     );
+}
+
+/**
+ * Helper function for translations with proper Polylang fallback
+ * 
+ * This function ensures that readable text is ALWAYS displayed:
+ * - If Polylang is active AND the string is translated, use the translation
+ * - If Polylang is NOT active OR string not translated, return default English text
+ * - Never show translation keys to users
+ *
+ * @param string $key Translation key
+ * @return string The translated or default text
+ */
+function fph_translate( $key ) {
+    $defaults = fph_get_default_strings();
+    $default_text = isset( $defaults[ $key ] ) ? $defaults[ $key ] : $key;
     
-    return isset( $translations[ $key ] ) ? $translations[ $key ] : $key;
+    // If Polylang is active, try to get the translation
+    if ( function_exists( 'pll__' ) ) {
+        $translated = pll__( $key );
+        
+        // If Polylang returns the key itself (not translated), use our default
+        // This prevents showing translation keys like "nav_exercises" to users
+        if ( $translated === $key ) {
+            return $default_text;
+        }
+        
+        return $translated;
+    }
+    
+    // Polylang not active, return default
+    return $default_text;
+}
+
+/**
+ * Echo version of fph_translate()
+ * 
+ * @param string $key Translation key
+ */
+function fph_translate_e( $key ) {
+    echo esc_html( fph_translate( $key ) );
+}
+
+/**
+ * Polylang fallback functions
+ * These functions provide default behavior when Polylang is not installed
+ */
+if ( ! function_exists( 'pll_e' ) ) {
+    /**
+     * Fallback for pll_e() - echoes the translated string
+     */
+    function pll_e( $string ) {
+        echo esc_html( fph_translate( $string ) );
+    }
+}
+
+if ( ! function_exists( 'pll__' ) ) {
+    /**
+     * Fallback for pll__() - returns the translated string
+     */
+    function pll__( $string ) {
+        return fph_translate( $string );
+    }
+}
+
+/**
+ * Get translation for a string key (legacy support)
+ * Used as fallback when Polylang is not installed
+ * 
+ * @deprecated Use fph_translate() instead
+ */
+function french_practice_hub_get_translation( $key ) {
+    return fph_translate( $key );
 }
 
 if ( ! function_exists( 'pll_current_language' ) ) {
