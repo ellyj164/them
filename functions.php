@@ -210,9 +210,14 @@ class French_Practice_Hub_Walker_Nav_Menu extends Walker_Nav_Menu {
 /**
  * Centralized default translations array
  * Contains all translatable strings with their default English values
+ * 
+ * @return array Array of translation keys and their default English text
  */
 function fph_get_default_strings() {
-    return array(
+    static $translations = null;
+    
+    if ( $translations === null ) {
+        $translations = array(
         // Navigation
         'nav_home'        => 'Home',
         'nav_courses'     => 'French courses',
@@ -290,6 +295,9 @@ function fph_get_default_strings() {
     );
 }
 
+return $translations;
+}
+
 /**
  * Helper function for translations with proper Polylang fallback
  * 
@@ -355,9 +363,16 @@ if ( ! function_exists( 'pll__' ) ) {
 
 /**
  * Get translation for a string key (legacy support)
- * Used as fallback when Polylang is not installed
  * 
- * @deprecated Use fph_translate() instead
+ * @deprecated since 1.3.0 Use fph_translate() instead
+ * @see fph_translate()
+ * 
+ * Example migration:
+ *   Old: french_practice_hub_get_translation( 'nav_home' )
+ *   New: fph_translate( 'nav_home' )
+ * 
+ * @param string $key Translation key
+ * @return string Translated or default text
  */
 function french_practice_hub_get_translation( $key ) {
     return fph_translate( $key );
