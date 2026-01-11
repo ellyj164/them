@@ -10,6 +10,25 @@ get_header();
 ?>
 
 <main class="about-page-container">
+    <?php
+    while ( have_posts() ) :
+        the_post();
+        
+        // Check if page is built with Elementor
+        $is_elementor = false;
+        if ( class_exists( '\Elementor\Plugin' ) ) {
+            $document = \Elementor\Plugin::$instance->documents->get( get_the_ID() );
+            if ( $document ) {
+                $is_elementor = $document->is_built_with_elementor();
+            }
+        }
+        
+        if ( $is_elementor ) {
+            // Page is built with Elementor, show Elementor content
+            the_content();
+        } else {
+            // Default theme content
+            ?>
     <div class="container">
         <h1><?php esc_html_e( 'Instructor Agreement', 'french-practice-hub' ); ?></h1>
         
@@ -63,6 +82,10 @@ get_header();
             </p>
         </div>
     </div>
+            <?php
+        }
+    endwhile;
+    ?>
 </main>
 
 <?php

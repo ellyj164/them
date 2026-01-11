@@ -10,6 +10,25 @@ get_header();
 ?>
 
 <main class="about-page-container">
+    <?php
+    while ( have_posts() ) :
+        the_post();
+        
+        // Check if page is built with Elementor
+        $is_elementor = false;
+        if ( class_exists( '\Elementor\Plugin' ) ) {
+            $document = \Elementor\Plugin::$instance->documents->get( get_the_ID() );
+            if ( $document ) {
+                $is_elementor = $document->is_built_with_elementor();
+            }
+        }
+        
+        if ( $is_elementor ) {
+            // Page is built with Elementor, show Elementor content
+            the_content();
+        } else {
+            // Default theme content
+            ?>
     <div class="container">
         <h1><?php esc_html_e( 'Contact / Legal Notice', 'french-practice-hub' ); ?></h1>
         
@@ -76,6 +95,10 @@ get_header();
             <p><?php esc_html_e( 'Any disputes arising from the use of this website will be handled in accordance with applicable laws. For any complaints or concerns, please contact us at the email address provided above.', 'french-practice-hub' ); ?></p>
         </div>
     </div>
+            <?php
+        }
+    endwhile;
+    ?>
 </main>
 
 <?php

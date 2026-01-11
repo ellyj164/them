@@ -26,12 +26,21 @@
         <nav class="main-nav">
             <?php
             if ( has_nav_menu( 'primary' ) ) {
-                wp_nav_menu( array(
-                    'theme_location' => 'primary',
-                    'container'      => false,
-                    'menu_class'     => '',
-                    'walker'         => new French_Practice_Hub_Walker_Nav_Menu(),
-                ) );
+                // Use custom walker if class exists
+                if ( class_exists( 'French_Practice_Hub_Walker_Nav_Menu' ) ) {
+                    wp_nav_menu( array(
+                        'theme_location' => 'primary',
+                        'container'      => false,
+                        'menu_class'     => '',
+                        'walker'         => new French_Practice_Hub_Walker_Nav_Menu(),
+                    ) );
+                } else {
+                    wp_nav_menu( array(
+                        'theme_location' => 'primary',
+                        'container'      => false,
+                        'menu_class'     => '',
+                    ) );
+                }
             } else {
                 // Fallback menu with Polylang strings
                 ?>
