@@ -4,6 +4,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Google Translate configuration
+    const GOOGLE_TRANSLATE_FALLBACK_DELAY = 2000; // ms - time to wait before falling back to Polylang/WPML
+    
     // Google Translate functionality
     function triggerGoogleTranslate(langCode) {
         // Map language codes to Google Translate format
@@ -58,7 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Fallback: if Google Translate fails after delay, navigate to Polylang/WPML URL
                 setTimeout(() => {
-                    // Check if page was translated (Google Translate adds specific classes/elements)
+                    // Check if page was translated
+                    // Note: This detection relies on Google Translate's DOM structure which may change.
+                    // Alternative detection methods could include checking for translated text or 
+                    // monitoring DOM mutations, but those are more complex and less reliable.
                     const isTranslated = document.querySelector('.goog-te-banner-frame') || 
                                        document.documentElement.classList.contains('translated-ltr') ||
                                        document.documentElement.classList.contains('translated-rtl');
@@ -67,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Google Translate didn't work, use Polylang/WPML fallback
                         window.location.href = option.href;
                     }
-                }, 2000);
+                }, GOOGLE_TRANSLATE_FALLBACK_DELAY);
             }
         });
     });
