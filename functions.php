@@ -165,12 +165,14 @@ function french_practice_hub_register_polylang_strings() {
     // This minimal set reduces memory usage significantly
     $all_strings = fph_get_default_strings();
     
-    // Register only the most essential navigation and button strings
-    $essential_keys = array(
+    // Essential navigation and button strings for translation
+    // Only these critical UI elements are registered with Polylang
+    // to minimize memory usage while maintaining functionality
+    $essential_keys = apply_filters( 'fph_essential_translation_keys', array(
         'nav_home', 'nav_courses', 'nav_exams', 'nav_exercises', 
         'nav_blog', 'nav_about', 'nav_signin', 'nav_register',
         'btn_get_started', 'btn_book_session'
-    );
+    ) );
     
     foreach ( $essential_keys as $key ) {
         if ( isset( $all_strings[ $key ] ) ) {
@@ -526,16 +528,22 @@ function fph_get_default_strings() {
 function fph_translate( $key ) {
     // Use static to prevent reloading defaults on every call
     static $defaults = null;
+    static $polylang_active = null;
     
     if ( $defaults === null ) {
         $defaults = fph_get_default_strings();
     }
     
+    // Cache Polylang detection for performance
+    if ( $polylang_active === null ) {
+        // Polylang is active only if pll_register_string exists (core Polylang function)
+        $polylang_active = function_exists( 'pll_register_string' );
+    }
+    
     $default_text = isset( $defaults[ $key ] ) ? $defaults[ $key ] : $key;
     
-    // Check if REAL Polylang plugin is active (not our fallback)
-    // The real pll_register_string function only exists when Polylang is active
-    if ( function_exists( 'pll_register_string' ) && function_exists( 'pll__' ) ) {
+    // Use Polylang if it's active
+    if ( $polylang_active && function_exists( 'pll__' ) ) {
         // Pass the key to Polylang for translation
         $translated = pll__( $key );
         
