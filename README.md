@@ -1,11 +1,12 @@
 # French Practice Hub WordPress Theme
 
-A comprehensive WordPress theme for French language learning platform with Polylang, Tutor LMS, and WooCommerce support.
+A comprehensive WordPress theme for French language learning platform with translation plugin compatibility, Tutor LMS, and WooCommerce support.
 
 ## Features
 
 - **Responsive Design**: Mobile-first approach with hamburger menu for smaller screens
-- **Polylang Integration**: Full multilingual support with translatable UI strings
+- **Translation Plugin Compatible**: Works with Polylang, WPML, TranslatePress, Weglot, and other translation plugins
+- **No Google Translate Dependency**: Uses WordPress translation plugins for better SEO and control
 - **Tutor LMS Compatible**: Works seamlessly with Tutor LMS for course management
 - **WooCommerce Ready**: Full WooCommerce support for selling courses
 - **Modern UI**: Clean, professional design with video hero section
@@ -60,17 +61,45 @@ The theme creates hierarchical post categories for:
 
 ## Required Plugins
 
-### Polylang
-The theme is designed to work with Polylang for multilingual content. Install Polylang and configure languages (English, French, Spanish, Arabic, Chinese) to enable the language switcher.
+### Translation Plugin Compatibility
 
-**Note**: The theme includes fallback functions so it works perfectly without Polylang. When Polylang is not installed, the theme uses built-in English translations.
+The theme is fully compatible with popular WordPress translation plugins for creating multilingual websites:
 
-**String Registration**: The theme automatically registers all UI strings with Polylang. After activating the theme, go to **Languages > String translations** to translate:
-- Navigation items
-- Hero section text
-- Feature card titles
-- Footer text
-- Button labels
+#### Supported Translation Plugins
+- **Polylang** (free) - Recommended for most users
+- **WPML** (premium) - Enterprise-level multilingual support
+- **TranslatePress** - Visual translation editor
+- **Weglot** - Cloud-based automatic translation
+- **Loco Translate** - For translating theme strings
+
+#### Setting Up Multilingual Support with Polylang
+
+1. **Install Polylang**: Download and activate the free Polylang plugin from WordPress.org
+2. **Configure Languages**: Go to **Languages > Languages** and add your desired languages (e.g., English, French, Spanish, Arabic, Chinese)
+3. **Translate Strings**: Go to **Languages > String translations** to translate theme UI strings:
+   - Navigation items (Home, Courses, Exams, etc.)
+   - Hero section text
+   - Feature card titles
+   - Footer text
+   - Button labels
+4. **Language Switcher**: The theme automatically displays a language switcher in the header with flag emojis when Polylang is active
+5. **Translate Content**: Create translated versions of your pages and posts using Polylang's interface
+
+#### Setting Up with WPML
+
+1. **Install WPML**: Purchase and activate WPML plugin
+2. **Configure Languages**: Follow WPML's setup wizard to configure your languages
+3. **String Translation**: Use WPML's String Translation feature to translate theme strings
+4. **Language Switcher**: The theme automatically detects WPML and displays the language switcher
+
+#### No Translation Plugin Installed?
+
+The theme works perfectly without any translation plugin installed:
+- The language switcher shows only English (EN) by default
+- All theme strings display in English
+- No errors or broken functionality
+
+**Note**: The theme does NOT use Google Translate API. Translation is handled entirely by WordPress translation plugins, giving you full control over translations and better SEO.
 
 ### WordPress Native Features
 
@@ -109,13 +138,34 @@ The theme integrates seamlessly with WordPress core features:
    - Main Navigation (assigned to Primary & Mobile locations)
    - Footer Courses (footer courses links)
    - Footer Legal (footer legal links)
-   
-3. **Google Translate** (Optional): To enable Google Translate widget:
-   - Go to **Appearance > Customize**
-   - Enable the option `french_practice_hub_enable_google_translate`
-   - The widget will appear in the header next to the language switcher
 
 3. **Upload Logo**: Go to **Appearance > Customize > Site Identity** to upload your logo
+
+## Translation Plugin Integration
+
+### Custom Hooks for Other Plugins
+
+If you're using a translation plugin not natively supported, you can integrate it using these hooks:
+
+- `fph_language_switcher` - Desktop language switcher hook
+- `fph_mobile_language_switcher` - Mobile language switcher hook
+
+Example:
+```php
+add_action('fph_language_switcher', 'my_custom_language_switcher');
+function my_custom_language_switcher() {
+    // Your custom language switcher code
+}
+```
+
+### Language Flag Mapping
+
+The theme includes a built-in flag emoji mapping for common languages:
+- English (en): 🇬🇧
+- French (fr): 🇫🇷
+- Spanish (es): 🇪🇸
+- Arabic (ar): 🇸🇦
+- Chinese (zh): 🇨🇳
 
 ## Theme Structure
 
@@ -188,8 +238,9 @@ On theme activation, the system automatically:
 ### Translation Ready
 - Includes `languages/french-practice-hub.pot` file
 - All strings use WordPress localization functions
-- Compatible with Polylang for multilingual sites
-- Works without Polylang using built-in fallback translations
+- Compatible with Polylang, WPML, TranslatePress, Weglot, and other translation plugins
+- Works without any translation plugin using built-in fallback translations
+- No dependency on Google Translate API
 
 ## Customization
 
@@ -236,6 +287,39 @@ For support, please contact: contact@fidelefle.com
 - Fonts: Source Sans Pro (Google Fonts)
 
 ## Changelog
+
+### 1.3.0 (2026-01-11)
+**Translation Plugin Compatibility Update**
+- **Removed Google Translate Dependency**: 
+  - Removed Google Translate API integration
+  - Deleted `google-translate-init.js` file
+  - Removed Google Translate hidden element from header
+  - Removed Google Translate theme customizer settings
+  - Removed Google Translate script enqueuing from functions.php
+- **Translation Plugin Compatibility**: Theme now works seamlessly with:
+  - Polylang (free) - with automatic language switcher
+  - WPML (premium) - with automatic language switcher
+  - TranslatePress, Weglot, and other translation plugins via custom hooks
+  - Loco Translate for string translations
+- **Enhanced Language Switcher**:
+  - Desktop and mobile language switchers now use plugin APIs (Polylang/WPML)
+  - Flag emoji mapping for English, French, Spanish, Arabic, and Chinese
+  - Automatic detection of active translation plugins
+  - Fallback to single language display when no plugin is active
+  - Custom hooks (`fph_language_switcher`, `fph_mobile_language_switcher`) for other plugins
+- **Improved Functions**:
+  - Added `fph_get_language_flag()` for language flag emoji mapping
+  - Added `fph_polylang_language_switcher()` for Polylang desktop support
+  - Added `fph_wpml_language_switcher()` for WPML desktop support
+  - Added `fph_polylang_mobile_language_switcher()` for Polylang mobile support
+  - Added `fph_wpml_mobile_language_switcher()` for WPML mobile support
+- **Documentation Updates**:
+  - Updated README with comprehensive translation plugin setup instructions
+  - Added section on supported translation plugins
+  - Added custom hooks documentation for unsupported plugins
+  - Clarified that theme does NOT use Google Translate API
+- **Better SEO**: Translation plugin integration provides better SEO than automated translation
+- **Full Control**: Site owners have complete control over translations
 
 ### 1.2.0 (2026-01-10)
 **Enhancement Update - Complete FPWEBP.html Parity**
