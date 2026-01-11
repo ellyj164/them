@@ -440,15 +440,18 @@ class French_Practice_Hub_Mobile_Walker extends Walker_Nav_Menu {
         $classes = empty( $item->classes ) ? array() : (array) $item->classes;
         
         if ( in_array( 'menu-item-has-children', $classes ) && $depth === 0 ) {
+            // Parent item with children: create toggle structure
             $output .= '<li>';
             $output .= '<div class="mobile-dropdown-toggle">';
             $output .= esc_html( $item->title );
             $output .= '<span class="mobile-dropdown-arrow"></span>';
             $output .= '</div>';
+        } elseif ( $depth === 0 ) {
+            // Top-level item without children: regular link in <li>
+            $output .= '<li>';
+            $output .= '<a href="' . esc_url( $item->url ) . '">' . esc_html( $item->title ) . '</a>';
         } else {
-            if ( $depth === 0 ) {
-                $output .= '<li>';
-            }
+            // Child item (depth > 0): just the link, no <li> wrapper
             $output .= '<a href="' . esc_url( $item->url ) . '">' . esc_html( $item->title ) . '</a>';
         }
     }
