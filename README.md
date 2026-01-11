@@ -158,14 +158,29 @@ function my_custom_language_switcher() {
 }
 ```
 
-### Language Flag Mapping
+### Customizing Language Flags
 
-The theme includes a built-in flag emoji mapping for common languages:
-- English (en): 🇬🇧
-- French (fr): 🇫🇷
-- Spanish (es): 🇪🇸
+You can customize the language flag emojis using the `fph_language_flags` filter:
+
+```php
+add_filter('fph_language_flags', 'custom_language_flags');
+function custom_language_flags($flags) {
+    $flags['de'] = '🇩🇪'; // Add German
+    $flags['it'] = '🇮🇹'; // Add Italian
+    $flags['en'] = '🇺🇸'; // Change English to US flag
+    return $flags;
+}
+```
+
+### Default Language Flag Mapping
+
+The theme includes built-in flag emoji mapping for common languages:
+- English (en, en_US, en_GB): 🇬🇧
+- French (fr, fr_FR): 🇫🇷
+- Spanish (es, es_ES): 🇪🇸
 - Arabic (ar): 🇸🇦
-- Chinese (zh): 🇨🇳
+- Chinese (zh, zh_CN, zh_Hans): 🇨🇳
+- Unknown languages: 🌐 (globe)
 
 ## Theme Structure
 
