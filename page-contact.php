@@ -74,7 +74,7 @@ get_header();
                 printf(
                     /* translators: %s: Privacy Policy link */
                     esc_html__( 'For information about how we collect and use your personal data, please see our %s.', 'french-practice-hub' ),
-                    '<a href="' . esc_url( get_permalink( get_page_by_path( 'privacy' ) ) ) . '">' . esc_html__( 'Privacy Policy', 'french-practice-hub' ) . '</a>'
+                    '<a href="' . esc_url( fph_get_safe_page_link( 'privacy' ) ) . '">' . esc_html__( 'Privacy Policy', 'french-practice-hub' ) . '</a>'
                 );
                 ?>
             </p>

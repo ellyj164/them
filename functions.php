@@ -949,3 +949,33 @@ function french_practice_hub_create_footer_menus( $created_pages, $created_categ
         }
     }
 }
+
+/**
+ * Helper function to safely get category link by name
+ * Returns '#' if category doesn't exist to prevent errors
+ * 
+ * @param string $category_name Category name
+ * @return string Category URL or '#' if not found
+ */
+function fph_get_safe_category_link( $category_name ) {
+    $cat_id = get_cat_ID( $category_name );
+    if ( $cat_id && $cat_id > 0 ) {
+        return get_category_link( $cat_id );
+    }
+    return '#';
+}
+
+/**
+ * Helper function to safely get page permalink by path
+ * Returns '#' if page doesn't exist to prevent errors
+ * 
+ * @param string $page_path Page path/slug
+ * @return string Page URL or '#' if not found
+ */
+function fph_get_safe_page_link( $page_path ) {
+    $page = get_page_by_path( $page_path );
+    if ( $page && $page instanceof WP_Post ) {
+        return get_permalink( $page->ID );
+    }
+    return '#';
+}
