@@ -61,10 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Fallback: if Google Translate fails after delay, navigate to Polylang/WPML URL
                 setTimeout(() => {
-                    // Check if page was translated
-                    // Note: This detection relies on Google Translate's DOM structure which may change.
-                    // Alternative detection methods could include checking for translated text or 
-                    // monitoring DOM mutations, but those are more complex and less reliable.
+                    // Check if page was translated by detecting Google Translate's DOM elements
+                    // 
+                    // IMPORTANT: This detection relies on Google Translate's current DOM structure.
+                    // Google Translate typically adds one or more of these when active:
+                    // - .goog-te-banner-frame: The translation banner iframe
+                    // - .translated-ltr class on <html>: Left-to-right translated content
+                    // - .translated-rtl class on <html>: Right-to-left translated content
+                    //
+                    // If Google changes these implementation details, this detection may fail.
+                    // The fallback ensures users can still navigate via Polylang/WPML if detection breaks.
                     const isTranslated = document.querySelector('.goog-te-banner-frame') || 
                                        document.documentElement.classList.contains('translated-ltr') ||
                                        document.documentElement.classList.contains('translated-rtl');

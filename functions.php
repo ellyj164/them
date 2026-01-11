@@ -439,6 +439,7 @@ class French_Practice_Hub_Mobile_Walker extends Walker_Nav_Menu {
     public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
         $classes = empty( $item->classes ) ? array() : (array) $item->classes;
         
+        // 'menu-item-has-children' is a WordPress core class automatically added to parent menu items
         if ( in_array( 'menu-item-has-children', $classes ) && $depth === 0 ) {
             // Parent item with children: create toggle structure
             $output .= '<li>';
