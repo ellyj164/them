@@ -129,11 +129,6 @@ body {
     position: relative;
 }
 
-.main-nav li {
-    display: inline-block;
-    position: relative;
-}
-
 .dropdown {
     display: none;
     position: absolute;
