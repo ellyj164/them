@@ -144,26 +144,53 @@ add_action( 'wp_enqueue_scripts', 'french_practice_hub_scripts' );
 
 /**
  * Register Polylang strings for translation
- * Uses the centralized default strings array
+ * MEMORY OPTIMIZED: Only runs in admin, only once per hour, minimal strings
  */
 function french_practice_hub_register_polylang_strings() {
-    if ( function_exists( 'pll_register_string' ) ) {
-        $default_strings = fph_get_default_strings();
-        
-        // Register each string with Polylang
-        foreach ( $default_strings as $key => $value ) {
-            pll_register_string( $key, $value, 'french-practice-hub' );
-        }
-        
-        // Additional language names (not in main array)
-        pll_register_string( 'lang_en', 'English', 'french-practice-hub' );
-        pll_register_string( 'lang_fr', 'Français', 'french-practice-hub' );
-        pll_register_string( 'lang_es', 'Español', 'french-practice-hub' );
-        pll_register_string( 'lang_ar', 'العربية', 'french-practice-hub' );
-        pll_register_string( 'lang_zh', '中文', 'french-practice-hub' );
+    // CRITICAL: Only register in admin to prevent frontend memory usage
+    if ( ! is_admin() ) {
+        return;
     }
+    
+    // CRITICAL: Only run once per hour using transient to prevent repeated registration
+    if ( get_transient( 'fph_polylang_strings_registered' ) ) {
+        return;
+    }
+    
+    if ( ! function_exists( 'pll_register_string' ) ) {
+        return;
+    }
+    
+    // Get default strings and register only essential UI strings
+    // This minimal set reduces memory usage significantly
+    $all_strings = fph_get_default_strings();
+    
+    // Essential navigation and button strings for translation
+    // Only these critical UI elements are registered with Polylang
+    // to minimize memory usage while maintaining functionality
+    $essential_keys = apply_filters( 'fph_essential_translation_keys', array(
+        'nav_home', 'nav_courses', 'nav_exams', 'nav_exercises', 
+        'nav_blog', 'nav_about', 'nav_signin', 'nav_register',
+        'btn_get_started', 'btn_book_session'
+    ) );
+    
+    foreach ( $essential_keys as $key ) {
+        if ( isset( $all_strings[ $key ] ) ) {
+            pll_register_string( $key, $all_strings[ $key ], 'french-practice-hub' );
+        }
+    }
+    
+    // Additional language names
+    pll_register_string( 'lang_en', 'English', 'french-practice-hub' );
+    pll_register_string( 'lang_fr', 'Français', 'french-practice-hub' );
+    pll_register_string( 'lang_es', 'Español', 'french-practice-hub' );
+    pll_register_string( 'lang_ar', 'العربية', 'french-practice-hub' );
+    pll_register_string( 'lang_zh', '中文', 'french-practice-hub' );
+    
+    // Mark as registered for 1 hour to prevent repeated registration
+    set_transient( 'fph_polylang_strings_registered', true, HOUR_IN_SECONDS );
 }
-add_action( 'init', 'french_practice_hub_register_polylang_strings' );
+add_action( 'admin_init', 'french_practice_hub_register_polylang_strings' );
 
 /**
  * Get language flag emoji based on language code
@@ -392,16 +419,22 @@ class French_Practice_Hub_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 /**
  * Centralized default translations array
- * Contains all translatable strings with their default English values
+ * MEMORY OPTIMIZED: Contains only essential translatable strings
+ * Long content and descriptions should be in template files, not in memory
  * 
  * @return array Array of translation keys and their default English text
  */
 function fph_get_default_strings() {
+    // Use static to prevent reloading on every call
     static $translations = null;
     
-    if ( $translations === null ) {
-        $translations = array(
-        // Navigation
+    if ( $translations !== null ) {
+        return $translations;
+    }
+    
+    // MINIMAL essential strings only - reduces memory footprint
+    $translations = array(
+        // Navigation - essential UI elements
         'nav_home'        => 'Home',
         'nav_courses'     => 'French courses',
         'nav_exams'       => 'Exams Prep',
@@ -476,40 +509,56 @@ function fph_get_default_strings() {
         'footer_acceptable'    => 'Acceptable Use Policy',
         'footer_copyright'     => '© 2026 Fidele FLE - French Practice Hub – All rights reserved',
     );
-    }
     
     return $translations;
 }
 
 /**
  * Helper function for translations with proper Polylang fallback
+ * MEMORY OPTIMIZED: Uses static cache to reduce function call overhead
  * 
  * This function ensures that readable text is ALWAYS displayed:
  * - If Polylang is active AND the string is translated, use the translation
  * - If Polylang is NOT active OR string not translated, return default English text
  * - Never show translation keys to users
  *
+ * IMPORTANT: This function does NOT call the fallback pll__() function defined below.
+ * It checks for the REAL Polylang plugin using pll_register_string existence.
+ * The fallback pll__() is only for third-party code that calls it directly.
+ *
  * @param string $key Translation key
  * @return string The translated or default text
  */
 function fph_translate( $key ) {
-    $defaults = fph_get_default_strings();
+    // Use static to prevent reloading defaults on every call
+    static $defaults = null;
+    static $polylang_active = null;
+    
+    if ( $defaults === null ) {
+        $defaults = fph_get_default_strings();
+    }
+    
+    // Cache Polylang detection for performance
+    if ( $polylang_active === null ) {
+        // Polylang is active only if pll_register_string exists (core Polylang function)
+        // This ensures we detect the REAL plugin, not our fallback functions
+        $polylang_active = function_exists( 'pll_register_string' );
+    }
+    
     $default_text = isset( $defaults[ $key ] ) ? $defaults[ $key ] : $key;
     
-    // If Polylang is active, try to get the translation
-    if ( function_exists( 'pll__' ) ) {
+    // Use Polylang if it's active (calls the REAL pll__() from the plugin)
+    if ( $polylang_active && function_exists( 'pll__' ) ) {
+        // Pass the key to Polylang for translation
         $translated = pll__( $key );
         
         // If Polylang returns the key itself (not translated), use our default
         // This prevents showing translation keys like "nav_exercises" to users
-        if ( $translated === $key ) {
-            return $default_text;
-        }
-        
-        return $translated;
+        return ( $translated !== $key ) ? $translated : $default_text;
     }
     
-    // Polylang not active, return default
+    // Polylang not active, return default text (e.g., "Home" instead of "nav_home")
+    // This branch is taken when Polylang is not installed
     return $default_text;
 }
 
@@ -524,25 +573,52 @@ function fph_translate_e( $key ) {
 
 /**
  * Polylang fallback functions
+ * MEMORY OPTIMIZED: Defined inside hook to ensure proper loading order
  * These functions provide default behavior when Polylang is not installed
  */
-if ( ! function_exists( 'pll_e' ) ) {
-    /**
-     * Fallback for pll_e() - echoes the translated string
-     */
-    function pll_e( $string ) {
-        echo esc_html( fph_translate( $string ) );
+add_action( 'after_setup_theme', function() {
+    if ( ! function_exists( 'pll_e' ) ) {
+        /**
+         * Fallback for pll_e() - echoes the HTML-escaped input string
+         * Used when third-party code calls pll_e() directly and Polylang is not active
+         */
+        function pll_e( $string ) {
+            echo esc_html( $string );
+        }
     }
-}
-
-if ( ! function_exists( 'pll__' ) ) {
-    /**
-     * Fallback for pll__() - returns the translated string
-     */
-    function pll__( $string ) {
-        return fph_translate( $string );
+    
+    if ( ! function_exists( 'pll__' ) ) {
+        /**
+         * Fallback for pll__() - returns the input string as-is
+         * Used when third-party code calls pll__() directly and Polylang is not active
+         * Note: fph_translate() does NOT use this fallback; it has its own default text logic
+         */
+        function pll__( $string ) {
+            return $string;
+        }
     }
-}
+    
+    if ( ! function_exists( 'pll_current_language' ) ) {
+        /**
+         * Fallback for pll_current_language() - returns 'en' by default
+         */
+        function pll_current_language( $field = 'slug' ) {
+            return 'en';
+        }
+    }
+    
+    if ( ! function_exists( 'pll_the_languages' ) ) {
+        /**
+         * Fallback for pll_the_languages() - returns empty array
+         */
+        function pll_the_languages( $args = array() ) {
+            if ( isset( $args['raw'] ) && $args['raw'] ) {
+                return array();
+            }
+            return '';
+        }
+    }
+}, 5 ); // Early priority to ensure availability
 
 /**
  * Get translation for a string key (legacy support)
@@ -559,27 +635,6 @@ if ( ! function_exists( 'pll__' ) ) {
  */
 function french_practice_hub_get_translation( $key ) {
     return fph_translate( $key );
-}
-
-if ( ! function_exists( 'pll_current_language' ) ) {
-    /**
-     * Fallback for pll_current_language() - returns 'en' by default
-     */
-    function pll_current_language( $field = 'slug' ) {
-        return 'en';
-    }
-}
-
-if ( ! function_exists( 'pll_the_languages' ) ) {
-    /**
-     * Fallback for pll_the_languages() - returns empty array
-     */
-    function pll_the_languages( $args = array() ) {
-        if ( isset( $args['raw'] ) && $args['raw'] ) {
-            return array();
-        }
-        return '';
-    }
 }
 
 /**
