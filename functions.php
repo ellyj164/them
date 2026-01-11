@@ -77,6 +77,33 @@ function french_practice_hub_elementor_support() {
 add_action( 'after_setup_theme', 'french_practice_hub_elementor_support' );
 
 /**
+ * Check if current page is built with Elementor
+ * 
+ * @param int|null $post_id Post ID to check. Uses current post if not provided.
+ * @return bool True if page is built with Elementor, false otherwise
+ */
+function fph_is_elementor_page( $post_id = null ) {
+    if ( ! $post_id ) {
+        $post_id = get_the_ID();
+    }
+    
+    if ( ! $post_id ) {
+        return false;
+    }
+    
+    if ( ! class_exists( '\Elementor\Plugin' ) ) {
+        return false;
+    }
+    
+    $document = \Elementor\Plugin::$instance->documents->get( $post_id );
+    if ( ! $document ) {
+        return false;
+    }
+    
+    return $document->is_built_with_elementor();
+}
+
+/**
  * Enqueue styles and scripts
  */
 function french_practice_hub_scripts() {
