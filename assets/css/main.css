@@ -3,6 +3,43 @@
  * Extracted from weWEB.html
  */
 
+/* Plugin Protection Layer - Prevents other plugins from breaking theme design */
+/* This ensures critical layout and styling remains intact regardless of active plugins */
+
+/* Protect theme container and layout structure */
+.header,
+.hero,
+.features,
+.footer-main {
+    box-sizing: border-box !important;
+}
+
+.header .container,
+.hero .container,
+.features .container,
+.footer-main .container {
+    box-sizing: border-box !important;
+}
+
+/* Protect navigation structure */
+.main-nav,
+.main-nav ul,
+.main-nav li,
+.mobile-nav,
+.mobile-nav ul,
+.mobile-nav li {
+    box-sizing: border-box !important;
+}
+
+/* Protect buttons from plugin style overrides */
+.btn,
+.sign-in-btn,
+.register-btn,
+.mobile-sign-in-btn,
+.mobile-register-btn {
+    box-sizing: border-box !important;
+}
+
 /* CSS Custom Properties */
 :root {
     --magenta-accent: #D9006C;
