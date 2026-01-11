@@ -101,6 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
  * Manages language selection and Google Translate integration
  */
 function initLanguageSwitcher() {
+    // Constants
+    const DEFAULT_LANGUAGE = 'EN';
+    const GOOGLE_TRANSLATE_MAX_ATTEMPTS = 20;
+    const GOOGLE_TRANSLATE_CHECK_INTERVAL = 200;
+    
     const langOptions = document.querySelectorAll('.lang-option');
     const currentLangFlag = document.getElementById('current-lang-flag');
     const currentLangCode = document.getElementById('current-lang-code');
@@ -126,10 +131,10 @@ function initLanguageSwitcher() {
     };
     
     // Load saved language preference or default to English
-    const savedLang = localStorage.getItem('preferredLanguage') || 'EN';
+    const savedLang = localStorage.getItem('preferredLanguage') || DEFAULT_LANGUAGE;
     
     // Initialize with saved language
-    if (savedLang !== 'EN') {
+    if (savedLang !== DEFAULT_LANGUAGE) {
         updateLanguageDisplay(savedLang);
         // Wait for Google Translate to load, then apply the language
         waitForGoogleTranslate(() => {
@@ -165,7 +170,7 @@ function initLanguageSwitcher() {
     });
     
     function updateLanguageDisplay(lang) {
-        const flag = flagMap[lang] || '🇬🇧';
+        const flag = flagMap[lang] || flagMap[DEFAULT_LANGUAGE];
         
         if (currentLangFlag) currentLangFlag.textContent = flag;
         if (currentLangCode) currentLangCode.textContent = lang;
@@ -174,7 +179,7 @@ function initLanguageSwitcher() {
     }
     
     function changeLanguage(lang) {
-        const googleLang = langMap[lang] || 'en';
+        const googleLang = langMap[lang] || langMap[DEFAULT_LANGUAGE];
         
         // Try to use Google Translate
         if (window.google && window.google.translate) {
@@ -186,7 +191,7 @@ function initLanguageSwitcher() {
         }
     }
     
-    function waitForGoogleTranslate(callback, maxAttempts = 20) {
+    function waitForGoogleTranslate(callback, maxAttempts = GOOGLE_TRANSLATE_MAX_ATTEMPTS) {
         let attempts = 0;
         
         const checkInterval = setInterval(() => {
@@ -197,8 +202,8 @@ function initLanguageSwitcher() {
                 callback();
             } else if (attempts >= maxAttempts) {
                 clearInterval(checkInterval);
-                console.log('Google Translate not available');
+                // Google Translate not available - fail silently
             }
-        }, 200);
+        }, GOOGLE_TRANSLATE_CHECK_INTERVAL);
     }
 }
