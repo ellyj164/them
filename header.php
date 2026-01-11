@@ -102,50 +102,43 @@
         </nav>
         
         <div class="header-actions">
-            <?php
-            // Google Translate widget (optional, if enabled in theme settings)
-            if ( get_theme_mod( 'french_practice_hub_enable_google_translate', false ) ) :
-                ?>
-                <div id="google_translate_element" class="google-translate-widget"></div>
-                <?php
-            endif;
+            <!-- Google Translate Hidden Element -->
+            <div id="google_translate_element" style="display:none;"></div>
             
-            // Polylang language switcher
-            if ( function_exists( 'pll_the_languages' ) ) :
-                $lang_flags = array(
-                    'en' => '🇬🇧',
-                    'fr' => '🇫🇷',
-                    'es' => '🇪🇸',
-                    'ar' => '🇸🇦',
-                    'zh' => '🇨🇳',
-                );
-                $current_lang = pll_current_language( 'slug' );
-                $current_flag = isset( $lang_flags[ $current_lang ] ) ? $lang_flags[ $current_lang ] : '🇬🇧';
-                ?>
-                <div class="language-switcher has-dropdown">
-                    <a id="current-lang">
-                        <span id="current-lang-flag"><?php echo esc_html( $current_flag ); ?></span>
-                        <span id="current-lang-code"><?php echo esc_html( strtoupper( $current_lang ) ); ?></span>
+            <!-- Standalone Language Switcher -->
+            <div class="language-switcher has-dropdown">
+                <a id="current-lang">
+                    <span id="current-lang-flag">🇬🇧</span>
+                    <span id="current-lang-code">EN</span>
+                </a>
+                <div class="dropdown" id="lang-dropdown">
+                    <a href="#" class="lang-option" data-lang="EN">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                        <span class="lang-code">EN</span>
                     </a>
-                    <div class="dropdown" id="lang-dropdown">
-                        <?php
-                        $languages = pll_the_languages( array( 'raw' => 1 ) );
-                        if ( is_array( $languages ) ) {
-                            foreach ( $languages as $lang ) {
-                                $flag = isset( $lang_flags[ $lang['slug'] ] ) ? $lang_flags[ $lang['slug'] ] : '';
-                                ?>
-                                <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option" hreflang="<?php echo esc_attr( $lang['slug'] ); ?>">
-                                    <span class="lang-flag"><?php echo esc_html( $flag ); ?></span>
-                                    <span><?php echo esc_html( $lang['name'] ); ?></span>
-                                    <span class="lang-code"><?php echo esc_html( strtoupper( $lang['slug'] ) ); ?></span>
-                                </a>
-                                <?php
-                            }
-                        }
-                        ?>
-                    </div>
+                    <a href="#" class="lang-option" data-lang="FR">
+                        <span class="lang-flag">🇫🇷</span>
+                        <span>Français</span>
+                        <span class="lang-code">FR</span>
+                    </a>
+                    <a href="#" class="lang-option" data-lang="ES">
+                        <span class="lang-flag">🇪🇸</span>
+                        <span>Español</span>
+                        <span class="lang-code">ES</span>
+                    </a>
+                    <a href="#" class="lang-option" data-lang="AR">
+                        <span class="lang-flag">🇸🇦</span>
+                        <span>العربية</span>
+                        <span class="lang-code">AR</span>
+                    </a>
+                    <a href="#" class="lang-option" data-lang="ZH">
+                        <span class="lang-flag">🇨🇳</span>
+                        <span>中文</span>
+                        <span class="lang-code">ZH</span>
+                    </a>
                 </div>
-            <?php endif; ?>
+            </div>
             
             <div class="search-container" id="search-container">
                 <form role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
@@ -258,6 +251,39 @@
             <?php if ( get_option( 'users_can_register' ) ) : ?>
                 <li><a href="<?php echo esc_url( wp_registration_url() ); ?>" class="mobile-register-btn"><?php fph_translate_e( 'nav_register' ); ?></a></li>
             <?php endif; ?>
+            <li>
+                <div class="mobile-dropdown-toggle">
+                    <span id="mobile-current-lang-flag">🇬🇧</span> <span id="mobile-current-lang-code">EN</span>
+                    <span class="mobile-dropdown-arrow"></span>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <a href="#" class="lang-option" data-lang="EN">
+                        <span class="lang-flag">🇬🇧</span>
+                        <span>English</span>
+                        <span class="lang-code">EN</span>
+                    </a>
+                    <a href="#" class="lang-option" data-lang="FR">
+                        <span class="lang-flag">🇫🇷</span>
+                        <span>Français</span>
+                        <span class="lang-code">FR</span>
+                    </a>
+                    <a href="#" class="lang-option" data-lang="ES">
+                        <span class="lang-flag">🇪🇸</span>
+                        <span>Español</span>
+                        <span class="lang-code">ES</span>
+                    </a>
+                    <a href="#" class="lang-option" data-lang="AR">
+                        <span class="lang-flag">🇸🇦</span>
+                        <span>العربية</span>
+                        <span class="lang-code">AR</span>
+                    </a>
+                    <a href="#" class="lang-option" data-lang="ZH">
+                        <span class="lang-flag">🇨🇳</span>
+                        <span>中文</span>
+                        <span class="lang-code">ZH</span>
+                    </a>
+                </div>
+            </li>
         </ul>
         <?php
     }

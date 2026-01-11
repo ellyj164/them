@@ -260,6 +260,13 @@ body {
 
 .lang-option {
     justify-content: space-between;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lang-flag {
+    font-size: 1.4em;
 }
 
 .lang-code {
