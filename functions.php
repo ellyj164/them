@@ -522,6 +522,10 @@ function fph_get_default_strings() {
  * - If Polylang is NOT active OR string not translated, return default English text
  * - Never show translation keys to users
  *
+ * IMPORTANT: This function does NOT call the fallback pll__() function defined below.
+ * It checks for the REAL Polylang plugin using pll_register_string existence.
+ * The fallback pll__() is only for third-party code that calls it directly.
+ *
  * @param string $key Translation key
  * @return string The translated or default text
  */
@@ -537,12 +541,13 @@ function fph_translate( $key ) {
     // Cache Polylang detection for performance
     if ( $polylang_active === null ) {
         // Polylang is active only if pll_register_string exists (core Polylang function)
+        // This ensures we detect the REAL plugin, not our fallback functions
         $polylang_active = function_exists( 'pll_register_string' );
     }
     
     $default_text = isset( $defaults[ $key ] ) ? $defaults[ $key ] : $key;
     
-    // Use Polylang if it's active
+    // Use Polylang if it's active (calls the REAL pll__() from the plugin)
     if ( $polylang_active && function_exists( 'pll__' ) ) {
         // Pass the key to Polylang for translation
         $translated = pll__( $key );
@@ -552,7 +557,8 @@ function fph_translate( $key ) {
         return ( $translated !== $key ) ? $translated : $default_text;
     }
     
-    // Polylang not active, return default
+    // Polylang not active, return default text (e.g., "Home" instead of "nav_home")
+    // This branch is taken when Polylang is not installed
     return $default_text;
 }
 
@@ -573,8 +579,8 @@ function fph_translate_e( $key ) {
 add_action( 'after_setup_theme', function() {
     if ( ! function_exists( 'pll_e' ) ) {
         /**
-         * Fallback for pll_e() - echoes the translated string
-         * Just returns the input string as-is (no translation without Polylang)
+         * Fallback for pll_e() - echoes the HTML-escaped input string
+         * Used when third-party code calls pll_e() directly and Polylang is not active
          */
         function pll_e( $string ) {
             echo esc_html( $string );
@@ -583,8 +589,9 @@ add_action( 'after_setup_theme', function() {
     
     if ( ! function_exists( 'pll__' ) ) {
         /**
-         * Fallback for pll__() - returns the translated string
-         * Just returns the input string as-is (no translation without Polylang)
+         * Fallback for pll__() - returns the input string as-is
+         * Used when third-party code calls pll__() directly and Polylang is not active
+         * Note: fph_translate() does NOT use this fallback; it has its own default text logic
          */
         function pll__( $string ) {
             return $string;
