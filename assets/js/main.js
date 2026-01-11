@@ -18,14 +18,30 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const googleLangCode = langMap[langCode] || langCode;
         
-        // Wait for Google Translate to be available
-        if (typeof google !== 'undefined' && google.translate && google.translate.TranslateElement) {
-            const select = document.querySelector('.goog-te-combo');
-            if (select) {
-                select.value = googleLangCode;
-                select.dispatchEvent(new Event('change'));
+        // Retry mechanism to wait for Google Translate to be available
+        let retryCount = 0;
+        const maxRetries = 10;
+        const retryDelay = 300; // ms
+        
+        function attemptTranslate() {
+            if (typeof google !== 'undefined' && google.translate && google.translate.TranslateElement) {
+                const select = document.querySelector('.goog-te-combo');
+                if (select) {
+                    select.value = googleLangCode;
+                    select.dispatchEvent(new Event('change'));
+                    return true;
+                }
             }
+            
+            // Retry if widget not ready yet
+            if (retryCount < maxRetries) {
+                retryCount++;
+                setTimeout(attemptTranslate, retryDelay);
+            }
+            return false;
         }
+        
+        attemptTranslate();
     }
     
     // Add click event listeners to language switcher options
@@ -34,9 +50,24 @@ document.addEventListener('DOMContentLoaded', () => {
         option.addEventListener('click', (e) => {
             const langCode = option.getAttribute('data-lang');
             if (langCode) {
+                // Prevent default navigation to allow Google Translate to work
+                e.preventDefault();
+                
                 // Trigger Google Translate
                 triggerGoogleTranslate(langCode);
-                // Let the default navigation continue as fallback
+                
+                // Fallback: if Google Translate fails after delay, navigate to Polylang/WPML URL
+                setTimeout(() => {
+                    // Check if page was translated (Google Translate adds specific classes/elements)
+                    const isTranslated = document.querySelector('.goog-te-banner-frame') || 
+                                       document.documentElement.classList.contains('translated-ltr') ||
+                                       document.documentElement.classList.contains('translated-rtl');
+                    
+                    if (!isTranslated) {
+                        // Google Translate didn't work, use Polylang/WPML fallback
+                        window.location.href = option.href;
+                    }
+                }, 2000);
             }
         });
     });
