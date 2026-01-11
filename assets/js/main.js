@@ -1,9 +1,12 @@
 /**
  * French Practice Hub Theme - Main JavaScript
- * Handles mobile menu, search, and dropdown functionality
+ * Handles mobile menu, search, dropdown, and language switcher functionality
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Language Switcher Functionality
+    initLanguageSwitcher();
+    
     // Search functionality
     const searchContainer = document.getElementById('search-container');
     const searchBtn = document.getElementById('search-btn');
@@ -92,3 +95,110 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+/**
+ * Language Switcher Initialization
+ * Manages language selection and Google Translate integration
+ */
+function initLanguageSwitcher() {
+    const langOptions = document.querySelectorAll('.lang-option');
+    const currentLangFlag = document.getElementById('current-lang-flag');
+    const currentLangCode = document.getElementById('current-lang-code');
+    const mobileLangFlag = document.getElementById('mobile-current-lang-flag');
+    const mobileLangCode = document.getElementById('mobile-current-lang-code');
+    
+    // Language code mapping for Google Translate
+    const langMap = {
+        'EN': 'en',
+        'FR': 'fr',
+        'ES': 'es',
+        'AR': 'ar',
+        'ZH': 'zh-CN'
+    };
+    
+    // Flag mapping
+    const flagMap = {
+        'EN': '🇬🇧',
+        'FR': '🇫🇷',
+        'ES': '🇪🇸',
+        'AR': '🇸🇦',
+        'ZH': '🇨🇳'
+    };
+    
+    // Load saved language preference or default to English
+    const savedLang = localStorage.getItem('preferredLanguage') || 'EN';
+    
+    // Initialize with saved language
+    if (savedLang !== 'EN') {
+        updateLanguageDisplay(savedLang);
+        // Wait for Google Translate to load, then apply the language
+        waitForGoogleTranslate(() => {
+            changeLanguage(savedLang);
+        });
+    }
+    
+    // Add click event listeners to all language options
+    langOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.preventDefault();
+            const lang = option.getAttribute('data-lang');
+            
+            // Save preference
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Update display
+            updateLanguageDisplay(lang);
+            
+            // Change language
+            changeLanguage(lang);
+            
+            // Close dropdown
+            const dropdown = option.closest('.dropdown, .mobile-dropdown-content');
+            if (dropdown) {
+                dropdown.classList.remove('active');
+                const toggle = dropdown.previousElementSibling;
+                if (toggle && toggle.classList.contains('mobile-dropdown-toggle')) {
+                    toggle.classList.remove('active');
+                }
+            }
+        });
+    });
+    
+    function updateLanguageDisplay(lang) {
+        const flag = flagMap[lang] || '🇬🇧';
+        
+        if (currentLangFlag) currentLangFlag.textContent = flag;
+        if (currentLangCode) currentLangCode.textContent = lang;
+        if (mobileLangFlag) mobileLangFlag.textContent = flag;
+        if (mobileLangCode) mobileLangCode.textContent = lang;
+    }
+    
+    function changeLanguage(lang) {
+        const googleLang = langMap[lang] || 'en';
+        
+        // Try to use Google Translate
+        if (window.google && window.google.translate) {
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = googleLang;
+                select.dispatchEvent(new Event('change'));
+            }
+        }
+    }
+    
+    function waitForGoogleTranslate(callback, maxAttempts = 20) {
+        let attempts = 0;
+        
+        const checkInterval = setInterval(() => {
+            attempts++;
+            
+            if (document.querySelector('.goog-te-combo')) {
+                clearInterval(checkInterval);
+                callback();
+            } else if (attempts >= maxAttempts) {
+                clearInterval(checkInterval);
+                console.log('Google Translate not available');
+            }
+        }, 200);
+    }
+}

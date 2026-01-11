@@ -104,27 +104,23 @@ function french_practice_hub_scripts() {
         true
     );
     
-    // Google Translate (optional, works alongside Polylang for on-the-fly translation)
-    // Only load if Google Translate is enabled in theme options
-    if ( get_theme_mod( 'french_practice_hub_enable_google_translate', false ) ) {
-        // Google Translate initialization script
-        wp_enqueue_script(
-            'google-translate-init',
-            get_template_directory_uri() . '/assets/js/google-translate-init.js',
-            array(),
-            wp_get_theme()->get( 'Version' ),
-            true
-        );
-        
-        // Google Translate Element library
-        wp_enqueue_script(
-            'google-translate-element',
-            'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit',
-            array( 'google-translate-init' ),
-            null,
-            true
-        );
-    }
+    // Google Translate initialization script (always loaded)
+    wp_enqueue_script(
+        'google-translate-init',
+        get_template_directory_uri() . '/assets/js/google-translate-init.js',
+        array(),
+        wp_get_theme()->get( 'Version' ),
+        true
+    );
+    
+    // Google Translate Element library (always loaded)
+    wp_enqueue_script(
+        'google-translate-element',
+        'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit',
+        array( 'google-translate-init' ),
+        null,
+        true
+    );
 }
 add_action( 'wp_enqueue_scripts', 'french_practice_hub_scripts' );
 
