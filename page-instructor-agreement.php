@@ -10,6 +10,16 @@ get_header();
 ?>
 
 <main class="about-page-container">
+    <?php
+    while ( have_posts() ) :
+        the_post();
+        
+        if ( fph_is_elementor_page() ) {
+            // Page is built with Elementor, show Elementor content
+            the_content();
+        } else {
+            // Default theme content
+            ?>
     <div class="container">
         <h1><?php esc_html_e( 'Instructor Agreement', 'french-practice-hub' ); ?></h1>
         
@@ -63,6 +73,10 @@ get_header();
             </p>
         </div>
     </div>
+            <?php
+        }
+    endwhile;
+    ?>
 </main>
 
 <?php

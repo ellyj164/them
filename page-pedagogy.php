@@ -10,8 +10,18 @@ get_header();
 ?>
 
 <main>
-    <div class="about-page-container">
-        <div class="container">
+    <?php
+    while ( have_posts() ) :
+        the_post();
+        
+        if ( fph_is_elementor_page() ) {
+            // Page is built with Elementor, show Elementor content
+            the_content();
+        } else {
+            // Default theme content
+            ?>
+            <div class="about-page-container">
+                <div class="container">
             <h1>Pedagogical Information</h1>
             
             <h2>Our Pedagogical Approach</h2>
@@ -180,6 +190,10 @@ get_header();
             </div>
         </div>
     </div>
+            <?php
+        }
+    endwhile;
+    ?>
 </main>
 
 <?php

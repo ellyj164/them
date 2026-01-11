@@ -68,6 +68,42 @@ function french_practice_hub_setup() {
 add_action( 'after_setup_theme', 'french_practice_hub_setup' );
 
 /**
+ * Add Elementor theme support
+ */
+function french_practice_hub_elementor_support() {
+    // Add Elementor support
+    add_theme_support( 'elementor' );
+}
+add_action( 'after_setup_theme', 'french_practice_hub_elementor_support' );
+
+/**
+ * Check if current page is built with Elementor
+ * 
+ * @param int|null $post_id Post ID to check. Uses current post if not provided.
+ * @return bool True if page is built with Elementor, false otherwise
+ */
+function fph_is_elementor_page( $post_id = null ) {
+    if ( ! $post_id ) {
+        $post_id = get_the_ID();
+    }
+    
+    if ( ! $post_id ) {
+        return false;
+    }
+    
+    if ( ! class_exists( '\Elementor\Plugin' ) ) {
+        return false;
+    }
+    
+    $document = \Elementor\Plugin::$instance->documents->get( $post_id );
+    if ( ! $document ) {
+        return false;
+    }
+    
+    return $document->is_built_with_elementor();
+}
+
+/**
  * Enqueue styles and scripts
  */
 function french_practice_hub_scripts() {
@@ -440,9 +476,9 @@ function fph_get_default_strings() {
         'footer_acceptable'    => 'Acceptable Use Policy',
         'footer_copyright'     => '© 2026 Fidele FLE - French Practice Hub – All rights reserved',
     );
-}
-
-return $translations;
+    }
+    
+    return $translations;
 }
 
 /**

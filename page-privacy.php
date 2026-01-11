@@ -10,6 +10,16 @@ get_header();
 ?>
 
 <main>
+    <?php
+    while ( have_posts() ) :
+        the_post();
+        
+        if ( fph_is_elementor_page() ) {
+            // Page is built with Elementor, show Elementor content
+            the_content();
+        } else {
+            // Default theme content
+            ?>
     <div class="content-section">
         <div class="container">
             <h2>Privacy Policy</h2>
@@ -79,6 +89,10 @@ get_header();
             <p>Email: <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a></p>
         </div>
     </div>
+            <?php
+        }
+    endwhile;
+    ?>
 </main>
 
 <?php
