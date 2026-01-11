@@ -150,6 +150,15 @@ function fph_get_language_flag( $lang_code ) {
         'zh_Hans' => '🇨🇳',
     );
     
+    /**
+     * Filter the language flags mapping
+     * 
+     * Allows developers to customize or add language flags
+     * 
+     * @param array $lang_flags Array of language codes to flag emojis
+     */
+    $lang_flags = apply_filters( 'fph_language_flags', $lang_flags );
+    
     return isset( $lang_flags[ $lang_code ] ) ? $lang_flags[ $lang_code ] : '🌐';
 }
 
