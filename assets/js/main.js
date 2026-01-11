@@ -4,6 +4,43 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Google Translate functionality
+    function triggerGoogleTranslate(langCode) {
+        // Map language codes to Google Translate format
+        const langMap = {
+            'en': 'en',
+            'fr': 'fr',
+            'es': 'es',
+            'ar': 'ar',
+            'zh': 'zh-CN',
+            'zh-CN': 'zh-CN'
+        };
+        
+        const googleLangCode = langMap[langCode] || langCode;
+        
+        // Wait for Google Translate to be available
+        if (typeof google !== 'undefined' && google.translate && google.translate.TranslateElement) {
+            const select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = googleLangCode;
+                select.dispatchEvent(new Event('change'));
+            }
+        }
+    }
+    
+    // Add click event listeners to language switcher options
+    const langOptions = document.querySelectorAll('.lang-option');
+    langOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            const langCode = option.getAttribute('data-lang');
+            if (langCode) {
+                // Trigger Google Translate
+                triggerGoogleTranslate(langCode);
+                // Let the default navigation continue as fallback
+            }
+        });
+    });
+    
     // Search functionality
     const searchContainer = document.getElementById('search-container');
     const searchBtn = document.getElementById('search-btn');

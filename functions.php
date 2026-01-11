@@ -250,7 +250,7 @@ function fph_wpml_language_switcher() {
     </a>
     <div class="dropdown" id="lang-dropdown">
         <?php foreach ( $languages as $lang ) : ?>
-            <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option">
+            <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option" data-lang="<?php echo esc_attr( $lang['language_code'] ); ?>">
                 <span class="lang-flag"><?php echo esc_html( fph_get_language_flag( $lang['language_code'] ) ); ?></span>
                 <span><?php echo esc_html( $lang['native_name'] ); ?></span>
                 <span class="lang-code"><?php echo esc_html( strtoupper( $lang['language_code'] ) ); ?></span>
@@ -296,7 +296,7 @@ function fph_polylang_language_switcher() {
     </a>
     <div class="dropdown" id="lang-dropdown">
         <?php foreach ( $languages as $lang ) : ?>
-            <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option">
+            <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option" data-lang="<?php echo esc_attr( $lang['slug'] ); ?>">
                 <span class="lang-flag"><?php echo esc_html( fph_get_language_flag( $lang['slug'] ) ); ?></span>
                 <span><?php echo esc_html( $lang['name'] ); ?></span>
                 <span class="lang-code"><?php echo esc_html( strtoupper( $lang['slug'] ) ); ?></span>
@@ -342,7 +342,7 @@ function fph_polylang_mobile_language_switcher() {
     </div>
     <div class="mobile-dropdown-content">
         <?php foreach ( $languages as $lang ) : ?>
-            <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option">
+            <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option" data-lang="<?php echo esc_attr( $lang['slug'] ); ?>">
                 <span class="lang-flag"><?php echo esc_html( fph_get_language_flag( $lang['slug'] ) ); ?></span>
                 <span><?php echo esc_html( $lang['name'] ); ?></span>
                 <span class="lang-code"><?php echo esc_html( strtoupper( $lang['slug'] ) ); ?></span>
@@ -377,7 +377,7 @@ function fph_wpml_mobile_language_switcher() {
     </div>
     <div class="mobile-dropdown-content">
         <?php foreach ( $languages as $lang ) : ?>
-            <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option">
+            <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option" data-lang="<?php echo esc_attr( $lang['language_code'] ); ?>">
                 <span class="lang-flag"><?php echo esc_html( fph_get_language_flag( $lang['language_code'] ) ); ?></span>
                 <span><?php echo esc_html( $lang['native_name'] ); ?></span>
                 <span class="lang-code"><?php echo esc_html( strtoupper( $lang['language_code'] ) ); ?></span>
@@ -408,6 +408,43 @@ class French_Practice_Hub_Walker_Nav_Menu extends Walker_Nav_Menu {
             $output .= '<span>' . esc_html( $item->title ) . '</span> ';
             $output .= '<span class="dropdown-arrow"></span>';
             $output .= '</a>';
+        } else {
+            if ( $depth === 0 ) {
+                $output .= '<li>';
+            }
+            $output .= '<a href="' . esc_url( $item->url ) . '">' . esc_html( $item->title ) . '</a>';
+        }
+    }
+
+    public function end_el( &$output, $item, $depth = 0, $args = null ) {
+        if ( $depth === 0 ) {
+            $output .= '</li>';
+        }
+    }
+}
+
+/**
+ * Custom walker for mobile dropdown menus
+ * Outputs HTML structure compatible with mobile JavaScript toggle logic
+ */
+class French_Practice_Hub_Mobile_Walker extends Walker_Nav_Menu {
+    public function start_lvl( &$output, $depth = 0, $args = null ) {
+        $output .= '<div class="mobile-dropdown-content">';
+    }
+
+    public function end_lvl( &$output, $depth = 0, $args = null ) {
+        $output .= '</div>';
+    }
+
+    public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
+        $classes = empty( $item->classes ) ? array() : (array) $item->classes;
+        
+        if ( in_array( 'menu-item-has-children', $classes ) && $depth === 0 ) {
+            $output .= '<li>';
+            $output .= '<div class="mobile-dropdown-toggle">';
+            $output .= esc_html( $item->title );
+            $output .= '<span class="mobile-dropdown-arrow"></span>';
+            $output .= '</div>';
         } else {
             if ( $depth === 0 ) {
                 $output .= '<li>';
