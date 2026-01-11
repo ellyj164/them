@@ -103,24 +103,6 @@ function french_practice_hub_scripts() {
         wp_get_theme()->get( 'Version' ),
         true
     );
-    
-    // Google Translate initialization script (always loaded)
-    wp_enqueue_script(
-        'google-translate-init',
-        get_template_directory_uri() . '/assets/js/google-translate-init.js',
-        array(),
-        wp_get_theme()->get( 'Version' ),
-        true
-    );
-    
-    // Google Translate Element library (always loaded)
-    wp_enqueue_script(
-        'google-translate-element',
-        'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit',
-        array( 'google-translate-init' ),
-        null,
-        true
-    );
 }
 add_action( 'wp_enqueue_scripts', 'french_practice_hub_scripts' );
 
@@ -148,30 +130,199 @@ function french_practice_hub_register_polylang_strings() {
 add_action( 'init', 'french_practice_hub_register_polylang_strings' );
 
 /**
- * Add theme customizer settings
+ * Get language flag emoji based on language code
+ * 
+ * @param string $lang_code Language code (e.g., 'en', 'fr', 'en_US', 'en_GB')
+ * @return string Flag emoji
  */
-function french_practice_hub_customize_register( $wp_customize ) {
-    // Add Google Translate section
-    $wp_customize->add_section( 'french_practice_hub_google_translate', array(
-        'title'    => __( 'Google Translate', 'french-practice-hub' ),
-        'priority' => 130,
-    ) );
+function fph_get_language_flag( $lang_code ) {
+    $lang_flags = array(
+        'en'    => '🇬🇧',
+        'en_US' => '🇬🇧',
+        'en_GB' => '🇬🇧',
+        'fr'    => '🇫🇷',
+        'fr_FR' => '🇫🇷',
+        'es'    => '🇪🇸',
+        'es_ES' => '🇪🇸',
+        'ar'    => '🇸🇦',
+        'zh'    => '🇨🇳',
+        'zh_CN' => '🇨🇳',
+        'zh_Hans' => '🇨🇳',
+    );
     
-    // Add Google Translate enable/disable setting
-    $wp_customize->add_setting( 'french_practice_hub_enable_google_translate', array(
-        'default'           => false,
-        'sanitize_callback' => 'rest_sanitize_boolean',
-        'transport'         => 'refresh',
-    ) );
+    /**
+     * Filter the language flags mapping
+     * 
+     * Allows developers to customize or add language flags
+     * 
+     * @param array $lang_flags Array of language codes to flag emojis
+     */
+    $lang_flags = apply_filters( 'fph_language_flags', $lang_flags );
     
-    $wp_customize->add_control( 'french_practice_hub_enable_google_translate', array(
-        'label'       => __( 'Enable Google Translate Widget', 'french-practice-hub' ),
-        'description' => __( 'Display a Google Translate widget in the header for on-the-fly translation. Works alongside Polylang.', 'french-practice-hub' ),
-        'section'     => 'french_practice_hub_google_translate',
-        'type'        => 'checkbox',
-    ) );
+    return isset( $lang_flags[ $lang_code ] ) ? $lang_flags[ $lang_code ] : '🌐';
 }
-add_action( 'customize_register', 'french_practice_hub_customize_register' );
+
+/**
+ * WPML compatibility: Add support for WPML language switcher
+ * This function is called by the language switcher in header.php
+ */
+function fph_wpml_language_switcher() {
+    if ( ! function_exists( 'icl_get_languages' ) ) {
+        return;
+    }
+    
+    $languages = icl_get_languages( 'skip_missing=0' );
+    if ( empty( $languages ) ) {
+        return;
+    }
+    
+    $current_lang = ICL_LANGUAGE_CODE;
+    $current_lang_data = isset( $languages[ $current_lang ] ) ? $languages[ $current_lang ] : reset( $languages );
+    $current_flag = fph_get_language_flag( $current_lang );
+    $current_code = strtoupper( $current_lang_data['language_code'] );
+    ?>
+    <a id="current-lang">
+        <span id="current-lang-flag"><?php echo esc_html( $current_flag ); ?></span>
+        <span id="current-lang-code"><?php echo esc_html( $current_code ); ?></span>
+    </a>
+    <div class="dropdown" id="lang-dropdown">
+        <?php foreach ( $languages as $lang ) : ?>
+            <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option">
+                <span class="lang-flag"><?php echo esc_html( fph_get_language_flag( $lang['language_code'] ) ); ?></span>
+                <span><?php echo esc_html( $lang['native_name'] ); ?></span>
+                <span class="lang-code"><?php echo esc_html( strtoupper( $lang['language_code'] ) ); ?></span>
+            </a>
+        <?php endforeach; ?>
+    </div>
+    <?php
+}
+
+/**
+ * Polylang compatibility: Add support for Polylang language switcher
+ * This function is called by the language switcher in header.php
+ */
+function fph_polylang_language_switcher() {
+    if ( ! function_exists( 'pll_the_languages' ) ) {
+        return;
+    }
+    
+    $languages = pll_the_languages( array( 'raw' => 1 ) );
+    if ( empty( $languages ) ) {
+        return;
+    }
+    
+    $current_lang = pll_current_language();
+    $current_lang_data = null;
+    foreach ( $languages as $lang ) {
+        if ( $lang['current_lang'] ) {
+            $current_lang_data = $lang;
+            break;
+        }
+    }
+    
+    if ( ! $current_lang_data ) {
+        $current_lang_data = reset( $languages );
+    }
+    
+    $current_flag = fph_get_language_flag( $current_lang_data['slug'] );
+    $current_code = strtoupper( $current_lang_data['slug'] );
+    ?>
+    <a id="current-lang">
+        <span id="current-lang-flag"><?php echo esc_html( $current_flag ); ?></span>
+        <span id="current-lang-code"><?php echo esc_html( $current_code ); ?></span>
+    </a>
+    <div class="dropdown" id="lang-dropdown">
+        <?php foreach ( $languages as $lang ) : ?>
+            <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option">
+                <span class="lang-flag"><?php echo esc_html( fph_get_language_flag( $lang['slug'] ) ); ?></span>
+                <span><?php echo esc_html( $lang['name'] ); ?></span>
+                <span class="lang-code"><?php echo esc_html( strtoupper( $lang['slug'] ) ); ?></span>
+            </a>
+        <?php endforeach; ?>
+    </div>
+    <?php
+}
+
+/**
+ * Polylang compatibility: Mobile language switcher
+ */
+function fph_polylang_mobile_language_switcher() {
+    if ( ! function_exists( 'pll_the_languages' ) ) {
+        return;
+    }
+    
+    $languages = pll_the_languages( array( 'raw' => 1 ) );
+    if ( empty( $languages ) ) {
+        return;
+    }
+    
+    $current_lang = pll_current_language();
+    $current_lang_data = null;
+    foreach ( $languages as $lang ) {
+        if ( $lang['current_lang'] ) {
+            $current_lang_data = $lang;
+            break;
+        }
+    }
+    
+    if ( ! $current_lang_data ) {
+        $current_lang_data = reset( $languages );
+    }
+    
+    $current_flag = fph_get_language_flag( $current_lang_data['slug'] );
+    $current_code = strtoupper( $current_lang_data['slug'] );
+    ?>
+    <div class="mobile-dropdown-toggle">
+        <span id="mobile-current-lang-flag"><?php echo esc_html( $current_flag ); ?></span>
+        <span id="mobile-current-lang-code"><?php echo esc_html( $current_code ); ?></span>
+        <span class="mobile-dropdown-arrow"></span>
+    </div>
+    <div class="mobile-dropdown-content">
+        <?php foreach ( $languages as $lang ) : ?>
+            <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option">
+                <span class="lang-flag"><?php echo esc_html( fph_get_language_flag( $lang['slug'] ) ); ?></span>
+                <span><?php echo esc_html( $lang['name'] ); ?></span>
+                <span class="lang-code"><?php echo esc_html( strtoupper( $lang['slug'] ) ); ?></span>
+            </a>
+        <?php endforeach; ?>
+    </div>
+    <?php
+}
+
+/**
+ * WPML compatibility: Mobile language switcher
+ */
+function fph_wpml_mobile_language_switcher() {
+    if ( ! function_exists( 'icl_get_languages' ) ) {
+        return;
+    }
+    
+    $languages = icl_get_languages( 'skip_missing=0' );
+    if ( empty( $languages ) ) {
+        return;
+    }
+    
+    $current_lang = ICL_LANGUAGE_CODE;
+    $current_lang_data = isset( $languages[ $current_lang ] ) ? $languages[ $current_lang ] : reset( $languages );
+    $current_flag = fph_get_language_flag( $current_lang );
+    $current_code = strtoupper( $current_lang_data['language_code'] );
+    ?>
+    <div class="mobile-dropdown-toggle">
+        <span id="mobile-current-lang-flag"><?php echo esc_html( $current_flag ); ?></span>
+        <span id="mobile-current-lang-code"><?php echo esc_html( $current_code ); ?></span>
+        <span class="mobile-dropdown-arrow"></span>
+    </div>
+    <div class="mobile-dropdown-content">
+        <?php foreach ( $languages as $lang ) : ?>
+            <a href="<?php echo esc_url( $lang['url'] ); ?>" class="lang-option">
+                <span class="lang-flag"><?php echo esc_html( fph_get_language_flag( $lang['language_code'] ) ); ?></span>
+                <span><?php echo esc_html( $lang['native_name'] ); ?></span>
+                <span class="lang-code"><?php echo esc_html( strtoupper( $lang['language_code'] ) ); ?></span>
+            </a>
+        <?php endforeach; ?>
+    </div>
+    <?php
+}
 
 /**
  * Custom walker for dropdown menus

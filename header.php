@@ -102,42 +102,21 @@
         </nav>
         
         <div class="header-actions">
-            <!-- Google Translate Hidden Element -->
-            <div id="google_translate_element" style="display:none;"></div>
-            
-            <!-- Standalone Language Switcher -->
+            <!-- Language Switcher -->
             <div class="language-switcher has-dropdown">
-                <a id="current-lang">
-                    <span id="current-lang-flag">🇬🇧</span>
-                    <span id="current-lang-code">EN</span>
-                </a>
-                <div class="dropdown" id="lang-dropdown">
-                    <a href="#" class="lang-option" data-lang="EN">
-                        <span class="lang-flag">🇬🇧</span>
-                        <span>English</span>
-                        <span class="lang-code">EN</span>
+                <?php if ( function_exists( 'pll_the_languages' ) ) : ?>
+                    <?php fph_polylang_language_switcher(); ?>
+                <?php elseif ( function_exists( 'icl_get_languages' ) ) : ?>
+                    <?php fph_wpml_language_switcher(); ?>
+                <?php elseif ( has_action( 'fph_language_switcher' ) ) : ?>
+                    <?php do_action( 'fph_language_switcher' ); ?>
+                <?php else : ?>
+                    <!-- Default fallback: single language -->
+                    <a id="current-lang">
+                        <span id="current-lang-flag">🇬🇧</span>
+                        <span id="current-lang-code">EN</span>
                     </a>
-                    <a href="#" class="lang-option" data-lang="FR">
-                        <span class="lang-flag">🇫🇷</span>
-                        <span>Français</span>
-                        <span class="lang-code">FR</span>
-                    </a>
-                    <a href="#" class="lang-option" data-lang="ES">
-                        <span class="lang-flag">🇪🇸</span>
-                        <span>Español</span>
-                        <span class="lang-code">ES</span>
-                    </a>
-                    <a href="#" class="lang-option" data-lang="AR">
-                        <span class="lang-flag">🇸🇦</span>
-                        <span>العربية</span>
-                        <span class="lang-code">AR</span>
-                    </a>
-                    <a href="#" class="lang-option" data-lang="ZH">
-                        <span class="lang-flag">🇨🇳</span>
-                        <span>中文</span>
-                        <span class="lang-code">ZH</span>
-                    </a>
-                </div>
+                <?php endif; ?>
             </div>
             
             <div class="search-container" id="search-container">
@@ -252,37 +231,19 @@
                 <li><a href="<?php echo esc_url( wp_registration_url() ); ?>" class="mobile-register-btn"><?php fph_translate_e( 'nav_register' ); ?></a></li>
             <?php endif; ?>
             <li>
-                <div class="mobile-dropdown-toggle">
-                    <span id="mobile-current-lang-flag">🇬🇧</span> <span id="mobile-current-lang-code">EN</span>
-                    <span class="mobile-dropdown-arrow"></span>
-                </div>
-                <div class="mobile-dropdown-content">
-                    <a href="#" class="lang-option" data-lang="EN">
-                        <span class="lang-flag">🇬🇧</span>
-                        <span>English</span>
-                        <span class="lang-code">EN</span>
-                    </a>
-                    <a href="#" class="lang-option" data-lang="FR">
-                        <span class="lang-flag">🇫🇷</span>
-                        <span>Français</span>
-                        <span class="lang-code">FR</span>
-                    </a>
-                    <a href="#" class="lang-option" data-lang="ES">
-                        <span class="lang-flag">🇪🇸</span>
-                        <span>Español</span>
-                        <span class="lang-code">ES</span>
-                    </a>
-                    <a href="#" class="lang-option" data-lang="AR">
-                        <span class="lang-flag">🇸🇦</span>
-                        <span>العربية</span>
-                        <span class="lang-code">AR</span>
-                    </a>
-                    <a href="#" class="lang-option" data-lang="ZH">
-                        <span class="lang-flag">🇨🇳</span>
-                        <span>中文</span>
-                        <span class="lang-code">ZH</span>
-                    </a>
-                </div>
+                <?php if ( function_exists( 'pll_the_languages' ) ) : ?>
+                    <?php fph_polylang_mobile_language_switcher(); ?>
+                <?php elseif ( function_exists( 'icl_get_languages' ) ) : ?>
+                    <?php fph_wpml_mobile_language_switcher(); ?>
+                <?php elseif ( has_action( 'fph_mobile_language_switcher' ) ) : ?>
+                    <?php do_action( 'fph_mobile_language_switcher' ); ?>
+                <?php else : ?>
+                    <!-- Default fallback: single language -->
+                    <div class="mobile-dropdown-toggle">
+                        <span id="mobile-current-lang-flag">🇬🇧</span>
+                        <span id="mobile-current-lang-code">EN</span>
+                    </div>
+                <?php endif; ?>
             </li>
         </ul>
         <?php
