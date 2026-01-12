@@ -50,6 +50,28 @@ body {
     line-height: 1.7;
 }
 
+/* Improve focus visibility for keyboard navigation */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--magenta-accent);
+    outline-offset: 2px;
+}
+
+/* Remove default focus outline for mouse users (but keep for keyboard) */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--magenta-accent);
+    outline-offset: 2px;
+}
+
 .container {
     max-width: 1400px;
     margin: 0 auto;
