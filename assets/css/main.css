@@ -1026,9 +1026,17 @@ body.translated-rtl {
         font-size: 0.9em;
     }
     
-    /* Hide language switcher on smaller mobile screens to save space */
+    /* Keep language switcher visible and make it more compact on mobile */
     .language-switcher {
-        display: none !important;
+        display: flex !important;
+    }
+    
+    #current-lang-flag {
+        font-size: 1.4em;
+    }
+    
+    #current-lang-code {
+        font-size: 0.8em;
     }
     
     .content-section h2 {
@@ -1098,6 +1106,19 @@ body.translated-rtl {
     
     .sign-in-btn {
         font-size: 0.95em;
+    }
+    
+    /* Make language switcher even more compact on very small screens */
+    .language-switcher {
+        display: flex !important;
+    }
+    
+    #current-lang-flag {
+        font-size: 1.3em;
+    }
+    
+    #current-lang-code {
+        font-size: 0.75em;
     }
     
     .language-switcher .dropdown {
