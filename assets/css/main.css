@@ -164,6 +164,9 @@ body {
 /* Bridge gap between menu item and dropdown to prevent immediate closing */
 /* This creates an invisible 15px high area that matches the dropdown's padding-top */
 /* allowing users to move their cursor from menu to submenu without triggering mouseleave */
+/* Note: This works in conjunction with the JavaScript 300ms delay for optimal UX:
+   - CSS bridge prevents immediate close when moving cursor through the gap
+   - JS delay provides extra time after cursor leaves the entire dropdown area */
 .has-dropdown::after {
     content: '';
     position: absolute;
