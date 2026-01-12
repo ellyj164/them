@@ -130,7 +130,7 @@ body {
 }
 
 .dropdown {
-    display: none;
+    display: block;
     position: absolute;
     top: 100%;
     left: 0;
@@ -155,7 +155,6 @@ body {
 .has-dropdown:hover .dropdown,
 .has-dropdown:focus-within .dropdown,
 .dropdown.show {
-    display: block;
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
