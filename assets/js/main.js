@@ -180,6 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropdownTimeouts = new WeakMap();
     
     desktopDropdowns.forEach(item => {
+        // Cache dropdown element reference to reduce DOM queries
+        const dropdown = item.querySelector('.dropdown');
+        if (!dropdown) return;
+        
         item.addEventListener('mouseenter', () => {
             // Clear any existing timeout for this dropdown
             const existingTimeout = dropdownTimeouts.get(item);
@@ -187,21 +191,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearTimeout(existingTimeout);
             }
             
-            const dropdown = item.querySelector('.dropdown');
-            if (dropdown) {
-                dropdown.classList.add('show');
-            }
+            dropdown.classList.add('show');
         });
         
         item.addEventListener('mouseleave', () => {
-            const dropdown = item.querySelector('.dropdown');
-            if (dropdown) {
-                // Set timeout and store it in WeakMap
-                const timeout = setTimeout(() => {
-                    dropdown.classList.remove('show');
-                }, 300); // 300ms delay before closing
-                dropdownTimeouts.set(item, timeout);
-            }
+            // Set timeout and store it in WeakMap
+            const timeout = setTimeout(() => {
+                dropdown.classList.remove('show');
+            }, 300); // 300ms delay before closing
+            dropdownTimeouts.set(item, timeout);
         });
     });
 });
