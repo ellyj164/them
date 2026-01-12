@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mobileNav) mobileNav.classList.remove('active');
         if (mobileNavOverlay) mobileNavOverlay.classList.remove('active');
         document.body.style.overflow = '';
+        document.body.classList.remove('mobile-nav-open');
     }
     
     function openMobileMenu() {
@@ -136,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mobileNav) mobileNav.classList.add('active');
         if (mobileNavOverlay) mobileNavOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
+        document.body.classList.add('mobile-nav-open');
     }
     
     if (hamburgerMenu) {

@@ -88,6 +88,19 @@ body {
     text-decoration: none;
 }
 
+/* Custom logo support for responsive sizing */
+.custom-logo-link {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.custom-logo-link img {
+    max-height: 40px;
+    width: auto;
+    height: auto;
+}
+
 /* Navigation */
 .main-nav {
     display: flex !important;
@@ -677,6 +690,19 @@ body.translated-rtl {
     background: none;
     border: none;
     z-index: 1002;
+    /* Ensure proper touch target size (minimum 44x44px recommended) */
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+    align-items: center;
+    /* Add visual feedback on touch */
+    -webkit-tap-highlight-color: rgba(217, 0, 108, 0.1);
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
+}
+
+.hamburger-menu:active {
+    background-color: rgba(217, 0, 108, 0.05);
 }
 
 .hamburger-menu span {
@@ -752,6 +778,10 @@ body.translated-rtl {
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1em;
+    /* Improve touch targets for mobile */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
 }
 
 .mobile-nav .mobile-dropdown-toggle {
@@ -763,6 +793,16 @@ body.translated-rtl {
     font-weight: 600;
     font-size: 1.1em;
     cursor: pointer;
+    /* Improve touch targets for mobile */
+    min-height: 44px;
+    /* Add visual feedback on touch */
+    -webkit-tap-highlight-color: rgba(217, 0, 108, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.mobile-nav .mobile-dropdown-toggle:active,
+.mobile-nav a:active {
+    background-color: rgba(217, 0, 108, 0.05);
 }
 
 .mobile-nav .mobile-dropdown-arrow {
@@ -840,6 +880,43 @@ body.translated-rtl {
     .header .register-btn {
         display: none !important;
     }
+    
+    /* Adjust header container for tablet/mobile */
+    .header .container {
+        gap: 20px;
+    }
+    
+    /* Make language switcher more compact on tablet */
+    .language-switcher {
+        display: flex;
+        align-items: center;
+    }
+    
+    #current-lang-code {
+        font-size: 0.85em;
+    }
+}
+
+/* Tablet-specific optimizations (between mobile and desktop) */
+@media (min-width: 769px) and (max-width: 1200px) {
+    .container {
+        padding: 0 30px;
+    }
+    
+    /* Adjust features grid for tablet */
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Keep language switcher visible on tablets */
+    .language-switcher {
+        display: flex !important;
+    }
+    
+    /* Adjust search input for tablet */
+    .search-container.active #search-input {
+        width: 180px;
+    }
 }
 
 @media (min-width: 1201px) {
@@ -858,6 +935,23 @@ body.translated-rtl {
 @media (max-width: 768px) {
     .container {
         padding: 0 15px;
+    }
+    
+    /* Improve header layout on mobile */
+    .header .container {
+        gap: 10px;
+    }
+    
+    /* Make logo smaller on mobile */
+    .logo-placeholder {
+        width: 100px;
+        height: 35px;
+        font-size: 0.8em;
+    }
+    
+    .custom-logo-link img {
+        max-height: 35px;
+        width: auto;
     }
     
     .hero h1 {
@@ -892,7 +986,7 @@ body.translated-rtl {
     }
     
     .header-actions {
-        gap: 10px;
+        gap: 8px;
     }
     
     .register-btn {
@@ -904,8 +998,15 @@ body.translated-rtl {
         font-size: 1em;
     }
     
+    /* Adjust search input width for mobile */
     .search-container.active #search-input {
-        width: 150px;
+        width: 120px;
+        font-size: 0.9em;
+    }
+    
+    /* Hide language switcher on smaller mobile screens to save space */
+    .language-switcher {
+        display: none !important;
     }
     
     .content-section h2 {
@@ -940,6 +1041,18 @@ body.translated-rtl {
 }
 
 @media (max-width: 480px) {
+    /* Further reduce logo size on very small screens */
+    .logo-placeholder {
+        width: 80px;
+        height: 30px;
+        font-size: 0.7em;
+    }
+    
+    .custom-logo-link img {
+        max-height: 30px;
+        width: auto;
+    }
+    
     .hero h1 {
         font-size: 1.6em;
     }
@@ -953,7 +1066,7 @@ body.translated-rtl {
     }
     
     .header-actions {
-        gap: 8px;
+        gap: 5px;
     }
     
     .register-btn {
@@ -971,9 +1084,20 @@ body.translated-rtl {
         left: auto;
     }
     
+    /* Make search button smaller on very small screens */
+    #search-btn {
+        padding: 6px;
+    }
+    
     #search-btn svg {
         width: 18px;
         height: 18px;
+    }
+    
+    /* Further reduce search input width */
+    .search-container.active #search-input {
+        width: 100px;
+        font-size: 0.85em;
     }
     
     .content-section h2 {
@@ -987,5 +1111,80 @@ body.translated-rtl {
     
     .about-page-container h1 {
         font-size: 1.8em;
+    }
+    
+    /* Adjust mobile nav width for very small screens */
+    .mobile-nav {
+        width: 85%;
+    }
+}
+
+/* Landscape orientation optimizations for mobile devices */
+@media (max-height: 500px) and (orientation: landscape) {
+    /* Reduce hero padding in landscape mode */
+    .hero-text-container {
+        padding: 60px 20px;
+    }
+    
+    .hero h1 {
+        font-size: 1.5em;
+    }
+    
+    .hero p {
+        font-size: 0.95em;
+    }
+    
+    /* Reduce header padding */
+    .header {
+        padding: 10px 0;
+    }
+    
+    /* Compact mobile nav in landscape */
+    .mobile-nav {
+        padding: 60px 20px 20px;
+    }
+    
+    .mobile-nav a,
+    .mobile-nav .mobile-dropdown-toggle {
+        padding: 10px;
+        font-size: 1em;
+        min-height: 40px;
+    }
+    
+    .mobile-nav .mobile-dropdown-content a {
+        padding: 8px 20px;
+        font-size: 0.95em;
+    }
+}
+
+/* Ensure proper stacking context and prevent scroll issues on mobile */
+@media (max-width: 1200px) {
+    body.mobile-nav-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
+}
+
+/* Print styles - ensure theme prints well */
+@media print {
+    .header,
+    .hamburger-menu,
+    .mobile-nav,
+    .mobile-nav-overlay,
+    .search-container,
+    .header-actions,
+    .footer {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
     }
 }
