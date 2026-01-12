@@ -4,8 +4,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Google Translate configuration
+    // Configuration constants
     const GOOGLE_TRANSLATE_FALLBACK_DELAY = 2000; // ms - time to wait before falling back to Polylang/WPML
+    const MOBILE_MENU_FOCUS_DELAY = 300; // ms - matches CSS transition duration for mobile menu
     
     // Google Translate functionality
     function triggerGoogleTranslate(langCode) {
@@ -139,13 +140,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'hidden';
         document.body.classList.add('mobile-nav-open');
         
-        // Set focus to first focusable element in mobile menu
+        // Set focus to first focusable element in mobile menu after transition completes
         setTimeout(() => {
             const firstFocusable = mobileNav?.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
             if (firstFocusable) {
                 firstFocusable.focus();
             }
-        }, 100);
+        }, MOBILE_MENU_FOCUS_DELAY);
     }
     
     if (hamburgerMenu) {

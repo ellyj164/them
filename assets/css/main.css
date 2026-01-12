@@ -1170,12 +1170,15 @@ body.translated-rtl {
     .mobile-nav .mobile-dropdown-toggle {
         padding: 10px;
         font-size: 1em;
-        min-height: 40px;
+        /* Keep minimum 44px touch target for accessibility (WCAG 2.1 Level AAA) */
+        min-height: 44px;
     }
     
     .mobile-nav .mobile-dropdown-content a {
         padding: 8px 20px;
         font-size: 0.95em;
+        /* Keep minimum 44px touch target for accessibility */
+        min-height: 44px;
     }
 }
 
@@ -1183,8 +1186,8 @@ body.translated-rtl {
 @media (max-width: 1200px) {
     body.mobile-nav-open {
         overflow: hidden;
-        position: fixed;
-        width: 100%;
+        /* Use height instead of position fixed to prevent scroll jump */
+        height: 100vh;
     }
 }
 
