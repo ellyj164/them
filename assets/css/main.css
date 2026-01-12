@@ -140,6 +140,8 @@ body {
     padding: 10px 0;
     min-width: 280px;
     border: 1px solid var(--border-color);
+    /* Use padding-top instead of margin-top to create hover bridge */
+    /* This allows the cursor to stay over the dropdown area while moving from menu to submenu */
     margin-top: 0;
     padding-top: 15px;
     z-index: 1001;
@@ -161,6 +163,8 @@ body {
 }
 
 /* Bridge gap between menu item and dropdown to prevent immediate closing */
+/* This creates an invisible 15px high area that matches the dropdown's padding-top */
+/* allowing users to move their cursor from menu to submenu without triggering mouseleave */
 .has-dropdown::after {
     content: '';
     position: absolute;

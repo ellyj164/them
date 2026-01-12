@@ -174,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Desktop Dropdown Delay Functionality
     // Add delay before closing dropdown to improve user experience
+    // Query after DOM load to ensure navigation elements exist
     const desktopDropdowns = document.querySelectorAll('.main-nav .has-dropdown');
     desktopDropdowns.forEach(item => {
         let timeout;
