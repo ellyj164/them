@@ -45,34 +45,57 @@ get_header();
                 <section class="features">
                     <div class="container">
                         <div class="features-grid">
-                            <a href="#" class="feature-card" style="background-image: url('https://frenchpracticehub.com/wp-content/uploads/2025/10/Kids-A1.1-Dialogue-1--scaled.png');">
-                                <h3><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'feature1_title' ); } else { echo esc_html__( 'Fun Exercises FLE', 'french-practice-hub' ); } ?></h3>
-                                <p><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'feature1_desc' ); } else { echo esc_html__( 'A1.1 - B2', 'french-practice-hub' ); } ?></p>
+                            <!-- Row 1 -->
+                            <a href="<?php echo esc_url( fph_get_safe_category_link( 'French courses' ) ); ?>" class="feature-card">
+                                <h3><?php fph_translate_e( 'French Courses' ); ?></h3>
+                                <p><?php fph_translate_e( 'Kids, A1.1-A1-A2' ); ?></p>
                             </a>
                             
-                            <a href="#" class="feature-card" style="background-image: url('https://frenchpracticehub.com/wp-content/uploads/2025/10/Paul-1-1.png');">
-                                <h3><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'feature2_title' ); } else { echo esc_html__( 'Video Dialogues FLE', 'french-practice-hub' ); } ?></h3>
-                                <p><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'feature2_desc' ); } else { echo esc_html__( 'A1.1 - B2', 'french-practice-hub' ); } ?></p>
+                            <a href="<?php echo esc_url( fph_get_safe_category_link( 'Fun Exercises' ) ); ?>" class="feature-card">
+                                <h3><?php fph_translate_e( 'Fun Exercises' ); ?></h3>
+                                <p><?php fph_translate_e( 'Kids, A1.1-A1-A2' ); ?></p>
                             </a>
                             
-                            <a href="#" class="feature-card" style="background-image: url('https://frenchpracticehub.com/wp-content/uploads/2025/10/Kids-A1.1-Dialogue-1--scaled.png');">
-                                <h3><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'feature3_title' ); } else { echo esc_html__( 'French Exam Success', 'french-practice-hub' ); } ?></h3>
-                                <p><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'feature3_desc' ); } else { echo esc_html__( 'DELF, TCF, TEF Canada (A1.1 - B2)', 'french-practice-hub' ); } ?></p>
+                            <a href="<?php echo esc_url( fph_get_safe_category_link( 'Exams Prep' ) ); ?>" class="feature-card">
+                                <h3><?php fph_translate_e( 'French Exams Prep FR (1)' ); ?></h3>
+                                <ul>
+                                    <li><?php fph_translate_e( 'DELF Prim A1.1' ); ?></li>
+                                    <li><?php fph_translate_e( 'DELF Prim A1' ); ?></li>
+                                    <li><?php fph_translate_e( 'DELF Prim A2' ); ?></li>
+                                    <li><?php fph_translate_e( 'DELF B1' ); ?></li>
+                                    <li><?php fph_translate_e( 'DELF B2' ); ?></li>
+                                    <li><?php fph_translate_e( 'DALF C1' ); ?></li>
+                                    <li><?php fph_translate_e( 'DALF C2' ); ?></li>
+                                </ul>
                             </a>
                             
-                            <a href="#" class="feature-card" style="background-image: url('https://frenchpracticehub.com/wp-content/uploads/2025/10/Coucou-les-amis-1-scaled.png');">
-                                <h3><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'feature4_title' ); } else { echo esc_html__( 'Fun French Songs FLE', 'french-practice-hub' ); } ?></h3>
-                                <p><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'feature4_desc' ); } else { echo esc_html__( 'Engaging songs to learn French.', 'french-practice-hub' ); } ?></p>
+                            <a href="<?php echo esc_url( fph_get_safe_category_link( 'Exams Prep' ) ); ?>" class="feature-card">
+                                <h3><?php fph_translate_e( 'French Exams Prep CA (2)' ); ?></h3>
+                                <ul>
+                                    <li><?php fph_translate_e( 'TCF Canada' ); ?></li>
+                                    <li><?php fph_translate_e( 'TEF Canada' ); ?></li>
+                                </ul>
                             </a>
                             
-                            <a href="#" class="feature-card" style="background-image: url('https://frenchpracticehub.com/wp-content/uploads/2025/10/1759813761322-1-1.jpg');">
-                                <h3><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'feature5_title' ); } else { echo esc_html__( 'French Reading Club', 'french-practice-hub' ); } ?></h3>
-                                <p><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'feature5_desc' ); } else { echo esc_html__( 'A1.1 - B2', 'french-practice-hub' ); } ?></p>
+                            <!-- Row 2 -->
+                            <a href="<?php echo esc_url( fph_get_safe_category_link( 'Video Dialogues FLE' ) ); ?>" class="feature-card">
+                                <h3><?php fph_translate_e( 'French Dialogues' ); ?></h3>
+                                <p><?php fph_translate_e( 'A1.1-A2 (Kids-Teens-Adults)' ); ?></p>
                             </a>
                             
-                            <a href="#" class="feature-card" style="background-image: url('https://frenchpracticehub.com/wp-content/uploads/2025/10/Coucou-les-amis--scaled.png');">
-                                <h3><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'feature6_title' ); } else { echo esc_html__( 'Online French Tutoring', 'french-practice-hub' ); } ?></h3>
-                                <p><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'feature6_desc' ); } else { echo esc_html__( 'A1.1 - C2', 'french-practice-hub' ); } ?></p>
+                            <a href="<?php echo esc_url( fph_get_safe_category_link( 'French Reading Club' ) ); ?>" class="feature-card">
+                                <h3><?php fph_translate_e( 'French Reading for Kids' ); ?></h3>
+                                <p><?php fph_translate_e( 'Kids, A1.1-A1-A2' ); ?></p>
+                            </a>
+                            
+                            <a href="<?php echo esc_url( fph_get_safe_category_link( 'Fun French Songs FLE' ) ); ?>" class="feature-card">
+                                <h3><?php fph_translate_e( 'Fun French Songs' ); ?></h3>
+                                <p><?php fph_translate_e( 'A1.1-A1-A2' ); ?></p>
+                            </a>
+                            
+                            <a href="<?php echo esc_url( fph_get_safe_page_link( 'contact' ) ); ?>" class="feature-card">
+                                <h3><?php fph_translate_e( 'Online French Tutoring' ); ?></h3>
+                                <p><?php fph_translate_e( 'A1.1-C2' ); ?></p>
                             </a>
                         </div>
                     </div>
