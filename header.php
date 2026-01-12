@@ -4,9 +4,24 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php wp_head(); ?>
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,fr,es,ar,zh-CN',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+
+<!-- Google Translate Hidden Element -->
+<div id="google_translate_element" style="display:none;"></div>
 
 <header class="header">
     <div class="container">
@@ -163,11 +178,21 @@
 <nav class="mobile-nav" id="mobile-nav">
     <?php
     if ( has_nav_menu( 'mobile' ) ) {
-        wp_nav_menu( array(
-            'theme_location' => 'mobile',
-            'container'      => false,
-            'menu_class'     => '',
-        ) );
+        // Use custom walker if class exists
+        if ( class_exists( 'French_Practice_Hub_Mobile_Walker' ) ) {
+            wp_nav_menu( array(
+                'theme_location' => 'mobile',
+                'container'      => false,
+                'menu_class'     => '',
+                'walker'         => new French_Practice_Hub_Mobile_Walker(),
+            ) );
+        } else {
+            wp_nav_menu( array(
+                'theme_location' => 'mobile',
+                'container'      => false,
+                'menu_class'     => '',
+            ) );
+        }
     } else {
         // Fallback mobile menu with Polylang strings
         ?>
