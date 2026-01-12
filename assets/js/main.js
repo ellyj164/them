@@ -4,8 +4,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Google Translate configuration
+    // Configuration constants
     const GOOGLE_TRANSLATE_FALLBACK_DELAY = 2000; // ms - time to wait before falling back to Polylang/WPML
+    const MOBILE_MENU_FOCUS_DELAY = 300; // ms - matches CSS transition duration for mobile menu
     
     // Google Translate functionality
     function triggerGoogleTranslate(langCode) {
@@ -129,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mobileNav) mobileNav.classList.remove('active');
         if (mobileNavOverlay) mobileNavOverlay.classList.remove('active');
         document.body.style.overflow = '';
+        document.body.classList.remove('mobile-nav-open');
     }
     
     function openMobileMenu() {
@@ -136,6 +138,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mobileNav) mobileNav.classList.add('active');
         if (mobileNavOverlay) mobileNavOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
+        document.body.classList.add('mobile-nav-open');
+        
+        // Set focus to first focusable element in mobile menu after transition completes
+        setTimeout(() => {
+            const firstFocusable = mobileNav?.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+            if (firstFocusable) {
+                firstFocusable.focus();
+            }
+        }, MOBILE_MENU_FOCUS_DELAY);
     }
     
     if (hamburgerMenu) {
@@ -151,6 +162,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mobileNavOverlay) {
         mobileNavOverlay.addEventListener('click', closeMobileMenu);
     }
+    
+    // Close mobile menu with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
     
     // Close mobile menu when clicking on mobile nav links
     const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
