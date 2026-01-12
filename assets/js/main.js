@@ -171,4 +171,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Desktop Dropdown Delay Functionality
+    // Add delay before closing dropdown to improve user experience
+    const desktopDropdowns = document.querySelectorAll('.main-nav .has-dropdown');
+    desktopDropdowns.forEach(item => {
+        let timeout;
+        
+        item.addEventListener('mouseenter', () => {
+            clearTimeout(timeout);
+            const dropdown = item.querySelector('.dropdown');
+            if (dropdown) {
+                dropdown.classList.add('show');
+            }
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            const dropdown = item.querySelector('.dropdown');
+            if (dropdown) {
+                timeout = setTimeout(() => {
+                    dropdown.classList.remove('show');
+                }, 300); // 300ms delay before closing
+            }
+        });
+    });
 });
