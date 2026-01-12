@@ -1109,10 +1109,6 @@ body.translated-rtl {
     }
     
     /* Make language switcher even more compact on very small screens */
-    .language-switcher {
-        display: flex !important;
-    }
-    
     #current-lang-flag {
         font-size: 1.3em;
     }
