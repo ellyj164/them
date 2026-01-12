@@ -12,7 +12,7 @@
                 includedLanguages: 'en,fr,es,ar,zh-CN',
                 layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                 autoDisplay: false
-            }, 'google_translate_element');
+            }, 'google_translate_widget_container');
         }
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
@@ -20,8 +20,8 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Google Translate Hidden Element -->
-<div id="google_translate_element" style="display:none;"></div>
+<!-- Google Translate Element -->
+<div id="google_translate_element" style="position: absolute; left: -9999px;"></div>
 
 <header class="header">
     <div class="container">
@@ -126,6 +126,11 @@
         </nav>
         
         <div class="header-actions">
+            <!-- Google Translate Widget for all screens including mobile -->
+            <div class="google-translate-widget" id="google_translate_widget_container">
+                <!-- Google Translate will inject its widget here -->
+            </div>
+            
             <!-- Language Switcher -->
             <div class="language-switcher has-dropdown">
                 <?php if ( function_exists( 'pll_the_languages' ) ) : ?>

@@ -338,7 +338,12 @@ button:focus-visible {
 
 /* Google Translate Widget */
 .google-translate-widget {
-    display: flex;
+    display: flex !important;
+    align-items: center;
+}
+
+#google_translate_widget_container {
+    display: flex !important;
     align-items: center;
 }
 
@@ -355,6 +360,19 @@ button:focus-visible {
 
 .google-translate-widget .goog-te-menu-value span {
     color: var(--text-color) !important;
+}
+
+/* Google Translate combo dropdown styling */
+.goog-te-combo {
+    margin: 0 !important;
+    padding: 5px 8px !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px !important;
+    background-color: var(--white-color) !important;
+    color: var(--text-color) !important;
+    font-family: 'Source Sans Pro', sans-serif !important;
+    font-size: 0.9em !important;
+    cursor: pointer !important;
 }
 
 /* Hide Google Translate top banner */
@@ -1013,6 +1031,13 @@ body.translated-rtl {
         gap: 8px;
     }
     
+    /* Make Google Translate widget more compact on mobile */
+    .google-translate-widget .goog-te-gadget-simple,
+    .goog-te-combo {
+        font-size: 0.85em !important;
+        padding: 4px 6px !important;
+    }
+    
     .register-btn {
         padding: 8px 15px;
         font-size: 1em;
@@ -1123,6 +1148,13 @@ body.translated-rtl {
         min-width: 200px;
         right: 0;
         left: auto;
+    }
+    
+    /* Make Google Translate even more compact on very small screens */
+    .google-translate-widget .goog-te-gadget-simple,
+    .goog-te-combo {
+        font-size: 0.8em !important;
+        padding: 3px 5px !important;
     }
     
     /* Make search button smaller on very small screens */
