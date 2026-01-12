@@ -171,4 +171,35 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Desktop Dropdown Delay Functionality
+    // Add delay before closing dropdown to improve user experience
+    // Query after DOM load to ensure navigation elements exist
+    const desktopDropdowns = document.querySelectorAll('.main-nav .has-dropdown');
+    // Use WeakMap to store timeout IDs for each dropdown item
+    const dropdownTimeouts = new WeakMap();
+    
+    desktopDropdowns.forEach(item => {
+        // Cache dropdown element reference to reduce DOM queries
+        const dropdown = item.querySelector('.dropdown');
+        if (!dropdown) return;
+        
+        item.addEventListener('mouseenter', () => {
+            // Clear any existing timeout for this dropdown
+            const existingTimeout = dropdownTimeouts.get(item);
+            if (existingTimeout) {
+                clearTimeout(existingTimeout);
+            }
+            
+            dropdown.classList.add('show');
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            // Set timeout and store it in WeakMap
+            const timeout = setTimeout(() => {
+                dropdown.classList.remove('show');
+            }, 300); // 300ms delay before closing
+            dropdownTimeouts.set(item, timeout);
+        });
+    });
 });
