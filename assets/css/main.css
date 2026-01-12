@@ -466,55 +466,57 @@ body.translated-rtl {
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 }
 
 .feature-card {
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
-    color: var(--white-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 1px solid var(--border-color);
+    background-color: var(--white-color);
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 220px;
-    padding: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    min-height: 200px;
+    padding: 25px;
     text-decoration: none;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-.feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to top, rgba(0, 50, 100, 0.8), rgba(0, 90, 156, 0.3));
-    z-index: 1;
-}
-
-.feature-card h3,
-.feature-card p {
-    position: relative;
-    z-index: 2;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+.feature-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
 }
 
 .feature-card h3 {
-    font-size: 1.8em;
-    margin: 0 0 10px;
+    font-size: 1.4em;
+    margin: 0 0 15px;
     font-weight: 700;
+    color: var(--text-color);
 }
 
 .feature-card p {
-    font-size: 1.1em;
+    font-size: 1em;
     margin: 0;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.feature-card ul {
+    margin: 10px 0 0 0;
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.feature-card li {
+    font-size: 0.95em;
+    color: var(--text-light);
+    margin-bottom: 6px;
+    line-height: 1.5;
 }
 
 /* About Page Container */
@@ -925,7 +927,7 @@ body.translated-rtl {
         padding: 0 30px;
     }
     
-    /* Adjust features grid for tablet */
+    /* Adjust features grid for tablet - 2 columns */
     .features-grid {
         grid-template-columns: repeat(2, 1fr);
     }
