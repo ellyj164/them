@@ -362,12 +362,6 @@ button:focus-visible {
     color: var(--text-color) !important;
 }
 
-/* Ensure Google Translate widget is visible on all screen sizes */
-#google_translate_element,
-#google_translate_widget_container {
-    display: block !important;
-}
-
 /* Google Translate combo dropdown styling */
 .goog-te-combo {
     margin: 0 !important;
@@ -1038,11 +1032,6 @@ body.translated-rtl {
     }
     
     /* Make Google Translate widget more compact on mobile */
-    .google-translate-widget,
-    #google_translate_widget_container {
-        display: flex !important;
-    }
-    
     .google-translate-widget .goog-te-gadget-simple,
     .goog-te-combo {
         font-size: 0.85em !important;
