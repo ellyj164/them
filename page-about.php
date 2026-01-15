@@ -44,6 +44,7 @@ get_header();
                         <p class="section-subtitle">Learning French is not only about memorizing vocabulary and grammar rules—it's about building confidence to communicate effectively in real-life situations.</p>
                     </div>
                     
+                    <!-- NOTE: Statistics should be made configurable via WordPress admin in future updates -->
                     <div class="stats-section">
                         <div class="stat-item">
                             <div class="stat-number">10,000+</div>

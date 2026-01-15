@@ -44,6 +44,8 @@ get_header();
                 
                 <section class="features">
                     <div class="container">
+                        <!-- NOTE: Replace Unsplash placeholder images with properly licensed local images -->
+                        <!-- These can be customized via WordPress admin or theme customizer in future updates -->
                         <div class="features-grid">
                             <!-- Row 1 -->
                             <a href="<?php echo esc_url( fph_get_safe_category_link( 'French courses' ) ); ?>" class="feature-card">

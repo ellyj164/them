@@ -473,6 +473,10 @@ body.translated-rtl {
     border-radius: 50px;
     font-weight: 600;
     font-size: 1.1em;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
 }
 
 .btn-primary {
@@ -480,10 +484,22 @@ body.translated-rtl {
     color: var(--white-color);
 }
 
+.btn-primary:hover {
+    background-color: #b8005a;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
 .btn-secondary {
     background-color: transparent;
     color: var(--white-color);
     border: 2px solid var(--white-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
 /* Features Section */

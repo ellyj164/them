@@ -31,6 +31,7 @@ get_header();
                 <div class="container">
                     <div class="profile-card">
                         <div class="profile-header">
+                            <!-- NOTE: Replace ui-avatars.com with local image upload functionality -->
                             <div class="profile-avatar">
                                 <img src="https://ui-avatars.com/api/?name=Fidele+Ilunga&size=300&background=D9006C&color=fff&bold=true" alt="Fidèle Ilunga Tshombe">
                             </div>
