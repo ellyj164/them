@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Platform UI Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .demo-section {
+            padding: 60px 20px;
+        }
+        .demo-section:nth-child(even) {
+            background: #F8F9FA;
+        }
+        .demo-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .demo-header h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+        }
+        .demo-header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Header -->
+    <div class="demo-section" style="background: linear-gradient(135deg, #0056D2 0%, #D9006C 100%); color: white;">
+        <div class="container">
+            <div class="demo-header">
+                <h1 style="color: white;">Professional E-Learning Platform UI</h1>
+                <p style="color: rgba(255,255,255,0.9);">Modern, accessible, and engaging design components</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feature Cards Grid -->
+    <div class="demo-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 48px; color: var(--primary-color);">Enhanced Feature Cards (4 Columns)</h2>
+            <div class="features-grid">
+                <a href="#" class="feature-card">
+                    <div class="feature-card-image">
+                        <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=600&h=400&fit=crop" alt="French Courses">
+                    </div>
+                    <div class="feature-card-body">
+                        <h3>French Courses</h3>
+                        <p>Kids, A1.1-A1-A2</p>
+                    </div>
+                </a>
+                
+                <a href="#" class="feature-card">
+                    <div class="feature-card-image">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop" alt="Fun Exercises">
+                    </div>
+                    <div class="feature-card-body">
+                        <h3>Fun Exercises</h3>
+                        <p>Interactive learning activities</p>
+                    </div>
+                </a>
+                
+                <a href="#" class="feature-card">
+                    <div class="feature-card-image">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop" alt="Exam Prep">
+                    </div>
+                    <div class="feature-card-body">
+                        <h3>French Exams Prep FR</h3>
+                        <ul>
+                            <li>DELF Prim A1.1</li>
+                            <li>DELF Prim A1</li>
+                            <li>DELF B1</li>
+                            <li>DELF B2</li>
+                        </ul>
+                    </div>
+                </a>
+                
+                <a href="#" class="feature-card">
+                    <div class="feature-card-image">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=400&fit=crop" alt="TCF Canada">
+                    </div>
+                    <div class="feature-card-body">
+                        <h3>French Exams Prep CA</h3>
+                        <ul>
+                            <li>TCF Canada</li>
+                            <li>TEF Canada</li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modern Buttons -->
+    <div class="demo-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 48px; color: var(--primary-color);">Modern Button System</h2>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-primary">Primary Button</button>
+                <button class="btn btn-secondary">Secondary Button</button>
+                <button class="btn btn-outline">Outline Button</button>
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary btn-lg">Large Button</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Indicators -->
+    <div class="demo-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 48px; color: var(--primary-color);">Progress & Status Indicators</h2>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="progress-wrapper">
+                    <div class="progress-header">
+                        <span class="progress-label">Course Progress</span>
+                        <span class="progress-percentage">75%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 75%;"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-wrapper">
+                    <div class="progress-header">
+                        <span class="progress-label">Lesson Completion</span>
+                        <span class="progress-percentage">60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" style="width: 60%;"></div>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; justify-content: center;">
+                    <span class="status-badge status-badge-completed">
+                        <span class="status-icon status-icon-completed"></span>
+                        Completed
+                    </span>
+                    <span class="status-badge status-badge-in-progress">
+                        <span class="status-icon status-icon-in-progress"></span>
+                        In Progress
+                    </span>
+                    <span class="status-badge status-badge-not-started">
+                        Not Started
+                    </span>
+                    <span class="status-badge status-badge-locked">
+                        <span class="status-icon status-icon-locked"></span>
+                        Locked
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Cards -->
+    <div class="demo-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 48px; color: var(--primary-color);">Professional Course Cards</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto;">
+                <a href="#" class="course-card">
+                    <div class="course-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=600&h=400&fit=crop" alt="Course">
+                        <span class="course-badge">
+                            <span class="badge badge-new">New</span>
+                        </span>
+                    </div>
+                    <div class="course-body">
+                        <h3 class="course-title">French for Beginners A1</h3>
+                        <div class="course-instructor">👤 Marie Dupont</div>
+                        <div class="course-meta">
+                            <span class="course-meta-item">📚 24 Lessons</span>
+                            <span class="course-meta-item">⏱️ 12 Hours</span>
+                        </div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price">€49.99</div>
+                            <button class="course-cta">Continue</button>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="#" class="course-card">
+                    <div class="course-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop" alt="Course">
+                        <span class="course-badge">
+                            <span class="badge badge-popular">Popular</span>
+                        </span>
+                    </div>
+                    <div class="course-body">
+                        <h3 class="course-title">DELF B2 Exam Preparation</h3>
+                        <div class="course-instructor">👤 Jean Martin</div>
+                        <div class="course-meta">
+                            <span class="course-meta-item">📚 36 Lessons</span>
+                            <span class="course-meta-item">⏱️ 20 Hours</span>
+                        </div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price">€79.99</div>
+                            <button class="course-cta">Enroll</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="demo-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 48px; color: var(--primary-color);">Modern Tab Navigation</h2>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="tabs">
+                    <ul class="tabs-nav">
+                        <li class="tab-item active">Overview</li>
+                        <li class="tab-item">Curriculum</li>
+                        <li class="tab-item">Reviews</li>
+                        <li class="tab-item">Instructor</li>
+                    </ul>
+                </div>
+                <div class="tab-content active" style="padding: 24px; background: white; border-radius: 0 0 8px 8px;">
+                    <p style="color: var(--text-secondary); margin: 0;">Modern tab design with smooth transitions and clear visual hierarchy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-new {
+            background: var(--magenta-accent);
+            color: var(--white-color);
+        }
+        .badge-popular {
+            background: var(--gradient-primary);
+            color: var(--white-color);
+        }
+    </style>
+
+    <script>
+        // Add simple tab switching for demo
+        document.querySelectorAll('.tab-item').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

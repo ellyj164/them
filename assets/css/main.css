@@ -242,13 +242,19 @@ button:focus-visible {
     width: 100%;
 }
 
+/* Dropdown Menu - Enhanced Professional Style */
 .dropdown-arrow {
     width: 8px;
     height: 8px;
-    border: solid var(--magenta-accent);
+    border: solid var(--text-color);
     border-width: 0 2px 2px 0;
     display: inline-block;
     transform: rotate(45deg);
+    transition: var(--transition-fast);
+}
+
+.has-dropdown:hover .dropdown-arrow {
+    transform: rotate(45deg) translateY(2px);
 }
 
 .has-dropdown {
@@ -261,20 +267,19 @@ button:focus-visible {
     top: 100%;
     left: 0;
     background-color: var(--white-color);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    border-radius: 8px;
-    padding: 10px 0;
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-md);
+    padding: 8px 0;
     min-width: 280px;
-    border: 1px solid var(--border-color);
-    /* Use padding-top instead of margin-top to create hover bridge */
-    /* This allows the cursor to stay over the dropdown area while moving from menu to submenu */
-    margin-top: 0;
-    padding-top: 15px;
+    border: 1px solid var(--border-light);
+    margin-top: 12px;
     z-index: 1001;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
 }
 
@@ -304,16 +309,22 @@ button:focus-visible {
     pointer-events: none;
 }
 
+/* Dropdown Link Styling */
 .dropdown a {
     color: var(--text-color);
     font-weight: 400;
-    font-size: 1em;
-    padding: 10px 20px;
+    font-size: 0.9375rem;
+    padding: 12px 20px;
+    display: block;
+    transition: var(--transition-fast);
+    border-left: 3px solid transparent;
 }
 
 .dropdown a:hover {
-    background-color: #f0f5fa;
-    color: var(--magenta-accent);
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+    padding-left: 24px;
 }
 
 /* Header Actions */
@@ -362,28 +373,41 @@ button:focus-visible {
     padding: 8px 10px;
 }
 
+/* Header Sign-In Button - Modern Style */
 .sign-in-btn {
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: 0.9375rem;
     background: none;
     border: none;
     cursor: pointer;
     color: var(--text-color);
     text-decoration: none;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    transition: var(--transition-fast);
 }
 
 .sign-in-btn:hover {
-    color: var(--magenta-accent);
+    color: var(--primary-color);
+    background: var(--primary-light);
 }
 
+/* Header Register Button - Enhanced Style */
 .register-btn {
     text-decoration: none;
     color: var(--white-color);
-    background-color: var(--magenta-accent);
-    padding: 8px 20px;
-    border-radius: 4px;
+    background: var(--gradient-primary);
+    padding: 10px 24px;
+    border-radius: var(--radius-md);
     font-weight: 600;
-    font-size: 1.05em;
+    font-size: 0.9375rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.register-btn:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
 }
 
 /* Language Switcher */
@@ -477,12 +501,12 @@ body.translated-rtl {
     top: 0 !important;
 }
 
-/* Hero Section */
+/* Hero Section - Enhanced E-Learning Style */
 .hero {
     position: relative;
     text-align: center;
     color: var(--white-color);
-    background-color: #000;
+    background: linear-gradient(135deg, #0056D2 0%, #003D99 100%);
     overflow: hidden;
 }
 
@@ -507,34 +531,35 @@ body.translated-rtl {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 40, 80, 0.5);
+    background: linear-gradient(135deg, rgba(0, 86, 210, 0.7) 0%, rgba(0, 61, 153, 0.8) 100%);
     z-index: 2;
 }
 
 .hero-text-container {
     position: relative;
     z-index: 3;
-    padding: 180px 20px;
+    padding: 200px 20px;
 }
 
 .hero h1 {
-    font-size: 2.8em;
+    font-size: 3.5rem;
     font-weight: 700;
     color: var(--white-color);
-    margin: 0 0 10px;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    margin: 0 0 20px;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    line-height: 1.2;
 }
 
 .hero p {
-    font-size: 1.3em;
-    margin-bottom: 30px;
-    line-height: 1.7;
-    color: var(--white-color);
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    font-size: 1.375rem;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .hero .subtitle-line-1 {
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .hero .subtitle-line-2 {
