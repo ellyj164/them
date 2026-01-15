@@ -20,32 +20,101 @@ get_header();
         } else {
             // Default theme content
             ?>
-            <div class="about-page-container">
+            <section class="page-hero">
+                <div class="page-hero-content container">
+                    <h1>Pedagogical Information</h1>
+                    <p>Our approach to effective French language learning</p>
+                </div>
+            </section>
+            
+            <div class="content-section">
                 <div class="container">
-            <h1>Pedagogical Information</h1>
+                    <div class="section-header">
+                        <h2 class="section-title">Our Pedagogical Approach</h2>
+                        <p class="section-subtitle">Active, communicative and learner-centered—these are the pillars of our teaching philosophy</p>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px;">
+                        <div class="icon-box">
+                            <div class="icon-box-icon">📋</div>
+                            <h3 class="icon-box-title">Task-Based Learning</h3>
+                            <p class="icon-box-text">Students learn by completing realistic tasks and projects that simulate real-world language use.</p>
+                        </div>
+                        
+                        <div class="icon-box">
+                            <div class="icon-box-icon">💬</div>
+                            <h3 class="icon-box-title">Communicative Approach</h3>
+                            <p class="icon-box-text">We prioritize interaction and dialogue, encouraging learners to practice speaking and listening from the very beginning.</p>
+                        </div>
+                        
+                        <div class="icon-box">
+                            <div class="icon-box-icon">🏗️</div>
+                            <h3 class="icon-box-title">Scaffolding</h3>
+                            <p class="icon-box-text">We build on your existing knowledge, gradually introducing new concepts and skills in a structured, supportive manner.</p>
+                        </div>
+                        
+                        <div class="icon-box">
+                            <div class="icon-box-icon">🎨</div>
+                            <h3 class="icon-box-title">Multimodal Resources</h3>
+                            <p class="icon-box-text">We integrate visual, auditory, and kinesthetic learning tools to accommodate different learning preferences.</p>
+                        </div>
+                        
+                        <div class="icon-box">
+                            <div class="icon-box-icon">🌍</div>
+                            <h3 class="icon-box-title">Cultural Immersion</h3>
+                            <p class="icon-box-text">Understanding French culture, traditions, and social norms is an integral part of our curriculum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            <h2>Our Pedagogical Approach</h2>
-            <p>Active, communicative and learner-centered—these are the pillars of our teaching philosophy. We believe that language acquisition is most effective when learners are actively engaged in meaningful communication. Our methodology includes:</p>
-            <ul>
-                <li><strong>Task-Based Learning:</strong> Students learn by completing realistic tasks and projects that simulate real-world language use.</li>
-                <li><strong>Communicative Approach:</strong> We prioritize interaction and dialogue, encouraging learners to practice speaking and listening from the very beginning.</li>
-                <li><strong>Scaffolding:</strong> We build on your existing knowledge, gradually introducing new concepts and skills in a structured, supportive manner.</li>
-                <li><strong>Multimodal Resources:</strong> We integrate visual, auditory, and kinesthetic learning tools to accommodate different learning preferences.</li>
-                <li><strong>Cultural Immersion:</strong> Understanding French culture, traditions, and social norms is an integral part of our curriculum.</li>
-            </ul>
+            <div class="content-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Learning French in the Digital Age</h2>
+                        <p class="section-subtitle">French Practice Hub fully integrates digital technology to enhance your learning experience</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li class="feature-list-item">
+                            <span class="feature-list-icon">🎮</span>
+                            <div>
+                                <strong>Interactive Exercises:</strong> Gamified activities and quizzes that make practice engaging and provide instant feedback.
+                            </div>
+                        </li>
+                        <li class="feature-list-item">
+                            <span class="feature-list-icon">🎥</span>
+                            <div>
+                                <strong>Video Dialogues:</strong> Authentic conversational videos with subtitles and comprehension exercises to improve listening skills.
+                            </div>
+                        </li>
+                        <li class="feature-list-item">
+                            <span class="feature-list-icon">👨‍🏫</span>
+                            <div>
+                                <strong>Online Tutoring:</strong> Live, one-on-one or group sessions with experienced instructors via video conferencing.
+                            </div>
+                        </li>
+                        <li class="feature-list-item">
+                            <span class="feature-list-icon">📱</span>
+                            <div>
+                                <strong>Mobile-Friendly:</strong> Access your courses and materials anytime, anywhere, on any device.
+                            </div>
+                        </li>
+                        <li class="feature-list-item">
+                            <span class="feature-list-icon">📊</span>
+                            <div>
+                                <strong>Progress Tracking:</strong> Monitor your improvement with detailed analytics and personalized recommendations.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             
-            <h2>Learning French in the Digital Age</h2>
-            <p>French Practice Hub fully integrates digital technology to enhance your learning experience. Our platform features:</p>
-            <ul>
-                <li><strong>Interactive Exercises:</strong> Gamified activities and quizzes that make practice engaging and provide instant feedback.</li>
-                <li><strong>Video Dialogues:</strong> Authentic conversational videos with subtitles and comprehension exercises to improve listening skills.</li>
-                <li><strong>Online Tutoring:</strong> Live, one-on-one or group sessions with experienced instructors via video conferencing.</li>
-                <li><strong>Mobile-Friendly:</strong> Access your courses and materials anytime, anywhere, on any device.</li>
-                <li><strong>Progress Tracking:</strong> Monitor your improvement with detailed analytics and personalized recommendations.</li>
-            </ul>
-            
-            <h2>CEFR / CECRL – Complete French Learning Journey</h2>
-            <p>The Common European Framework of Reference for Languages (CEFR) provides a standardized description of language ability. Here's how our courses align with each level:</p>
+            <div class="content-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">CEFR / CECRL – Complete French Learning Journey</h2>
+                        <p class="section-subtitle">The Common European Framework of Reference for Languages (CEFR) provides a standardized description of language ability</p>
+                    </div>
             <div class="table-container">
                 <table class="responsive-table">
                     <thead>
@@ -118,9 +187,14 @@ get_header();
                     </tbody>
                 </table>
             </div>
+                </div>
+            </div>
             
-            <h2>TCF Canada – C2 Level Requirements</h2>
-            <p>The Test de connaissance du français pour le Canada (TCF Canada) evaluates French proficiency for immigration purposes. Here are the criteria for achieving C2 level:</p>
+            <div class="content-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">TCF Canada – C2 Level Requirements</h2>
+                    </div>
             <div class="table-container">
                 <table class="responsive-table">
                     <thead>
@@ -153,9 +227,14 @@ get_header();
                     </tbody>
                 </table>
             </div>
+                </div>
+            </div>
             
-            <h2>TEF Canada – C2 Level Requirements</h2>
-            <p>The Test d'évaluation de français pour le Canada (TEF Canada) is another recognized French proficiency test for Canadian immigration. Here are the C2 level criteria:</p>
+            <div class="content-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">TEF Canada – C2 Level Requirements</h2>
+                    </div>
             <div class="table-container">
                 <table class="responsive-table">
                     <thead>
@@ -188,8 +267,8 @@ get_header();
                     </tbody>
                 </table>
             </div>
-        </div>
-    </div>
+                </div>
+            </div>
             <?php
         }
     endwhile;
