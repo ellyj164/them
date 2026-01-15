@@ -1880,6 +1880,57 @@ body.translated-rtl {
     .responsive-table td {
         padding: 10px 8px;
     }
+    
+    /* Mobile responsive for new components */
+    .page-hero h1 {
+        font-size: 2em;
+    }
+    
+    .page-hero p {
+        font-size: 1.1em;
+    }
+    
+    .section-title {
+        font-size: 2em;
+    }
+    
+    .section-subtitle {
+        font-size: 1em;
+    }
+    
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-item {
+        flex-direction: column !important;
+        padding-left: 50px;
+    }
+    
+    .timeline-item::before {
+        left: 20px;
+    }
+    
+    .timeline-content {
+        width: 100%;
+    }
+    
+    .page-with-toc {
+        grid-template-columns: 1fr;
+    }
+    
+    .toc-sidebar {
+        position: static;
+        margin-bottom: 30px;
+    }
+    
+    .stats-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-info-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 480px) {
