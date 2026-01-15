@@ -40,6 +40,7 @@
     --success-green: #1E8E3E;
     --warning-orange: #F9AB00;
     --info-blue: #1A73E8;
+    --info-teal: #17a2b8;
     
     /* Neutral Colors */
     --text-color: #1F1F1F;
@@ -50,6 +51,7 @@
     --white-color: #FFFFFF;
     --border-color: #DADCE0;
     --border-light: #E8EAED;
+    --gray-500: #9AA0A6;
     
     /* Design System Enhancements */
     --gradient-primary: linear-gradient(135deg, #0056D2 0%, #D9006C 100%);
@@ -1398,6 +1400,23 @@ body.translated-rtl {
     100% { transform: translateX(100%); }
 }
 
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    /* Disable shimmer animation for users who prefer reduced motion */
+    .progress-bar-fill::after {
+        animation: none;
+    }
+    
+    /* Reduce other animations */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 /* Progress indicator with percentage */
 .progress-wrapper {
     margin-bottom: var(--space-md);
@@ -1482,7 +1501,7 @@ body.translated-rtl {
 }
 
 .status-badge-locked {
-    background: #9AA0A6;
+    background: var(--gray-500);
     color: var(--white-color);
 }
 
@@ -1513,7 +1532,7 @@ body.translated-rtl {
 }
 
 .status-icon-locked {
-    background: #9AA0A6;
+    background: var(--gray-500);
     color: var(--white-color);
 }
 

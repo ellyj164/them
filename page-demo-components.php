@@ -2,6 +2,10 @@
 /**
  * Template Name: Component Demo
  * Description: Demo page showcasing all new e-learning UI components
+ * 
+ * NOTE: This demo uses Unsplash placeholder images for demonstration only.
+ * Replace with properly licensed local images in production.
+ * Store images in wp-content/uploads/ or assets/images/
  *
  * @package French_Practice_Hub
  */
@@ -323,7 +327,7 @@ get_header();
 }
 
 .badge-free {
-    background: #17a2b8;
+    background: var(--info-teal);
     color: var(--white-color);
 }
 </style>
