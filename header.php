@@ -7,12 +7,21 @@
     <!-- Google Translate Script -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
+            // Desktop/Header widget
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
                 includedLanguages: 'en,fr,es,ar,zh-CN',
                 layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
                 autoDisplay: false
             }, 'google_translate_widget_container');
+            
+            // Mobile widget
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,fr,es,ar,zh-CN',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'mobile_google_translate_widget');
         }
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
@@ -283,6 +292,16 @@
                         <span id="mobile-current-lang-code">EN</span>
                     </div>
                 <?php endif; ?>
+            </li>
+            <!-- Google Translate Widget for Mobile -->
+            <li class="mobile-google-translate">
+                <div class="mobile-dropdown-toggle">
+                    <?php esc_html_e( 'Translate Page', 'french-practice-hub' ); ?>
+                    <span class="mobile-dropdown-arrow"></span>
+                </div>
+                <div class="mobile-dropdown-content">
+                    <div class="mobile-translate-widget" id="mobile_google_translate_widget"></div>
+                </div>
             </li>
         </ul>
         <?php
