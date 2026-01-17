@@ -282,4 +282,42 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize button state
         updateButtonIcon();
     }
+    
+    // ============================================
+    // HERO VIDEO AUTOPLAY HANDLER
+    // ============================================
+    
+    const heroVideo = document.querySelector('.hero-video');
+    
+    if (heroVideo) {
+        // Ensure video attributes are set
+        heroVideo.muted = true;
+        heroVideo.playsInline = true;
+        heroVideo.loop = true;
+        
+        // Attempt to play video
+        const playPromise = heroVideo.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                // Autoplay started successfully
+            }).catch(() => {
+                // Autoplay was prevented by browser policy
+                // Video will show first frame
+            });
+        }
+        
+        // Re-attempt play when video is visible (for lazy loading scenarios)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    heroVideo.play().catch(() => {
+                        // Auto-play prevented, user interaction required
+                    });
+                }
+            });
+        }, { threshold: 0.25 });
+        
+        observer.observe(heroVideo);
+    }
 });
