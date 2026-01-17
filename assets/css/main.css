@@ -1005,20 +1005,36 @@ body.translated-rtl {
     color: var(--magenta-accent);
 }
 
-.footer-socials {
+/* Social Icons Container */
+.social-icons {
     display: flex;
-    gap: 15px;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
     margin-top: 15px;
 }
 
-.footer-socials a {
-    font-size: 1.8em;
-    color: var(--text-light);
-    transition: color 0.3s ease;
+/* Social Icon Base Styles */
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: white;
 }
 
-.footer-socials a:hover {
-    color: var(--magenta-accent);
+.social-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.social-icon svg {
+    width: 20px;
+    height: 20px;
 }
 
 .footer-bottom {
@@ -3151,85 +3167,85 @@ body.translated-rtl {
 }
 
 /* Social Media Buttons - Professional Brand Colors */
-.social-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    transition: var(--transition);
-    color: var(--white-color);
-    text-decoration: none;
-    box-shadow: var(--shadow-sm);
-}
-
-.social-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
-}
-
-/* Facebook - Official Brand Color */
-.social-facebook {
-    background: #1877F2;
-}
-
-.social-facebook:hover {
-    background: #145dbf;
-}
-
-/* Twitter/X - Official Brand Color */
-.social-twitter {
-    background: #000000;
-}
-
-.social-twitter:hover {
-    background: #1a1a1a;
-}
-
-/* Instagram - Gradient Brand Colors */
-.social-instagram {
-    background: linear-gradient(45deg, #833AB4, #FD1D1D, #FCAF45);
-}
-
-.social-instagram:hover {
-    background: linear-gradient(45deg, #6a2d96, #d81818, #e09a36);
-}
-
-/* LinkedIn - Official Brand Color */
-.social-linkedin {
-    background: #0A66C2;
-}
-
-.social-linkedin:hover {
-    background: #084d92;
-}
-
-/* YouTube - Official Brand Color */
+/* YouTube - Red rounded rectangle */
 .social-youtube {
     background: #FF0000;
+    border-radius: 8px; /* Rounded rectangle, not circle */
+    color: white;
 }
 
 .social-youtube:hover {
-    background: #cc0000;
+    background: #CC0000;
 }
 
-/* WhatsApp - Official Brand Color */
+/* Facebook - Dark blue circle */
+.social-facebook {
+    background: #1877F2;
+    color: white;
+}
+
+.social-facebook:hover {
+    background: #0d65d9;
+}
+
+/* Instagram - Gradient circle */
+.social-instagram {
+    background: linear-gradient(45deg, #FCAF45, #FD1D1D, #833AB4);
+    color: white;
+}
+
+.social-instagram:hover {
+    background: linear-gradient(45deg, #e09a3d, #e31a1a, #7232a1);
+}
+
+/* TikTok - Black circle */
+.social-tiktok {
+    background: #000000;
+    color: white;
+}
+
+.social-tiktok:hover {
+    background: #1a1a1a;
+}
+
+/* LinkedIn - Dark blue circle */
+.social-linkedin {
+    background: #0A66C2;
+    color: white;
+}
+
+.social-linkedin:hover {
+    background: #084d94;
+}
+
+/* Twitter/X - Light blue circle */
+.social-twitter {
+    background: #1DA1F2;
+    color: white;
+}
+
+.social-twitter:hover {
+    background: #0d8ddb;
+}
+
+/* WhatsApp - Green circle */
 .social-whatsapp {
     background: #25D366;
+    color: white;
 }
 
 .social-whatsapp:hover {
     background: #1da851;
 }
 
-/* TikTok - Official Brand Color */
-.social-tiktok {
-    background: #000000;
+/* Email - Gray/dark circle */
+.social-email {
+    background: #6c757d;
+    color: white;
 }
 
-.social-tiktok:hover {
-    background: #1a1a1a;
+.social-email:hover {
+    background: #545b62;
 }
 
 /* Responsive Styles for New Sections */
@@ -3270,9 +3286,14 @@ body.translated-rtl {
         height: 50px;
     }
     
-    .social-btn {
+    .social-icon {
         width: 36px;
         height: 36px;
+    }
+    
+    .social-icon svg {
+        width: 18px;
+        height: 18px;
     }
 }
 
