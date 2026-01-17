@@ -102,7 +102,7 @@ get_header();
                 <p>We reserve the right to modify these Terms at any time. We will notify users of material changes by posting the updated Terms on the Platform. Your continued use of the Platform after changes constitutes acceptance of the modified Terms.</p>
                 
                 <h3>15. Contact Information</h3>
-                <p>For questions about these Terms, contact us at: <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a></p>
+                <p>For questions about these Terms, contact us at: <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a></p>
             </div>
         </div>
     </div>

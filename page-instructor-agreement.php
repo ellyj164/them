@@ -69,7 +69,7 @@ get_header();
             <p><?php esc_html_e( 'For questions about this Agreement, please contact:', 'french-practice-hub' ); ?></p>
             <p>
                 <strong><?php esc_html_e( 'Email:', 'french-practice-hub' ); ?></strong>
-                <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a>
+                <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a>
             </p>
         </div>
     </div>

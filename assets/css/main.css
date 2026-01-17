@@ -2985,3 +2985,272 @@ body.translated-rtl {
         padding: 0;
     }
 }
+
+/* ============================================
+   HOMEPAGE ENHANCEMENTS - E-LEARNING PLATFORM
+   ============================================ */
+
+/* Featured Courses Section */
+.featured-courses-section {
+    padding: 80px 0;
+    background: var(--bg-color);
+}
+
+.featured-courses-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+}
+
+/* Video Showcase Section */
+.video-showcase-section {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.video-showcase-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="%230056D2" opacity="0.05"/></svg>');
+    opacity: 0.5;
+}
+
+.video-showcase-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.video-showcase-content h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.video-showcase-content p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.video-showcase-features {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.showcase-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.showcase-feature .feature-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.video-showcase-player {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    background: var(--bg-secondary);
+    aspect-ratio: 16 / 9;
+}
+
+.showcase-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.video-control-btn {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-lg);
+    color: var(--primary-color);
+}
+
+.video-control-btn:hover {
+    background: var(--white-color);
+    transform: scale(1.1);
+    box-shadow: var(--shadow-xl);
+}
+
+.video-control-btn:active {
+    transform: scale(1.05);
+}
+
+/* Social Media Buttons - Professional Brand Colors */
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: var(--transition);
+    color: var(--white-color);
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Facebook - Official Brand Color */
+.social-facebook {
+    background: #1877F2;
+}
+
+.social-facebook:hover {
+    background: #145dbf;
+}
+
+/* Twitter/X - Official Brand Color */
+.social-twitter {
+    background: #000000;
+}
+
+.social-twitter:hover {
+    background: #1a1a1a;
+}
+
+/* Instagram - Gradient Brand Colors */
+.social-instagram {
+    background: linear-gradient(45deg, #833AB4, #FD1D1D, #FCAF45);
+}
+
+.social-instagram:hover {
+    background: linear-gradient(45deg, #6a2d96, #d81818, #e09a36);
+}
+
+/* LinkedIn - Official Brand Color */
+.social-linkedin {
+    background: #0A66C2;
+}
+
+.social-linkedin:hover {
+    background: #084d92;
+}
+
+/* YouTube - Official Brand Color */
+.social-youtube {
+    background: #FF0000;
+}
+
+.social-youtube:hover {
+    background: #cc0000;
+}
+
+/* WhatsApp - Official Brand Color */
+.social-whatsapp {
+    background: #25D366;
+}
+
+.social-whatsapp:hover {
+    background: #1da851;
+}
+
+/* TikTok - Official Brand Color */
+.social-tiktok {
+    background: #000000;
+}
+
+.social-tiktok:hover {
+    background: #1a1a1a;
+}
+
+/* Responsive Styles for New Sections */
+@media (max-width: 1200px) {
+    .featured-courses-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .featured-courses-section {
+        padding: 60px 0;
+    }
+    
+    .featured-courses-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .video-showcase-section {
+        padding: 60px 0;
+    }
+    
+    .video-showcase-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .video-showcase-content h2 {
+        font-size: 2rem;
+    }
+    
+    .video-showcase-content p {
+        font-size: 1rem;
+    }
+    
+    .video-control-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .social-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-showcase-content h2 {
+        font-size: 1.75rem;
+    }
+    
+    .showcase-feature {
+        font-size: 0.9375rem;
+    }
+    
+    .showcase-feature .feature-icon {
+        font-size: 1.25rem;
+    }
+}

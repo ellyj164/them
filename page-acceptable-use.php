@@ -109,7 +109,7 @@ get_header();
             
             <h3>6. Reporting Violations</h3>
             <p>If you encounter behavior or content that violates this AUP, please report it immediately to:</p>
-            <p>Email: <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a><br>
+            <p>Email: <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a><br>
             Subject Line: "AUP Violation Report"</p>
             
             <p>Include relevant details such as usernames, dates, and descriptions of the violation.</p>
@@ -133,7 +133,7 @@ get_header();
             <p>We may update this Acceptable Use Policy at any time. Continued use of the Platform after changes constitutes acceptance of the updated policy.</p>
             
             <h3>10. Contact Us</h3>
-            <p>For questions about this policy, contact: <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a></p>
+            <p>For questions about this policy, contact: <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a></p>
         </div>
     </div>
             <?php

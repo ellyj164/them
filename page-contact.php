@@ -38,7 +38,15 @@ get_header();
                     <div class="contact-info-icon">✉️</div>
                     <h3 class="contact-info-title"><?php esc_html_e( 'General Inquiries', 'french-practice-hub' ); ?></h3>
                     <div class="contact-info-text">
-                        <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a>
+                        <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a>
+                    </div>
+                </div>
+                
+                <div class="contact-info-card">
+                    <div class="contact-info-icon">📱</div>
+                    <h3 class="contact-info-title"><?php esc_html_e( 'Phone', 'french-practice-hub' ); ?></h3>
+                    <div class="contact-info-text">
+                        <a href="tel:+250787550062">+250 787 550 062</a>
                     </div>
                 </div>
                 
@@ -47,7 +55,7 @@ get_header();
                     <h3 class="contact-info-title"><?php esc_html_e( 'Technical Support', 'french-practice-hub' ); ?></h3>
                     <div class="contact-info-text">
                         <p><?php esc_html_e( 'For technical issues or questions about using the platform', 'french-practice-hub' ); ?></p>
-                        <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a>
+                        <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a>
                     </div>
                 </div>
                 
@@ -56,7 +64,7 @@ get_header();
                     <h3 class="contact-info-title"><?php esc_html_e( 'Business Inquiries', 'french-practice-hub' ); ?></h3>
                     <div class="contact-info-text">
                         <p><?php esc_html_e( 'Partnership opportunities and collaborations', 'french-practice-hub' ); ?></p>
-                        <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a>
+                        <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a>
                     </div>
                 </div>
             </div>
@@ -78,7 +86,8 @@ get_header();
                 
                 <h3><?php esc_html_e( 'Contact', 'french-practice-hub' ); ?></h3>
                 <p>
-                    <?php esc_html_e( 'Email:', 'french-practice-hub' ); ?> <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a>
+                    <?php esc_html_e( 'Email:', 'french-practice-hub' ); ?> <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a><br>
+                    <?php esc_html_e( 'Phone:', 'french-practice-hub' ); ?> <a href="tel:+250787550062">+250 787 550 062</a>
                 </p>
                 
                 <h3><?php esc_html_e( 'Publication Director', 'french-practice-hub' ); ?></h3>

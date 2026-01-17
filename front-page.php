@@ -142,6 +142,78 @@ get_header();
                         </div>
                     </div>
                 </section>
+                
+                <!-- Featured Courses Section - Tutor LMS Integration -->
+                <!-- Admin Note: Customize the shortcode below to display different courses -->
+                <!-- Parameters: id="course_ids" exclude_ids="ids" category="category_name" orderby="ID|title|date" order="desc|asc" count="number" -->
+                <section class="featured-courses-section">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2 class="section-title"><?php esc_html_e( 'Featured Courses', 'french-practice-hub' ); ?></h2>
+                            <p class="section-subtitle"><?php esc_html_e( 'Start your learning journey with our most popular courses', 'french-practice-hub' ); ?></p>
+                        </div>
+                        
+                        <div class="featured-courses-grid">
+                            <?php
+                            // Tutor LMS shortcode - displays 4 courses in a single row
+                            // Change parameters to customize: category, orderby, order, count, etc.
+                            echo do_shortcode('[tutor_course id="" exclude_ids="" category="" orderby="ID" order="desc" count="4"]');
+                            ?>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Auto-play Video Section -->
+                <section class="video-showcase-section">
+                    <div class="container">
+                        <div class="video-showcase-wrapper">
+                            <div class="video-showcase-content">
+                                <h2><?php esc_html_e( 'Experience Interactive Learning', 'french-practice-hub' ); ?></h2>
+                                <p><?php esc_html_e( 'Discover how our platform combines engaging video content with interactive exercises to help you master French through real-world practice and immersive experiences.', 'french-practice-hub' ); ?></p>
+                                <div class="video-showcase-features">
+                                    <div class="showcase-feature">
+                                        <span class="feature-icon">🎯</span>
+                                        <span><?php esc_html_e( 'Structured Learning Path', 'french-practice-hub' ); ?></span>
+                                    </div>
+                                    <div class="showcase-feature">
+                                        <span class="feature-icon">🎮</span>
+                                        <span><?php esc_html_e( 'Interactive Games & Exercises', 'french-practice-hub' ); ?></span>
+                                    </div>
+                                    <div class="showcase-feature">
+                                        <span class="feature-icon">🎓</span>
+                                        <span><?php esc_html_e( 'Expert-Led Instruction', 'french-practice-hub' ); ?></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="video-showcase-player">
+                                <!-- Admin Note: Replace the src URL with your actual video URL -->
+                                <video 
+                                    class="showcase-video" 
+                                    id="showcase-video"
+                                    muted 
+                                    loop
+                                    playsinline
+                                    poster="https://frenchpracticehub.com/wp-content/uploads/2026/01/Characters-in-the-French-Practice-Hub-1.mp4">
+                                    <source src="https://frenchpracticehub.com/wp-content/uploads/2026/01/Characters-in-the-French-Practice-Hub-1.mp4" type="video/mp4">
+                                    <?php esc_html_e( 'Your browser does not support the video tag.', 'french-practice-hub' ); ?>
+                                </video>
+                                
+                                <div class="video-controls">
+                                    <button id="video-play-pause" class="video-control-btn" aria-label="<?php esc_attr_e( 'Play/Pause video', 'french-practice-hub' ); ?>">
+                                        <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                        </svg>
+                                        <svg class="pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                                            <rect x="6" y="4" width="4" height="16"></rect>
+                                            <rect x="14" y="4" width="4" height="16"></rect>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 <?php
             }
         endwhile;
