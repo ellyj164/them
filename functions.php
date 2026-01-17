@@ -1251,12 +1251,17 @@ function fph_save_booking_meta( $post_id ) {
     }
 
     // Save fields
-    $fields = array( 'booking_day', 'booking_time', 'booking_type', 'booking_name', 'booking_email', 'booking_phone', 'booking_age', 'booking_notes', 'booking_status' );
+    $fields = array( 'booking_day', 'booking_time', 'booking_type', 'booking_name', 'booking_email', 'booking_phone', 'booking_age', 'booking_status' );
     
     foreach ( $fields as $field ) {
         if ( isset( $_POST[ $field ] ) ) {
             update_post_meta( $post_id, '_' . $field, sanitize_text_field( $_POST[ $field ] ) );
         }
+    }
+    
+    // Handle booking_notes separately to preserve line breaks
+    if ( isset( $_POST['booking_notes'] ) ) {
+        update_post_meta( $post_id, '_booking_notes', sanitize_textarea_field( $_POST['booking_notes'] ) );
     }
 }
 add_action( 'save_post_fph_booking', 'fph_save_booking_meta' );
@@ -1378,7 +1383,12 @@ add_action( 'wp_ajax_nopriv_fph_submit_booking', 'fph_handle_booking_submission'
  * Send booking notification email
  */
 function fph_send_booking_notification( $booking_data ) {
-    $to = 'contact@frenchpracticehub.com';
+    // Get admin email, with fallback
+    $to = get_option( 'admin_email', 'contact@frenchpracticehub.com' );
+    
+    // Allow filtering of notification email
+    $to = apply_filters( 'fph_booking_notification_email', $to );
+    
     $subject = sprintf(
         __( 'New Session Booking - %s at %s', 'french-practice-hub' ),
         $booking_data['day'],

@@ -105,12 +105,26 @@
                         bookingMessage.className = 'booking-message success';
                         bookingMessage.textContent = data.data.message || 'Booking submitted successfully! We will contact you soon.';
                         
-                        // Reset form after success
+                        // Update the slot to show as booked (visual feedback)
+                        const day = document.getElementById('booking-day').value.toLowerCase();
+                        const time = document.getElementById('booking-time').value;
+                        const slotSelector = '.slot-available[data-day="' + day + '"][data-time="' + time + '"]';
+                        const slot = document.querySelector(slotSelector);
+                        
+                        if (slot) {
+                            slot.className = 'slot-booked';
+                            slot.textContent = 'Pending';
+                            slot.title = 'Booking Pending Confirmation';
+                            slot.removeAttribute('data-day');
+                            slot.removeAttribute('data-time');
+                            slot.removeAttribute('data-type');
+                            // Remove click handler
+                            slot.style.cursor = 'not-allowed';
+                        }
+                        
+                        // Reset form and close modal after success
                         setTimeout(function() {
                             closeModal();
-                            
-                            // Refresh page to update booked slots
-                            location.reload();
                         }, 2000);
                     } else {
                         bookingMessage.className = 'booking-message error';
