@@ -1080,6 +1080,44 @@ body.translated-rtl {
     stroke: currentColor;
 }
 
+/* Footer Contact Section - Compact Professional Design */
+.footer-contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-contact-list li {
+    margin-bottom: 12px;
+}
+
+.footer-contact-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #9CA3AF;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-contact-list a:hover {
+    color: #0056D2;
+}
+
+.footer-contact-list svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    stroke: currentColor;
+}
+
+/* Remove any oversized icon styles */
+.footer-column svg:not(.footer-contact-list svg):not(.social-icon svg) {
+    width: 16px !important;
+    height: 16px !important;
+}
+
 /* Professional Social Icons - Uniform Circular Design */
 .social-icons {
     display: flex;
