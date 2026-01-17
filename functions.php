@@ -107,10 +107,10 @@ function fph_is_elementor_page( $post_id = null ) {
  * Enqueue styles and scripts
  */
 function french_practice_hub_scripts() {
-    // Google Fonts
+    // Google Fonts - Nunito for playful, rounded educational style
     wp_enqueue_style(
         'french-practice-hub-fonts',
-        'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap',
         array(),
         null
     );
