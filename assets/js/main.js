@@ -220,4 +220,66 @@ document.addEventListener('DOMContentLoaded', () => {
             dropdownTimeouts.set(item, timeout);
         });
     });
+    
+    // ============================================
+    // VIDEO SHOWCASE AUTO-PLAY FUNCTIONALITY
+    // ============================================
+    
+    const showcaseVideo = document.getElementById('showcase-video');
+    const playPauseBtn = document.getElementById('video-play-pause');
+    
+    if (showcaseVideo && playPauseBtn) {
+        const playIcon = playPauseBtn.querySelector('.play-icon');
+        const pauseIcon = playPauseBtn.querySelector('.pause-icon');
+        
+        // Update button icon based on video state
+        function updateButtonIcon() {
+            if (showcaseVideo.paused) {
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            } else {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            }
+        }
+        
+        // Play/Pause button click handler
+        playPauseBtn.addEventListener('click', () => {
+            if (showcaseVideo.paused) {
+                showcaseVideo.play();
+            } else {
+                showcaseVideo.pause();
+            }
+            updateButtonIcon();
+        });
+        
+        // Intersection Observer for auto-play on scroll
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Video is in viewport - auto-play
+                    showcaseVideo.play().catch(error => {
+                        // Auto-play failed (browser policy), user needs to click play
+                        console.log('Auto-play prevented:', error);
+                    });
+                } else {
+                    // Video left viewport - pause
+                    showcaseVideo.pause();
+                }
+                updateButtonIcon();
+            });
+        }, {
+            threshold: 0.5 // Trigger when 50% of video is visible
+        });
+        
+        // Start observing the video element
+        videoObserver.observe(showcaseVideo);
+        
+        // Update icon on video events
+        showcaseVideo.addEventListener('play', updateButtonIcon);
+        showcaseVideo.addEventListener('pause', updateButtonIcon);
+        
+        // Initialize button state
+        updateButtonIcon();
+    }
 });

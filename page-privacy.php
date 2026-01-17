@@ -118,7 +118,7 @@ get_header();
                 
                 <h3>11. Contact Us</h3>
                 <p>If you have questions or concerns about this Privacy Policy, please contact us at:</p>
-                <p>Email: <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a></p>
+                <p>Email: <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a></p>
             </div>
         </div>
     </div>

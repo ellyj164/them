@@ -74,7 +74,7 @@ get_header();
                 <h3>5. How to Request a Refund</h3>
                 <p>To request a refund, please:</p>
                 <ol style="padding-left: 25px;">
-                    <li style="margin-bottom: 10px;">Contact us at <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a></li>
+                    <li style="margin-bottom: 10px;">Contact us at <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a></li>
                     <li style="margin-bottom: 10px;">Include your order number and reason for the refund request</li>
                     <li style="margin-bottom: 10px;">Allow 5-7 business days for review and processing</li>
                     <li style="margin-bottom: 10px;">Refunds will be issued to the original payment method within 10-14 business days</li>
@@ -98,7 +98,7 @@ get_header();
                 <p>We may update this Refund & Cancellation Policy at any time. Changes will be posted on this page with an updated revision date.</p>
                 
                 <h3>10. Contact Us</h3>
-                <p>For questions about refunds or cancellations, contact: <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a></p>
+                <p>For questions about refunds or cancellations, contact: <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a></p>
             </div>
         </div>
     </div>

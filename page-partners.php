@@ -75,7 +75,7 @@ get_header();
                     </div>
                     <p style="text-align: center; font-size: 1.2em; max-width: 800px; margin: 0 auto 30px;">If you are interested in partnering with French Practice Hub, we would love to hear from you. Together, we can create meaningful learning experiences and expand opportunities for French language learners around the world.</p>
                     <div style="text-align: center;">
-                        <a href="mailto:contact@fidelefle.com" class="btn btn-primary">Contact Us for Partnership</a>
+                        <a href="mailto:contact@frenchpracticehub.com" class="btn btn-primary">Contact Us for Partnership</a>
                     </div>
                     
                     <div style="background: var(--bg-color); padding: 30px; border-radius: var(--radius-md); margin-top: 50px; text-align: center;">

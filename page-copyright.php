@@ -79,7 +79,7 @@ get_header();
             </ul>
             
             <p><strong>Copyright Agent Contact:</strong><br>
-            Email: <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a><br>
+            Email: <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a><br>
             Subject Line: "DMCA Copyright Infringement Notice"</p>
             
             <h3>8. Counter-Notification</h3>
@@ -101,7 +101,7 @@ get_header();
             </ul>
             
             <h3>10. Contact Us</h3>
-            <p>For questions about intellectual property matters, contact: <a href="mailto:contact@fidelefle.com">contact@fidelefle.com</a></p>
+            <p>For questions about intellectual property matters, contact: <a href="mailto:contact@frenchpracticehub.com">contact@frenchpracticehub.com</a></p>
         </div>
     </div>
             <?php
