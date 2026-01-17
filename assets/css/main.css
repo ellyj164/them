@@ -31,6 +31,10 @@
 
 /* CSS Custom Properties - Enhanced for E-Learning Platform */
 :root {
+    /* Font System - Playful Rounded Typography */
+    --font-primary: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-heading: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
     /* Primary Brand Colors - Inspired by Coursera/Udemy */
     --magenta-accent: #D9006C;
     --primary-color: #0056D2;  /* More vibrant blue */
@@ -88,30 +92,32 @@
 
 /* Base Styles - Enhanced Typography with Nunito */
 body {
-    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: var(--font-primary);
     margin: 0;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
     font-size: 16px;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 /* Improved Heading Typography */
 h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
     font-weight: 700;
     line-height: 1.3;
     color: var(--text-color);
     margin-top: 0;
 }
 
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.5rem; }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1.125rem; }
-h6 { font-size: 1rem; }
+h1 { font-size: 2.5rem; font-weight: 800; }
+h2 { font-size: 2rem; font-weight: 800; }
+h3 { font-size: 1.5rem; font-weight: 700; }
+h4 { font-size: 1.25rem; font-weight: 700; }
+h5 { font-size: 1.125rem; font-weight: 600; }
+h6 { font-size: 1rem; font-weight: 600; }
 
 /* Improve focus visibility for keyboard navigation */
 a:focus,
@@ -545,7 +551,7 @@ body.translated-rtl {
 
 .hero h1 {
     font-size: 3.5rem;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--white-color);
     margin: 0 0 20px;
     text-shadow: 0 4px 12px rgba(0,0,0,0.3);
