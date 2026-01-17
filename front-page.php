@@ -24,8 +24,17 @@ get_header();
                 ?>
                 <section class="hero">
                     <div class="hero-video-wrapper">
-                        <video playsinline autoplay loop muted poster="https://frenchpracticehub.com/wp-content/uploads/2026/01/Characters-in-the-French-Practice-Hub-1.mp4">
-                            <source src="https://frenchpracticehub.com/wp-content/uploads/2026/01/Characters-in-the-French-Practice-Hub-1.mp4" type="video/mp4">
+                        <video 
+                            class="hero-video" 
+                            autoplay 
+                            muted 
+                            loop 
+                            playsinline
+                            preload="auto"
+                            disablePictureInPicture
+                            poster="<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-poster.jpg'); ?>">
+                            <source src="https://frenchpracticehub.com/wp-content/uploads/2026/01/Characters-in-the-French-Practice-Hub-4.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
                         </video>
                         <div class="hero-video-overlay"></div>
                     </div>

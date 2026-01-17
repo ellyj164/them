@@ -521,6 +521,7 @@ body.translated-rtl {
 /* Hero Section - Enhanced E-Learning Style */
 .hero {
     position: relative;
+    min-height: 100vh;
     text-align: center;
     color: var(--white-color);
     background: linear-gradient(135deg, #0056D2 0%, #003D99 100%);
@@ -533,28 +534,48 @@ body.translated-rtl {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 0;
 }
 
-.hero-video-wrapper video {
+.hero-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    /* IMPORTANT: Remove any blur filters */
+    filter: none !important;
+    -webkit-filter: none !important;
+    /* Ensure crisp rendering */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    /* Prevent quality degradation */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
+/* Lighter overlay to show video clearly */
 .hero-video-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(0, 86, 210, 0.7) 0%, rgba(0, 61, 153, 0.8) 100%);
-    z-index: 2;
+    /* REDUCED opacity - was too strong before */
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 86, 210, 0.4) 0%,
+        rgba(0, 86, 210, 0.5) 50%,
+        rgba(0, 86, 210, 0.6) 100%
+    );
+    z-index: 1;
 }
 
+/* Ensure hero text is above overlay */
 .hero-text-container {
     position: relative;
-    z-index: 3;
+    z-index: 2;
     padding: 200px 20px;
 }
 
@@ -1003,6 +1024,60 @@ body.translated-rtl {
 
 .footer-column a:hover {
     color: var(--magenta-accent);
+}
+
+/* Footer Contact Links */
+.footer-contact-links {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+}
+
+.footer-contact-links li {
+    margin-bottom: 10px;
+}
+
+.footer-contact-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 14px;
+}
+
+.footer-contact-links a:hover {
+    color: var(--primary-color);
+}
+
+.footer-contact-info {
+    margin-top: 12px;
+}
+
+.footer-contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.footer-contact-info a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-contact-info a:hover {
+    color: var(--primary-color);
+}
+
+.footer-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    stroke: currentColor;
 }
 
 /* Professional Social Icons - Uniform Circular Design */
@@ -2665,7 +2740,7 @@ body.translated-rtl {
 }
 
 /* Tablet-specific optimizations (between mobile and desktop) */
-@media (min-width: 769px) and (max-width: 1200px) {
+@media (min-width: 769px) and (max-width: 1024px) {
     .container {
         padding: 0 30px;
     }
@@ -2680,6 +2755,11 @@ body.translated-rtl {
     /* Adjust search input for tablet */
     .search-container.active #search-input {
         width: 180px;
+    }
+    
+    /* Tablet video */
+    .hero-video {
+        object-position: center;
     }
 }
 
@@ -2728,6 +2808,21 @@ body.translated-rtl {
     
     .hero-text-container {
         padding: 120px 20px;
+    }
+    
+    /* Mobile responsive video */
+    .hero-video {
+        object-fit: cover;
+        object-position: center center;
+    }
+    
+    .hero-video-overlay {
+        /* Slightly more overlay on mobile for text readability */
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 86, 210, 0.5) 0%,
+            rgba(0, 86, 210, 0.6) 100%
+        );
     }
     
     .cta-buttons {
