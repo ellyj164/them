@@ -31,8 +31,7 @@ get_header();
                             loop 
                             playsinline
                             preload="auto"
-                            disablePictureInPicture
-                            poster="<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-poster.jpg'); ?>">
+                            disablePictureInPicture>
                             <source src="https://frenchpracticehub.com/wp-content/uploads/2026/01/Characters-in-the-French-Practice-Hub-4.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>

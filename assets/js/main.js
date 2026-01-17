@@ -301,11 +301,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (playPromise !== undefined) {
             playPromise.then(() => {
                 // Autoplay started successfully
-                console.log('Hero video playing');
-            }).catch((error) => {
-                // Autoplay was prevented
-                console.log('Autoplay prevented:', error);
-                // Video will show poster/first frame
+            }).catch(() => {
+                // Autoplay was prevented by browser policy
+                // Video will show first frame
             });
         }
         
@@ -313,7 +311,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    heroVideo.play().catch(() => {});
+                    heroVideo.play().catch(() => {
+                        // Auto-play prevented, user interaction required
+                    });
                 }
             });
         }, { threshold: 0.25 });
