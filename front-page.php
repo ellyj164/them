@@ -37,7 +37,7 @@ get_header();
                         </p>
                         <div class="cta-buttons">
                             <a href="#" class="btn btn-primary btn-lg"><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'btn_get_started' ); } else { echo esc_html__( 'Get Started', 'french-practice-hub' ); } ?></a>
-                            <a href="#" class="btn btn-outline btn-lg"><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'btn_book_session' ); } else { echo esc_html__( 'Book a Session', 'french-practice-hub' ); } ?></a>
+                            <a href="<?php echo esc_url( fph_get_safe_page_link( 'book-session' ) ); ?>" class="btn btn-outline btn-lg"><?php if ( function_exists( 'fph_translate_e' ) ) { fph_translate_e( 'btn_book_session' ); } else { echo esc_html__( 'Book a Session', 'french-practice-hub' ); } ?></a>
                         </div>
                     </div>
                 </section>
