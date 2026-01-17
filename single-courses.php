@@ -9,6 +9,8 @@
  * @package French_Practice_Hub
  */
 
+get_header();
+
 // Let Tutor LMS handle its own templates
 if (function_exists('tutor')) {
     // Use Tutor LMS default template
@@ -17,3 +19,5 @@ if (function_exists('tutor')) {
     // Fallback to default single template if Tutor LMS is not active
     get_template_part('single');
 }
+
+get_footer();

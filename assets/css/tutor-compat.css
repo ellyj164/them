@@ -55,8 +55,7 @@
 .tutor-course-thumbnail img,
 .tutor-card-thumbnail img {
     min-width: 100%;
-    min-height: 180px;
-    max-height: 180px;
+    height: 180px;
 }
 
 /* Course Content Area */

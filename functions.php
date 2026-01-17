@@ -1600,10 +1600,16 @@ add_action('after_setup_theme', 'fph_tutor_lms_support');
  */
 function fph_enqueue_tutor_styles() {
     if (fph_is_tutor_lms_active()) {
+        // Check if tutor-frontend style exists, otherwise enqueue without dependency
+        $dependencies = array();
+        if (wp_style_is('tutor-frontend', 'registered')) {
+            $dependencies = array('tutor-frontend');
+        }
+        
         wp_enqueue_style(
             'fph-tutor-compat',
             get_template_directory_uri() . '/assets/css/tutor-compat.css',
-            array('tutor-frontend'),
+            $dependencies,
             '1.0.0'
         );
     }
@@ -1627,7 +1633,8 @@ function fph_tutor_activation_flush() {
 }
 add_action('tutor_addon_after_enable', 'fph_tutor_activation_flush');
 add_action('activated_plugin', function($plugin) {
-    if (strpos($plugin, 'tutor') !== false) {
+    // Check for specific Tutor LMS plugin file
+    if ($plugin === 'tutor/tutor.php' || $plugin === 'tutor-lms/tutor.php') {
         flush_rewrite_rules();
     }
 });
