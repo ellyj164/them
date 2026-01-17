@@ -1560,3 +1560,113 @@ function fph_booking_admin_styles() {
     }
 }
 add_action( 'admin_head', 'fph_booking_admin_styles' );
+
+/**
+ * ============================================================================
+ * TUTOR LMS COMPATIBILITY LAYER
+ * ============================================================================
+ */
+
+/**
+ * Check if Tutor LMS is active
+ * Auto-detects Tutor LMS plugin to prevent duplicate features
+ * 
+ * @return bool True if Tutor LMS is active, false otherwise
+ */
+function fph_is_tutor_lms_active() {
+    return function_exists('tutor') || defined('TUTOR_VERSION') || class_exists('TUTOR\Tutor');
+}
+
+/**
+ * Add Tutor LMS theme support
+ * Only runs if Tutor LMS is detected to avoid conflicts
+ */
+function fph_tutor_lms_support() {
+    if (!fph_is_tutor_lms_active()) {
+        return;
+    }
+    
+    // Add theme support for Tutor LMS
+    add_theme_support('tutor');
+    
+    // Enqueue Tutor LMS compatibility styles
+    add_action('wp_enqueue_scripts', 'fph_enqueue_tutor_styles', 20);
+}
+add_action('after_setup_theme', 'fph_tutor_lms_support');
+
+/**
+ * Enqueue Tutor LMS compatibility CSS
+ * Professional styling for course cards, dashboard, and login pages
+ */
+function fph_enqueue_tutor_styles() {
+    if (fph_is_tutor_lms_active()) {
+        // Check if tutor-frontend style exists, otherwise enqueue without dependency
+        $dependencies = array();
+        if (wp_style_is('tutor-frontend', 'registered')) {
+            $dependencies = array('tutor-frontend');
+        }
+        
+        wp_enqueue_style(
+            'fph-tutor-compat',
+            get_template_directory_uri() . '/assets/css/tutor-compat.css',
+            $dependencies,
+            '1.0.0'
+        );
+    }
+}
+
+/**
+ * Flush rewrite rules when theme is activated (fixes 404 on course pages)
+ * This ensures Tutor LMS course URLs work correctly
+ */
+function fph_flush_rewrite_rules() {
+    flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'fph_flush_rewrite_rules');
+
+/**
+ * Flush rewrite rules when Tutor LMS is activated
+ * Ensures course pages work immediately after plugin activation
+ */
+function fph_tutor_activation_flush() {
+    flush_rewrite_rules();
+}
+add_action('tutor_addon_after_enable', 'fph_tutor_activation_flush');
+add_action('activated_plugin', function($plugin) {
+    // Check for specific Tutor LMS plugin file
+    if ($plugin === 'tutor/tutor.php' || $plugin === 'tutor-lms/tutor.php') {
+        flush_rewrite_rules();
+    }
+});
+
+/**
+ * Ensure Tutor LMS templates load correctly
+ * Compatibility layer for single course and archive pages
+ * 
+ * @param string $template Current template path
+ * @return string Modified template path
+ */
+function fph_tutor_template_support($template) {
+    if (!fph_is_tutor_lms_active()) {
+        return $template;
+    }
+    
+    // Single course
+    if (is_singular('courses')) {
+        $custom_template = locate_template('single-courses.php');
+        if ($custom_template) {
+            return $custom_template;
+        }
+    }
+    
+    // Course archive
+    if (is_post_type_archive('courses') || is_tax('course-category')) {
+        $custom_template = locate_template('archive-courses.php');
+        if ($custom_template) {
+            return $custom_template;
+        }
+    }
+    
+    return $template;
+}
+add_filter('template_include', 'fph_tutor_template_support', 99);
