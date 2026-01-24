@@ -562,8 +562,6 @@ body.translated-rtl {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Disabled overlay to show video without blue blur */
-    background: transparent;
     z-index: 1;
     /* Subtle gradient at bottom for text readability only */
     background: linear-gradient(

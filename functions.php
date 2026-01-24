@@ -1621,7 +1621,7 @@ function fph_enqueue_tutor_styles() {
  */
 function fph_flush_rewrite_rules() {
     flush_rewrite_rules();
-    // Set a flag to flush again on next admin page load
+    // Set a flag to flush again on admin_init to ensure proper URL handling
     update_option('fph_flush_rewrites_flag', '1');
 }
 add_action('after_switch_theme', 'fph_flush_rewrite_rules');
