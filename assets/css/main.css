@@ -555,21 +555,22 @@ body.translated-rtl {
     -webkit-backface-visibility: hidden;
 }
 
-/* Lighter overlay to show video clearly */
+/* No overlay - show video clearly without any blur or tint */
 .hero-video-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* REDUCED opacity - was too strong before */
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 86, 210, 0.4) 0%,
-        rgba(0, 86, 210, 0.5) 50%,
-        rgba(0, 86, 210, 0.6) 100%
-    );
+    /* Disabled overlay to show video without blue blur */
+    background: transparent;
     z-index: 1;
+    /* Subtle gradient at bottom for text readability only */
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0) 40%
+    );
 }
 
 /* Ensure hero text is above overlay */
@@ -2855,11 +2856,11 @@ body.translated-rtl {
     }
     
     .hero-video-overlay {
-        /* Slightly more overlay on mobile for text readability */
+        /* Light gradient at bottom for mobile text readability */
         background: linear-gradient(
-            to bottom,
-            rgba(0, 86, 210, 0.5) 0%,
-            rgba(0, 86, 210, 0.6) 100%
+            to top,
+            rgba(0, 0, 0, 0.4) 0%,
+            rgba(0, 0, 0, 0) 40%
         );
     }
     
