@@ -1621,6 +1621,8 @@ function fph_enqueue_tutor_styles() {
  */
 function fph_flush_rewrite_rules() {
     flush_rewrite_rules();
+    // Set a flag to flush again on admin_init to ensure proper URL handling
+    update_option('fph_flush_rewrites_flag', '1');
 }
 add_action('after_switch_theme', 'fph_flush_rewrite_rules');
 
@@ -1651,16 +1653,23 @@ function fph_tutor_template_support($template) {
         return $template;
     }
     
-    // Single course
-    if (is_singular('courses')) {
+    // Get the Tutor LMS course post type dynamically
+    $course_post_type = function_exists('tutor') ? tutor()->course_post_type : 'courses';
+    
+    // Single course - check multiple variations (both 'courses' and 'course')
+    if (is_singular($course_post_type) || is_singular('courses') || is_singular('course')) {
+        // Try plural first, then singular
         $custom_template = locate_template('single-courses.php');
+        if (!$custom_template) {
+            $custom_template = locate_template('single-course.php');
+        }
         if ($custom_template) {
             return $custom_template;
         }
     }
     
-    // Course archive
-    if (is_post_type_archive('courses') || is_tax('course-category')) {
+    // Course archive - check multiple variations
+    if (is_post_type_archive($course_post_type) || is_post_type_archive('courses') || is_post_type_archive('course') || is_tax('course-category') || is_tax('course-tag')) {
         $custom_template = locate_template('archive-courses.php');
         if ($custom_template) {
             return $custom_template;
@@ -1670,3 +1679,42 @@ function fph_tutor_template_support($template) {
     return $template;
 }
 add_filter('template_include', 'fph_tutor_template_support', 99);
+
+/**
+ * Alternative template handler for Tutor LMS using Tutor's own filter
+ * This ensures the theme's single course template is used
+ * Checks both plural (single-courses.php) and singular (single-course.php) variants
+ */
+function fph_tutor_single_course_template($template) {
+    if (!fph_is_tutor_lms_active()) {
+        return $template;
+    }
+    
+    // Try plural first
+    $custom_template = locate_template('single-courses.php');
+    
+    // If not found, try singular
+    if (!$custom_template) {
+        $custom_template = locate_template('single-course.php');
+    }
+    
+    if ($custom_template) {
+        return $custom_template;
+    }
+    
+    return $template;
+}
+add_filter('single_template', 'fph_tutor_single_course_template', 99);
+
+/**
+ * Force flush rewrite rules on admin init if needed
+ * This helps fix 404 errors on course pages after theme activation
+ */
+function fph_maybe_flush_rewrites() {
+    // Check if we need to flush
+    if (get_option('fph_flush_rewrites_flag')) {
+        flush_rewrite_rules();
+        delete_option('fph_flush_rewrites_flag');
+    }
+}
+add_action('admin_init', 'fph_maybe_flush_rewrites');
