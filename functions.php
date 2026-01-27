@@ -1718,3 +1718,57 @@ function fph_maybe_flush_rewrites() {
     }
 }
 add_action('admin_init', 'fph_maybe_flush_rewrites');
+
+/**
+ * Handle newsletter subscription form
+ */
+function fph_handle_newsletter_subscription() {
+    // Verify nonce
+    if ( ! isset( $_POST['fph_newsletter_nonce'] ) || ! wp_verify_nonce( $_POST['fph_newsletter_nonce'], 'fph_newsletter_subscribe' ) ) {
+        wp_die( esc_html__( 'Security check failed. Please try again.', 'french-practice-hub' ) );
+    }
+    
+    // Get and sanitize email
+    $email = isset( $_POST['newsletter_email'] ) ? sanitize_email( $_POST['newsletter_email'] ) : '';
+    
+    if ( ! is_email( $email ) ) {
+        wp_die( esc_html__( 'Please provide a valid email address.', 'french-practice-hub' ) );
+    }
+    
+    // Store subscription in options or custom table
+    // For now, we'll store in options. In production, you might want to use a plugin or custom table
+    $subscribers = get_option( 'fph_newsletter_subscribers', array() );
+    
+    if ( ! in_array( $email, $subscribers ) ) {
+        $subscribers[] = $email;
+        update_option( 'fph_newsletter_subscribers', $subscribers );
+        
+        // Send notification email to admin
+        $admin_email = get_option( 'admin_email' );
+        $subject = __( 'New Newsletter Subscription', 'french-practice-hub' );
+        $message = sprintf( __( 'New subscriber: %s', 'french-practice-hub' ), $email );
+        wp_mail( $admin_email, $subject, $message );
+    }
+    
+    // Redirect back with success message
+    $redirect_url = add_query_arg( 'newsletter', 'subscribed', wp_get_referer() );
+    wp_safe_redirect( $redirect_url );
+    exit;
+}
+add_action( 'admin_post_fph_newsletter_subscribe', 'fph_handle_newsletter_subscription' );
+add_action( 'admin_post_nopriv_fph_newsletter_subscribe', 'fph_handle_newsletter_subscription' );
+
+/**
+ * Display newsletter subscription success message
+ */
+function fph_newsletter_success_notice() {
+    if ( isset( $_GET['newsletter'] ) && $_GET['newsletter'] === 'subscribed' ) {
+        echo '<div style="position: fixed; top: 20px; right: 20px; background: #4caf50; color: white; padding: 15px 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 9999; animation: slideIn 0.3s ease;">';
+        echo esc_html__( 'Thank you for subscribing to our newsletter!', 'french-practice-hub' );
+        echo '</div>';
+        echo '<style>@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }</style>';
+        echo '<script>setTimeout(function() { var notice = document.querySelector(\'[style*="position: fixed"]\'); if (notice) notice.style.display = "none"; }, 5000);</script>';
+    }
+}
+add_action( 'wp_footer', 'fph_newsletter_success_notice' );
+
