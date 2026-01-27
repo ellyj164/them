@@ -1797,6 +1797,9 @@ function fph_newsletter_notice_styles() {
                 z-index: 9999;
                 animation: fphSlideIn 0.3s ease;
             }
+            .fph-newsletter-success-notice.fph-hidden {
+                display: none;
+            }
             @keyframes fphSlideIn {
                 from { transform: translateX(100%); opacity: 0; }
                 to { transform: translateX(0); opacity: 1; }
@@ -1807,12 +1810,11 @@ function fph_newsletter_notice_styles() {
             setTimeout(function() {
                 var notice = document.querySelector(".fph-newsletter-success-notice");
                 if (notice) {
-                    notice.style.display = "none";
+                    notice.classList.add("fph-hidden");
                 }
             }, 5000);
         ' );
     }
 }
 add_action( 'wp_enqueue_scripts', 'fph_newsletter_notice_styles', 20 );
-
 
