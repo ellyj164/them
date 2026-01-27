@@ -1,12 +1,86 @@
 /**
  * French Practice Hub Theme - Main JavaScript
- * Handles mobile menu, search, and dropdown functionality
+ * Handles mobile menu, search, dropdown, and dark mode functionality
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     // Configuration constants
     const GOOGLE_TRANSLATE_FALLBACK_DELAY = 2000; // ms - time to wait before falling back to Polylang/WPML
     const MOBILE_MENU_FOCUS_DELAY = 300; // ms - matches CSS transition duration for mobile menu
+    
+    // ============================================
+    // DARK MODE FUNCTIONALITY
+    // ============================================
+    
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const darkModeToggleMobile = document.getElementById('dark-mode-toggle-mobile');
+    
+    // Check for saved dark mode preference or system preference
+    function getDarkModePreference() {
+        const saved = localStorage.getItem('darkMode');
+        if (saved !== null) {
+            return saved === 'true';
+        }
+        // Check system preference
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    
+    // Apply dark mode
+    function setDarkMode(isDark) {
+        if (isDark) {
+            document.documentElement.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'true');
+        } else {
+            document.documentElement.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', 'false');
+        }
+        updateDarkModeIcons(isDark);
+    }
+    
+    // Update icon visibility
+    function updateDarkModeIcons(isDark) {
+        const toggles = [darkModeToggle, darkModeToggleMobile].filter(Boolean);
+        toggles.forEach(toggle => {
+            const sunIcon = toggle.querySelector('.sun-icon');
+            const moonIcon = toggle.querySelector('.moon-icon');
+            if (sunIcon && moonIcon) {
+                if (isDark) {
+                    sunIcon.style.display = 'block';
+                    moonIcon.style.display = 'none';
+                } else {
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'block';
+                }
+            }
+        });
+    }
+    
+    // Toggle dark mode
+    function toggleDarkMode() {
+        const isDark = !document.documentElement.classList.contains('dark-mode');
+        setDarkMode(isDark);
+    }
+    
+    // Initialize dark mode on page load
+    setDarkMode(getDarkModePreference());
+    
+    // Add event listeners for dark mode toggle
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+    }
+    if (darkModeToggleMobile) {
+        darkModeToggleMobile.addEventListener('click', toggleDarkMode);
+    }
+    
+    // Listen for system theme changes
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            // Only auto-switch if user hasn't set a preference
+            if (localStorage.getItem('darkMode') === null) {
+                setDarkMode(e.matches);
+            }
+        });
+    }
     
     // Google Translate functionality
     function triggerGoogleTranslate(langCode) {
