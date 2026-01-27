@@ -554,7 +554,7 @@ function fph_get_default_strings() {
         'footer_refund'        => 'Refund & Cancellation Policy',
         'footer_copyright_ip'  => 'Copyright & Intellectual Property Policy',
         'footer_acceptable'    => 'Acceptable Use Policy',
-        'footer_copyright'     => '© 2026 Fidele FLE - French Practice Hub – All rights reserved',
+        'footer_copyright'     => 'Copyright © 2026 Fidele FLE | French Practice Hub - All rights reserved',
     );
     
     return $translations;

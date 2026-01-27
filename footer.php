@@ -179,7 +179,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p><?php esc_html_e( 'Copyright © 2026 Fidele FLE | French Practice Hub - All rights reserved', 'french-practice-hub' ); ?></p>
+                <p><?php fph_translate_e( 'footer_copyright' ); ?></p>
             </div>
         </div>
     </footer>
