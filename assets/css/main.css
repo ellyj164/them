@@ -88,9 +88,6 @@
     --space-xl: 32px;
     --space-2xl: 48px;
     --space-3xl: 64px;
-    
-    /* Transition for smooth theme switching */
-    --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Dark Mode Variables */
@@ -129,19 +126,20 @@
     --shadow-hover: 0 12px 24px rgba(0,0,0,0.7), 0 6px 12px rgba(0,0,0,0.5);
 }
 
-/* Smooth transitions for theme switching - applied to key elements only for performance */
+/* Smooth transitions for theme switching - applied to specific elements for performance */
 body,
 .header,
 .footer,
 .feature-card,
 .btn,
 .card,
-input,
-textarea,
-select,
 .dropdown,
-.newsletter-form input,
-.newsletter-form button {
+.footer-newsletter,
+.newsletter-form input[type="email"],
+.newsletter-form button,
+.btn-community,
+.btn-donation,
+.btn-suggestions {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 

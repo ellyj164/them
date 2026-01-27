@@ -34,25 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.classList.remove('dark-mode');
             localStorage.setItem('darkMode', 'false');
         }
-        updateDarkModeIcons(isDark);
-    }
-    
-    // Update icon visibility
-    function updateDarkModeIcons(isDark) {
-        const toggles = [darkModeToggle, darkModeToggleMobile].filter(Boolean);
-        toggles.forEach(toggle => {
-            const sunIcon = toggle.querySelector('.sun-icon');
-            const moonIcon = toggle.querySelector('.moon-icon');
-            if (sunIcon && moonIcon) {
-                if (isDark) {
-                    sunIcon.style.display = 'block';
-                    moonIcon.style.display = 'none';
-                } else {
-                    sunIcon.style.display = 'none';
-                    moonIcon.style.display = 'block';
-                }
-            }
-        });
+        // Icons are controlled by CSS, no need to manipulate styles
     }
     
     // Toggle dark mode

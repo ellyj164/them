@@ -1750,8 +1750,16 @@ function fph_handle_newsletter_subscription() {
         wp_mail( $admin_email, $subject, $message );
     }
     
-    // Redirect back with success message
-    $redirect_url = add_query_arg( 'newsletter', 'subscribed', wp_get_referer() );
+    // Redirect back with success message - validate referer
+    $referer = wp_get_referer();
+    $redirect_url = home_url( '/' );
+    
+    // Only use referer if it's from the same site
+    if ( $referer && strpos( $referer, home_url() ) === 0 ) {
+        $redirect_url = $referer;
+    }
+    
+    $redirect_url = add_query_arg( 'newsletter', 'subscribed', $redirect_url );
     wp_safe_redirect( $redirect_url );
     exit;
 }
@@ -1762,13 +1770,49 @@ add_action( 'admin_post_nopriv_fph_newsletter_subscribe', 'fph_handle_newsletter
  * Display newsletter subscription success message
  */
 function fph_newsletter_success_notice() {
-    if ( isset( $_GET['newsletter'] ) && $_GET['newsletter'] === 'subscribed' ) {
-        echo '<div style="position: fixed; top: 20px; right: 20px; background: #4caf50; color: white; padding: 15px 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 9999; animation: slideIn 0.3s ease;">';
+    // Sanitize and validate the GET parameter
+    if ( isset( $_GET['newsletter'] ) && 'subscribed' === sanitize_key( $_GET['newsletter'] ) ) {
+        echo '<div class="fph-newsletter-success-notice">';
         echo esc_html__( 'Thank you for subscribing to our newsletter!', 'french-practice-hub' );
         echo '</div>';
-        echo '<style>@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }</style>';
-        echo '<script>setTimeout(function() { var notice = document.querySelector(\'[style*="position: fixed"]\'); if (notice) notice.style.display = "none"; }, 5000);</script>';
     }
 }
 add_action( 'wp_footer', 'fph_newsletter_success_notice' );
+
+/**
+ * Enqueue newsletter success notice styles
+ */
+function fph_newsletter_notice_styles() {
+    if ( isset( $_GET['newsletter'] ) && 'subscribed' === sanitize_key( $_GET['newsletter'] ) ) {
+        wp_add_inline_style( 'french-practice-hub-main', '
+            .fph-newsletter-success-notice {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4caf50;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                z-index: 9999;
+                animation: fphSlideIn 0.3s ease;
+            }
+            @keyframes fphSlideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        ' );
+        
+        wp_add_inline_script( 'french-practice-hub-main', '
+            setTimeout(function() {
+                var notice = document.querySelector(".fph-newsletter-success-notice");
+                if (notice) {
+                    notice.style.display = "none";
+                }
+            }, 5000);
+        ' );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'fph_newsletter_notice_styles', 20 );
+
 
