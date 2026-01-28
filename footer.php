@@ -150,6 +150,34 @@
                 </div>
             </div>
             
+            <!-- Newsletter Section -->
+            <div class="footer-newsletter">
+                <h4><?php esc_html_e( 'Subscribe to Our Newsletter', 'french-practice-hub' ); ?></h4>
+                <p><?php esc_html_e( 'Get the latest updates, tips, and resources delivered to your inbox.', 'french-practice-hub' ); ?></p>
+                <form class="newsletter-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+                    <input type="hidden" name="action" value="fph_newsletter_subscribe">
+                    <?php wp_nonce_field( 'fph_newsletter_subscribe', 'fph_newsletter_nonce' ); ?>
+                    <input type="email" name="newsletter_email" placeholder="<?php esc_attr_e( 'Enter your email', 'french-practice-hub' ); ?>" required>
+                    <button type="submit"><?php esc_html_e( 'Subscribe', 'french-practice-hub' ); ?></button>
+                </form>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="footer-cta-buttons">
+                <a href="<?php echo esc_url( home_url( '/join-community/' ) ); ?>" class="btn btn-community">
+                    <?php esc_html_e( 'Join our community: A1.1, A1, A2', 'french-practice-hub' ); ?>
+                </a>
+                <a href="<?php echo esc_url( home_url( '/donation/' ) ); ?>" class="btn btn-donation">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <?php esc_html_e( 'Donation', 'french-practice-hub' ); ?>
+                </a>
+                <a href="<?php echo esc_url( home_url( '/suggestions/' ) ); ?>" class="btn btn-suggestions">
+                    <?php esc_html_e( 'Suggestions', 'french-practice-hub' ); ?>
+                </a>
+            </div>
+            
             <div class="footer-bottom">
                 <p><?php fph_translate_e( 'footer_copyright' ); ?></p>
             </div>

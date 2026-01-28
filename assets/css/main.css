@@ -90,6 +90,59 @@
     --space-3xl: 64px;
 }
 
+/* Dark Mode Variables */
+.dark-mode {
+    --bg-color: #1a1a2e;
+    --bg-secondary: #16213e;
+    --text-color: #eaeaea;
+    --text-secondary: #b8b8b8;
+    --text-light: #9a9a9a;
+    --white-color: #0f0f23;
+    --border-color: #3a3a5c;
+    --border-light: #2a2a4c;
+    --gray-500: #7a7a8a;
+    
+    /* Dark mode specific colors */
+    --primary-color: #4a8fff;
+    --primary-dark: #2060d0;
+    --primary-light: #1e3a5f;
+    --magenta-accent: #ff4d9f;
+    --highlight-red: #ff5a52;
+    --success-green: #4caf50;
+    --warning-orange: #ffb74d;
+    --info-blue: #42a5f5;
+    --info-teal: #26c6da;
+    
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, #4a8fff 0%, #ff4d9f 100%);
+    --gradient-success: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+    --gradient-overlay: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.4) 100%);
+    
+    /* Adjust shadows for dark mode */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.4);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.5), 0 4px 6px rgba(0,0,0,0.3);
+    --shadow-xl: 0 20px 25px rgba(0,0,0,0.6), 0 10px 10px rgba(0,0,0,0.4);
+    --shadow-hover: 0 12px 24px rgba(0,0,0,0.7), 0 6px 12px rgba(0,0,0,0.5);
+}
+
+/* Smooth transitions for theme switching - applied to specific elements for performance */
+body,
+.header,
+.footer,
+.feature-card,
+.btn,
+.card,
+.dropdown,
+.footer-newsletter,
+.newsletter-form input[type="email"],
+.newsletter-form button,
+.btn-community,
+.btn-donation,
+.btn-suggestions {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
 /* Base Styles - Enhanced Typography with Nunito */
 body {
     font-family: var(--font-primary);
@@ -425,6 +478,80 @@ button:focus-visible {
 .register-btn:hover {
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
+}
+
+/* Dark Mode Toggle Button */
+.dark-mode-toggle,
+.dark-mode-toggle-mobile {
+    background: none;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    color: var(--text-color);
+    width: 40px;
+    height: 40px;
+}
+
+.dark-mode-toggle:hover,
+.dark-mode-toggle-mobile:hover {
+    background: var(--primary-light);
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.dark-mode-toggle svg,
+.dark-mode-toggle-mobile svg {
+    width: 20px;
+    height: 20px;
+}
+
+.dark-mode-toggle .moon-icon {
+    display: block;
+}
+
+.dark-mode-toggle .sun-icon {
+    display: none;
+}
+
+.dark-mode .dark-mode-toggle .moon-icon,
+.dark-mode .dark-mode-toggle-mobile .moon-icon {
+    display: none;
+}
+
+.dark-mode .dark-mode-toggle .sun-icon,
+.dark-mode .dark-mode-toggle-mobile .sun-icon {
+    display: block;
+}
+
+.dark-mode-toggle-mobile {
+    width: 100%;
+    gap: 10px;
+    justify-content: flex-start;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 0;
+    background: none;
+}
+
+.dark-mode-toggle-mobile:hover {
+    background: var(--primary-light);
+    transform: none;
+}
+
+.dark-mode-label {
+    font-weight: 600;
+    font-size: 0.9375rem;
+}
+
+.mobile-dark-mode {
+    border-top: 1px solid var(--border-light);
+    margin-top: 10px;
+    padding-top: 10px;
 }
 
 /* Language Switcher */
@@ -1148,12 +1275,143 @@ body.translated-rtl {
     fill: white;
 }
 
+/* Newsletter Section */
+.footer-newsletter {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 30px;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.footer-newsletter h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.footer-newsletter p {
+    margin: 0 0 20px 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.newsletter-form input[type="email"] {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-family: var(--font-primary);
+    background: var(--white-color);
+    color: var(--text-color);
+    transition: var(--transition-fast);
+}
+
+.newsletter-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.newsletter-form button {
+    padding: 12px 30px;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    font-family: var(--font-primary);
+}
+
+.newsletter-form button:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* CTA Buttons */
+.footer-cta-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+.btn-community,
+.btn-donation,
+.btn-suggestions {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    white-space: nowrap;
+}
+
+.btn-community {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.btn-community:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.btn-donation {
+    background: var(--gradient-success);
+    color: white;
+}
+
+.btn-donation:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.btn-donation svg {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-suggestions {
+    background: var(--white-color);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-suggestions:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
 .footer-bottom {
     border-top: 1px solid var(--border-color);
     padding-top: 20px;
     text-align: center;
     font-size: 0.9em;
-    color: #808080;
+    color: var(--text-secondary);
 }
 
 /* ============================================
@@ -2877,6 +3135,41 @@ body.translated-rtl {
     .footer-content {
         grid-template-columns: 1fr;
         gap: 30px;
+    }
+    
+    /* Newsletter responsive */
+    .footer-newsletter {
+        padding: 25px 20px;
+    }
+    
+    .footer-newsletter h4 {
+        font-size: 1.3rem;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .newsletter-form input[type="email"] {
+        min-width: 100%;
+    }
+    
+    .newsletter-form button {
+        width: 100%;
+    }
+    
+    /* CTA buttons responsive */
+    .footer-cta-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .btn-community,
+    .btn-donation,
+    .btn-suggestions {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
     }
     
     .header-actions {
